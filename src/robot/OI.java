@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 
-    Joystick leftStick = new Joystick(1);
-        Button Button_GearShift = new JoystickButton(leftStick, RobotMap.Button_GearShift);
+    public Joystick leftStick = new Joystick(1);
+    Button Button_GearShift = new JoystickButton(leftStick, RobotMap.Button_GearShift);
     Joystick rightStick = new Joystick(2);
     // Another type of button you can create is a DigitalIOButton, which is
     // a button or switch hooked up to the cypress module. These are useful if

@@ -45,7 +45,7 @@ public class RobotMap {
         public static final int Solenoid_Ball_Loader = 2;
         public static final int Solenoid_Trigger = 3;
         public static final int Solenoid_Extensions = 4;
-        public static final int Solenoid_Collecter = 5;
+        public static final int Solenoid_Collector = 5;
         
 //Control Systems    
     //Joystick 1 (USB1)

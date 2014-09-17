@@ -5,9 +5,9 @@
  */
 package subsystems.drive;
 
-import subsystems.drive.ArcadeDrive;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Victor;
+import commands.CommandBase;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import robot.RobotMap;
 
@@ -16,17 +16,14 @@ import robot.RobotMap;
  * @author afiol-mahon
  */
 public class Drive extends Subsystem {
-    Victor lDrive = new Victor(RobotMap.PWM_LeftDrive);
-    Victor rDrive = new Victor(RobotMap.PWM_RightDrive);
-    
-            
+    RobotDrive chassis = new RobotDrive(RobotMap.PWM_LeftDrive, RobotMap.PWM_RightDrive);
 
     public void initDefaultCommand() {
         setDefaultCommand(new ArcadeDrive());
     }
     
-    public void drive(double leftDrive, double rightDrive){
-        lDrive.set(leftDrive);
-        rDrive.set(rightDrive);
+    public void arcade(){
+        chassis.arcadeDrive(CommandBase.oi.leftStick);
+        Timer.delay(0.01);
     }
 }
