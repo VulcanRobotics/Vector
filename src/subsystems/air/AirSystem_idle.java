@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsystems.compressor;
+package subsystems.air;
 
 import commands.CommandBase;
 
@@ -11,15 +11,14 @@ import commands.CommandBase;
  *
  * @author afiol-mahon
  */
-public class Enable_Compressor extends CommandBase {
+public class AirSystem_idle extends CommandBase {
     
-    public Enable_Compressor() {
-        requires(compressorsystem);
+    public AirSystem_idle() {
+        requires(airSystem);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        compressorsystem.compress();
     }
 
     // Called repeatedly when this Command is scheduled to run
