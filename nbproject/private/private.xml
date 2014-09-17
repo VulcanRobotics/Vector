@@ -3,18 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/afiolmahon/git/1218Java/src/subsystems/air/AirSystem.java</file>
-            <file>file:/C:/Users/afiolmahon/git/1218Java/src/subsystems/drive/Drive.java</file>
-            <file>file:/C:/Users/afiolmahon/git/1218Java/src/robot/OI.java</file>
-            <file>file:/C:/Users/afiolmahon/git/1218Java/src/subsystems/drive/ArcadeDrive.java</file>
-            <file>file:/C:/Users/afiolmahon/git/1218Java/src/subsystems/air/AirSystem_idle.java</file>
-=======
             <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/air/AirSystem.java</file>
             <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/commands/CommandBase.java</file>
+            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/commands/AutonCommand.java</file>
             <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/air/AirSystem_idle.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/commands/ExampleCommand.java</file>
->>>>>>> 431cf589d35173bb4e952f28a1f1eda9ddeac4b1
+            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/robot/RobotTemplate.java</file>
         </group>
     </open-files>
 </project-private>

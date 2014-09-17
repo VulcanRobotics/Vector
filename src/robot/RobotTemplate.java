@@ -8,12 +8,12 @@
 package robot;
 
 
+import commands.AutonCommand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import commands.CommandBase;
-import commands.ExampleCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,7 +33,7 @@ public class RobotTemplate extends IterativeRobot {
     public static OI oi;
     public void robotInit() {
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+        autonomousCommand = new AutonCommand();
         oi  = new OI();//TESTCODETESTCODETESTCODE
         // Initialize all subsystems
         CommandBase.init();

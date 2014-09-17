@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.OI;
 import subsystems.air.AirSystem;
 import subsystems.drive.Drive;
-import subsystems.ExampleSubsystem;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -16,7 +15,6 @@ import subsystems.ExampleSubsystem;
 public abstract class CommandBase extends Command {
 
     public static OI oi;
-    public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
     public static Drive drive = new Drive();
     public static AirSystem airSystem = new AirSystem();
     
@@ -29,7 +27,7 @@ public abstract class CommandBase extends Command {
         oi = new OI();
 
         // Show what command your subsystem is running on the SmartDashboard
-        SmartDashboard.putData(exampleSubsystem);
+        //SmartDashboard.putData(exampleSubsystem);
     }
 
     public CommandBase(String name) {
