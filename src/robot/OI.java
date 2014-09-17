@@ -18,13 +18,6 @@ public class OI {
     // a button or switch hooked up to the cypress module. These are useful if
     // you want to build a customized operator interface.
     // Button button = new DigitalIOButton(1);
-    public double getRightStickX(){
-        return rightStick.getX();
-    }
-    
-    public double getRightStickY(){
-        return rightStick.getY();
-    }
     
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to

@@ -14,7 +14,7 @@ import robot.RobotMap;
  *
  * @author afiol-mahon
  */
-public class AirSystem extends Subsystem {
+public class SS_AirSystem extends Subsystem {
     Compressor compressor = new Compressor(RobotMap.DIO_Compressor, RobotMap.Relay_Compressor);
     //Solenoids
         Solenoid solenoid_gear_shift = new Solenoid(RobotMap.Solenoid_Gear_Shift);
@@ -24,13 +24,13 @@ public class AirSystem extends Subsystem {
         Solenoid solenoid_collector = new Solenoid(RobotMap.Solenoid_Collector);
     
     public void initDefaultCommand() {
-            setDefaultCommand(new AirSystem_idle());
             initSolenoids();
             compressor.start();
+            setDefaultCommand(new C_AirSystem_idle());
     }
     
     public void initSolenoids(){ //This method sets the default values for all of the solenoids being used on the robot.
-        solenoid_gear_shift.set(false);
+        solenoid_gear_shift.set(false); //false is high gear?
         solenoid_ball_loader.set(false); //false is in, true is out
         solenoid_trigger.set(false);
         solenoid_extensions.set(false);

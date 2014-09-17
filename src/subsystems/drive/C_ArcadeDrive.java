@@ -10,9 +10,9 @@ import commands.CommandBase;
  *
  * @author afiolmahon
  */
-public class ArcadeDrive extends CommandBase {
+public class C_ArcadeDrive extends CommandBase {
     
-    public ArcadeDrive() {
+    public C_ArcadeDrive() {
         requires(drive);
     }
 

@@ -22,7 +22,7 @@ import commands.CommandBase;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class RobotTemplate extends IterativeRobot {
+public class RobotMain extends IterativeRobot {
 
     Command autonomousCommand;
 
@@ -30,11 +30,9 @@ public class RobotTemplate extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
-    public static OI oi;
     public void robotInit() {
         // instantiate the command used for the autonomous period
         autonomousCommand = new AutonCommand();
-        oi  = new OI();//TESTCODETESTCODETESTCODE
         // Initialize all subsystems
         CommandBase.init();
     }

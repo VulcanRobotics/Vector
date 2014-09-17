@@ -11,9 +11,9 @@ import commands.CommandBase;
  *
  * @author afiol-mahon
  */
-public class AirSystem_idle extends CommandBase {
+public class C_AirSystem_idle extends CommandBase {
     
-    public AirSystem_idle() {
+    public C_AirSystem_idle() {
         requires(airSystem);
     }
 

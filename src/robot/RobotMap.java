@@ -29,11 +29,11 @@ public class RobotMap {
         public static final int DIO_Top_Limit_Switch = 2;
         public static final int DIO_Bottom_Limit_Switch = 3;
     //ETC
-        public static final int DIO_Arm_Out = 4;
-        public static final int DIO_Shooter_Down_New = 5;
-        public static final int DIO_Arm_Half_Out = 11;
+        public static final int DIO_Arm_Out = 4; //reed switch
+        public static final int DIO_Shooter_Down_New = 5; //limit switch
+        public static final int DIO_Arm_Half_Out = 11; //limit
         public static final int DIO_Shooter_Down_Old = 10;//Depreciated?
-        public static final int DIO_Ball_Detector = 12;
+        public static final int DIO_Ball_Detector = 12; //infared thing
     //Tension Potentiometer
         public static final int AnalogModule_Tension_Potentiometer = 1;
         public static final int AI_Tension_Potentiometer = 1;
@@ -49,18 +49,12 @@ public class RobotMap {
         
 //Control Systems    
     //Joystick 1 (USB1)
-        //Axis
-            
         //Buttons
         public static final int Button_GearShift = 11;
     //Joystick 2 (USB2)
-        //Axis
-            
         //Buttons
         
     //Joystick 3 (USB3)
-        //Axis
-        
         //Buttons
             
 }

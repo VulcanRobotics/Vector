@@ -15,11 +15,11 @@ import robot.RobotMap;
  *
  * @author afiol-mahon
  */
-public class Drive extends Subsystem {
+public class SS_Drive extends Subsystem {
     RobotDrive chassis = new RobotDrive(RobotMap.PWM_LeftDrive, RobotMap.PWM_RightDrive);
 
     public void initDefaultCommand() {
-        setDefaultCommand(new ArcadeDrive());
+        setDefaultCommand(new C_ArcadeDrive());
     }
     
     public void arcade(){
