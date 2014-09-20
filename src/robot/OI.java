@@ -4,6 +4,7 @@ package robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import subsystems.air.C_GearShift;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -18,7 +19,9 @@ public class OI {
     // a button or switch hooked up to the cypress module. These are useful if
     // you want to build a customized operator interface.
     // Button button = new DigitalIOButton(1);
-    
+    public OI (){
+        Button_GearShift.whenPressed(new C_GearShift());
+    }
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.

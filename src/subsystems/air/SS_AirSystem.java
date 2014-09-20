@@ -35,6 +35,16 @@ public class SS_AirSystem extends Subsystem {
         solenoid_trigger.set(false);
         solenoid_extensions.set(false);
         solenoid_collector.set(true); //true is up, false is down
-                
+    }
+    
+    private boolean gearShiftState = false;
+    public void toggleGearshift(){
+        if(gearShiftState == false){
+            gearShiftState = true;
+            
+        }else{
+            gearShiftState = false;
+        }
+        solenoid_gear_shift.set(gearShiftState);
     }
 }
