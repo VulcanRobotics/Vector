@@ -5,17 +5,19 @@
  */
 package subsystems.arm;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import robot.RobotMap;
 /**
  *
  * @author afiolmahon
  */
 public class SS_Arm extends Subsystem {
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+    Solenoid solenoid_ball_loader = new Solenoid(RobotMap.Solenoid_Ball_Loader);
 
     public void initDefaultCommand() {
+        solenoid_ball_loader.set(false); //false is in, true is out
+
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }

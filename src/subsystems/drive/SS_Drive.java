@@ -7,6 +7,7 @@ package subsystems.drive;
 
 import commands.CommandBase;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import robot.RobotMap;
@@ -17,13 +18,22 @@ import robot.RobotMap;
  */
 public class SS_Drive extends Subsystem {
     RobotDrive chassis = new RobotDrive(RobotMap.PWM_LeftDrive, RobotMap.PWM_RightDrive);
+    Solenoid solenoid_gear_shift = new Solenoid(RobotMap.Solenoid_Gear_Shift);
+
 
     public void initDefaultCommand() {
+        solenoid_gear_shift.set(false); //true is low gear
         setDefaultCommand(new C_ArcadeDrive());
     }
     
     public void arcade(){
         chassis.arcadeDrive(CommandBase.oi.leftStick);
         Timer.delay(0.01);
+    }
+    
+    private boolean gearShiftState = false;
+    public void toggleGearshift(){
+        gearShiftState = !gearShiftState;
+        solenoid_gear_shift.set(gearShiftState);
     }
 }

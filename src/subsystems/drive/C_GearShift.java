@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsystems.air;
+package subsystems.drive;
 
 import commands.CommandBase;
 
 /**
  *
- * @author 1218
+ * @author afiolmahon
  */
 public class C_GearShift extends CommandBase {
     
     public C_GearShift() {
-        requires(airSystem);
+        requires(drive);
     }
 
     // Called just before this Command runs the first time
@@ -23,7 +23,7 @@ public class C_GearShift extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        airSystem.toggleGearshift();
+        drive.toggleGearshift();
     }
 
     // Make this return true when this Command no longer needs to run execute()
