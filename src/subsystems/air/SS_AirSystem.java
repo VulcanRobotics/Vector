@@ -30,11 +30,11 @@ public class SS_AirSystem extends Subsystem {
     }
     
     public void initSolenoids(){ //This method sets the default values for all of the solenoids being used on the robot.
-        solenoid_gear_shift.set(false); //false is high gear?
+        solenoid_gear_shift.set(false); //true is low gear
         solenoid_ball_loader.set(false); //false is in, true is out
         solenoid_trigger.set(false);
         solenoid_extensions.set(false);
-        solenoid_collector.set(true); //true is up, false is down
+        solenoid_collector.set(false); //true is up, false is down
     }
     
     private boolean gearShiftState = false;
