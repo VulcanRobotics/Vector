@@ -48,13 +48,33 @@ public class RobotMap {
         public static final int Solenoid_Collector = 5;
         
 //Control Systems    
-    //Joystick 1 (USB1)
+    //Joystick 1 (Driver)
         //Buttons
-        public static final int Button_GearShift = 11;
-    //Joystick 2 (USB2)
+        public static final int Button_GearShift = 1;
+        public static final int Button_InvertJoystickY = 11;
+    //Joystick 2 (Operator)
         //Buttons
+        public static final int Button_Trigger = 1; //Trigger
+        public static final int Button = 2; //activate pickup
+        //public static final int Button = 3;
+        public static final int Button_ManualLowerTension = 4; //In manual mode lower tension screw
+        //public static final int Button = 5;
+        public static final int Button_ManualRaiseTension = 6; //In manual mode raise tension screw
+        public static final int Button_AutoGyroDrive = 7; //Gyroscope drives robot straight
+        public static final int Button_GyroReset = 8; //Reset Gyro
+        //public static final int Button = 9;
+        //public static final int Button = 11;
         
     //Joystick 3 (USB3)
+        //Axis
+            //axis 3 is used for tension trimming when manual shot trim is enabled
         //Buttons
-            
+        public static final int Button_ShootingOrTruss = 1; //True is Normal Shot
+        //DEPRICATED SHOOTER DOWN NEW/OLD SELECTOR(WAS BUTTON 2)
+        public static final int Button_ManualOrAuto = 3; //False is Auto mode
+        public static final int Button_HighPower = 4; //True is longShotPower/longTrussPower
+        public static final int Button_LowPower = 5; //True is shortShotPower/shortTrussPower
+        public static final int Button_ManualExtension = 7; //Controls extension in Manual Mode
+        public static final int Button_EnableManualShotTrim = 8; //if true, value from axis 3 is used to trim the desired tension level
+        //public static final int Button = 9;
 }
