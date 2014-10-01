@@ -22,11 +22,14 @@ public class C_Tension_ManualRaise extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        if(speed < 0){
+            finished = true;
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        tension.tensionChange(speed);
+        tension.setTension(speed);
         while(CommandBase.oi.Button_ManualRaiseTension.get()){
             //Wait
         }
@@ -40,7 +43,7 @@ public class C_Tension_ManualRaise extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        tension.tensionChange(0);
+        tension.setTension(0);
     }
 
     // Called when another command which requires one or more of the same

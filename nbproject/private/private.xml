@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/shooter/SS_Shooter.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/tension/SS_Tension.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/tension/C_Tension_ManualRaise.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/tension/C_Tension_Main.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/tension/C_Tension_ManualLower.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/robot/OI.java</file>
+            <file>file:/C:/Users/afiolmahon/git/1218Java/src/subsystems/tension/C_Tension_Main.java</file>
+            <file>file:/C:/Users/afiolmahon/git/1218Java/src/subsystems/tension/C_Tension_ManualRaise.java</file>
+            <file>file:/C:/Users/afiolmahon/git/1218Java/src/subsystems/tension/C_Tension_ManualLower.java</file>
+            <file>file:/C:/Users/afiolmahon/git/1218Java/src/subsystems/tension/SS_Tension.java</file>
         </group>
     </open-files>
 </project-private>
