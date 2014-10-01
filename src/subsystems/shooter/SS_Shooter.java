@@ -5,8 +5,10 @@
  */
 package subsystems.shooter;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
 
 /**
@@ -17,13 +19,18 @@ public class SS_Shooter extends Subsystem {
     Solenoid solenoid_trigger = new Solenoid(RobotMap.Solenoid_Trigger);
     Solenoid solenoid_collector = new Solenoid(RobotMap.Solenoid_Collector);
     Solenoid solenoid_extensions = new Solenoid(RobotMap.Solenoid_Extensions);
-
+    
+    DigitalInput BallDetector = new DigitalInput(RobotMap.DIO_Ball_Detector);
+    
 
     public void initDefaultCommand() {
+        setDefaultCommand(new C_Shooter_Main());
         solenoid_trigger.set(false);
         solenoid_collector.set(false);
         solenoid_extensions.set(false);
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    public void syncDashboard(){
+        SmartDashboard.putBoolean("Ball Ready", !BallDetector.get());
     }
 }

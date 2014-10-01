@@ -1,11 +1,12 @@
 package commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.OI;
 import subsystems.air.SS_AirSystem;
 import subsystems.arm.SS_Arm;
 import subsystems.drive.SS_Drive;
+import subsystems.shooter.SS_Shooter;
+import subsystems.tension.SS_Tension;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -19,6 +20,8 @@ public abstract class CommandBase extends Command {
     public static SS_Drive drive = new SS_Drive();
     public static SS_AirSystem airSystem = new SS_AirSystem();
     public static SS_Arm arm = new SS_Arm();
+    public static SS_Shooter shooter = new SS_Shooter();
+    public static SS_Tension tension = new SS_Tension();
     
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

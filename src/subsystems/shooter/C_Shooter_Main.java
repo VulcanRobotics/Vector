@@ -3,31 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsystems.drive;
+package subsystems.shooter;
 
 import commands.CommandBase;
 
 /**
  *
- * @author afiolmahon
+ * @author afiol-mahon
  */
-public class C_GearShift extends CommandBase {
+public class C_Shooter_Main extends CommandBase {
     
-    boolean finished=false;
-    boolean state;
-    public C_GearShift(boolean state) {
-        requires(drive);
-        this.state = state;
+    boolean finished = false;
+    
+    public C_Shooter_Main() {
+        requires(shooter);
     }
-
     // Called just before this Command runs the first time
     protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        drive.toggleGearshift(state);
-        finished=true;
+        shooter.syncDashboard();
+        finished = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()

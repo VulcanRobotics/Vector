@@ -27,13 +27,11 @@ public class SS_Drive extends Subsystem {
     }
     
     public void arcade(){
-        chassis.arcadeDrive(CommandBase.oi.leftStick);
+        chassis.arcadeDrive(-(CommandBase.oi.driverStick.getY()), CommandBase.oi.driverStick.getX());
         Timer.delay(0.01);
     }
     
-    private boolean gearShiftState = false;
-    public void toggleGearshift(){
-        gearShiftState = !gearShiftState;
-        solenoid_gear_shift.set(gearShiftState);
+    public void toggleGearshift(boolean state){
+        solenoid_gear_shift.set(state);
     }
 }

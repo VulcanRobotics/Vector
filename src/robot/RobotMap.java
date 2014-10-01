@@ -25,7 +25,7 @@ public class RobotMap {
         public static final int DigitalModule_RightEncoder = 1;
         public static final int DIO1_RightEncoder = 8;
         public static final int DIO2_RightEncoder = 9;
-    //Limit Switches
+    //Tension Screw Limit Switches
         public static final int DIO_Top_Limit_Switch = 2; //Tension Screw Top Limit
         public static final int DIO_Bottom_Limit_Switch = 3; //Tension Screw Bottom Limit
     //ETC

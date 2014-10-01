@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsystems.drive;
+package subsystems.tension;
 
 import commands.CommandBase;
 
 /**
  *
- * @author afiolmahon
+ * @author afiol-mahon
  */
-public class C_GearShift extends CommandBase {
+public class C_Tension_ManualLower extends CommandBase {
+    double speed;
+    boolean finished = false;
     
-    boolean finished=false;
-    boolean state;
-    public C_GearShift(boolean state) {
-        requires(drive);
-        this.state = state;
+    public C_Tension_ManualLower(double speed) {
+        requires(shooter);
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -26,8 +26,11 @@ public class C_GearShift extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        drive.toggleGearshift(state);
-        finished=true;
+        tension.tensionChange(speed);
+        while(CommandBase.oi.Button_ManualLowerTension.get()){
+            //Wait
+        }
+        finished = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,6 +40,7 @@ public class C_GearShift extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        tension.tensionChange(0);
     }
 
     // Called when another command which requires one or more of the same
