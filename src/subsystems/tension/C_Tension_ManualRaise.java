@@ -22,28 +22,25 @@ public class C_Tension_ManualRaise extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        if(speed < 0){
-            finished = true;
-        }
+        
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        tension.setTension(speed);
-        while(CommandBase.oi.Button_ManualRaiseTension.get()){
-            //Wait
+        if(tension.isManualMode()){
+            tension.tenModule.setTension(speed);
         }
-        finished = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return finished;
+        return !CommandBase.oi.Button_ManualRaiseTension.get();
+
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        tension.setTension(0);
+        tension.tenModule.setTension(0);
     }
 
     // Called when another command which requires one or more of the same

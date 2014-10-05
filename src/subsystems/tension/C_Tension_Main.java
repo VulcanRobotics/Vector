@@ -23,7 +23,12 @@ public class C_Tension_Main extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        tension.tensionHardRangeCheck();
+        if(tension.isManualMode()){
+            tension.tensionPID.disable();
+        }else{
+            tension.tensionPID.enable();
+        }
+        tension.tenModule.tensionRangeCheck();
         tension.syncDashboard();
     }
 
