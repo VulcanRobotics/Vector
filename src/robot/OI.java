@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import subsystems.drive.C_GearShift;
-import subsystems.tension.C_Tension_ManualLower;
-import subsystems.tension.C_Tension_ManualRaise;
+import subsystems.shooter.C_Tension_ManualLower;
+import subsystems.shooter.C_Tension_ManualRaise;
 
 /**
  * This class is the glue that binds the controls on the physical operator

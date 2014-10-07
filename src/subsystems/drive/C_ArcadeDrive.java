@@ -18,11 +18,13 @@ public class C_ArcadeDrive extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println("C_ArcadeDrive started");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         drive.arcade();
+        drive.syncDashboard();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,6 +34,7 @@ public class C_ArcadeDrive extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("C_ArcadeDrive ended");
     }
 
     // Called when another command which requires one or more of the same

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsystems.tension;
+package subsystems.shooter;
 
 import commands.CommandBase;
 import edu.wpi.first.wpilibj.DigitalInput;

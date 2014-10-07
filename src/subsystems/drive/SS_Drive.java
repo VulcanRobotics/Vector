@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
 
 /**
@@ -31,7 +32,11 @@ public class SS_Drive extends Subsystem {
         Timer.delay(0.01);
     }
     
-    public void toggleGearshift(boolean state){
+    public void setGear(boolean state){
         solenoid_gear_shift.set(state);
+    }
+
+    void syncDashboard() {
+        SmartDashboard.putBoolean("Gear Shift", solenoid_gear_shift.get());
     }
 }

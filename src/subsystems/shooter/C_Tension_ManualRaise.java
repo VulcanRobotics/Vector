@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsystems.tension;
+package subsystems.shooter;
 
 import commands.CommandBase;
 
@@ -16,18 +16,18 @@ public class C_Tension_ManualRaise extends CommandBase {
     boolean finished = false;
     
     public C_Tension_ManualRaise(double speed) {
-        requires(tension);
+        requires(shooter);
         this.speed = speed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        
+        System.out.println("C_Tension_ManualRaise started");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        tension.tenModule.setManualTension(speed);
+        shooter.tenModule.setManualTension(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,7 +38,8 @@ public class C_Tension_ManualRaise extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        tension.tenModule.setTension(0);
+        shooter.tenModule.setTension(0);
+        System.out.println("C_Tension_ManualRaise ended");
     }
 
     // Called when another command which requires one or more of the same

@@ -22,11 +22,13 @@ public class C_GearShift extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println("C_GearShift started");
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        drive.toggleGearshift(state);
+        drive.setGear(state);
         finished=true;
     }
 
@@ -37,6 +39,7 @@ public class C_GearShift extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("C_GearShift ended");
     }
 
     // Called when another command which requires one or more of the same

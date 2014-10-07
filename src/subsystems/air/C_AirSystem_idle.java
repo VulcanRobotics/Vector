@@ -19,6 +19,7 @@ public class C_AirSystem_idle extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println("C_AirSystem_idle started");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,6 +33,7 @@ public class C_AirSystem_idle extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("C_AirSystem_idle ended");
     }
 
     // Called when another command which requires one or more of the same
