@@ -23,11 +23,8 @@ public class C_Tension_Main extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(tension.isManualMode()){
-            tension.tensionPID.disable();
-        }else{
-            tension.tensionPID.enable();
-        }
+        tension.manualCheck();//enables or disables PID based on manual switch
+        tension.tensionPID.setSetpoint(tension.tenModule.getTensionTargetSelect());
         tension.tenModule.tensionRangeCheck();
         tension.syncDashboard();
     }

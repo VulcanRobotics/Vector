@@ -5,9 +5,11 @@
  */
 package subsystems.tension;
 
+import commands.CommandBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
 
 /**
@@ -17,20 +19,33 @@ import robot.RobotMap;
 public class O_TenModule implements PIDOutput{
 
     //Constants
-    //Constants
     public double tenPotMAX = 2.55;
     public double tenPotMIN = 0.2;
     
+    public double trusPowerHigh = 2.6;
+    public double trusPowerMid = 2.2;
+    public double trusPowerLow = 1.75;
+    
+    public double shotPowerHigh = 2.05;
+    public double shotPowerMid = 1.95;
+    public double shotPowerLow = 1.56;
+    
+    //Inputs
     public DigitalInput Top_Limit_Switch = new DigitalInput(RobotMap.DIO_Top_Limit_Switch);
     public DigitalInput Bottom_Limit_Switch = new DigitalInput(RobotMap.DIO_Bottom_Limit_Switch);
     
+    //PIDSource
     public O_TenPotPIDSource tenPot = new O_TenPotPIDSource(5.00, RobotMap.AI_Tension_Potentiometer);
-
+    
+    //Output
     private Talon motor;
+    
+    //constructor
     public O_TenModule(int channel){
         motor = new Talon(channel);
     }
     
+    //output to motor, implemented by PIDOutput
     public void pidWrite(double output) {
         setTension(-output);
     }
@@ -60,9 +75,34 @@ public class O_TenModule implements PIDOutput{
             }
         }else if(motor.get() > 0){
             if(Top_Limit_Switch.get() | tenPot.pidGet()< tenPotMIN){
-             motor.set(0.0);
+                motor.set(0.0);
             }
         }
-    }   
+    }
+
+    public void setManualTension(double speed) {
+        if(CommandBase.oi.Button_ManualTensionMode.get()){
+            setTension(speed);
+        }
+    }
     
+    public double getTensionTargetSelect(){
+        if(CommandBase.oi.Button_shotType.get()){ //Normal Shot Values
+            if(CommandBase.oi.Button_HighPower.get()){//high power shot
+                return SmartDashboard.getNumber("longShotPower", shotPowerHigh);
+            }else if(CommandBase.oi.Button_LowPower.get()){//low power shot
+                return SmartDashboard.getNumber("shortShotPower", shotPowerLow);
+            }else{//mid power shot
+                return SmartDashboard.getNumber("middleShotPower", shotPowerMid);
+            }
+        }else{ //Truss shot values
+            if(CommandBase.oi.Button_HighPower.get()){ //high power truss
+                return SmartDashboard.getNumber("longTrussPower", trusPowerHigh);
+            }else if(CommandBase.oi.Button_LowPower.get()){ //low power truss
+                return SmartDashboard.getNumber("shortTrussPower", trusPowerLow);
+            }else{ //mid power truss
+                return SmartDashboard.getNumber("middleTrussPower", trusPowerMid);
+            }
+        }
+    }
 }

@@ -15,16 +15,22 @@ import subsystems.tension.C_Tension_ManualRaise;
 public class OI {
 
     public Joystick driverStick = new Joystick(1);
-    Button Button_GearShift = new JoystickButton(driverStick, RobotMap.Button_GearShift);
+    public Button Button_GearShift = new JoystickButton(driverStick, RobotMap.Button_GearShift);
     
     
-    Joystick opStick = new Joystick(2);
+    public Joystick opStick = new Joystick(2);
     public Button Button_ManualRaiseTension = new JoystickButton(opStick, RobotMap.Button_ManualRaiseTension);
     public Button Button_ManualLowerTension = new JoystickButton(opStick, RobotMap.Button_ManualLowerTension);
+    public Button Button_Trigger = new JoystickButton(opStick, RobotMap.Button_Trigger);
 
     //Joy 3
     public Joystick controlPanel = new Joystick(3);
-    public Button Button_ManualOrAuto = new JoystickButton(controlPanel, RobotMap.Button_ManualOrAuto);
+    public Button Button_ManualTensionMode = new JoystickButton(controlPanel, RobotMap.Button_ManualOrAuto);
+    public Button Button_shotType = new JoystickButton(controlPanel, RobotMap.Button_ShootingOrTruss); //true is normal shot
+    public Button Button_HighPower = new JoystickButton(controlPanel, RobotMap.Button_HighPower);
+    public Button Button_LowPower = new JoystickButton(controlPanel, RobotMap.Button_LowPower);
+    public Button Button_Reload = new JoystickButton(controlPanel, RobotMap.Button_Reload);
+
     
 // Another type of button you can create is a DigitalIOButton, which is
     // a button or switch hooked up to the cypress module. These are useful if
@@ -35,9 +41,7 @@ public class OI {
         Button_GearShift.whenReleased(new C_GearShift(false));
                 
         Button_ManualRaiseTension.whenPressed(new C_Tension_ManualRaise(0.7));        
-        Button_ManualLowerTension.whenPressed(new C_Tension_ManualLower(-0.7));
-        
-        
+        Button_ManualLowerTension.whenPressed(new C_Tension_ManualLower(-0.7));        
     }
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to

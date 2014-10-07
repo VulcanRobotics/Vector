@@ -3,14 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/robot/RobotMap.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/tension/O_TenModule.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/tension/O_TenPotPIDSource.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/tension/SS_Tension.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/tension/C_Tension_ManualRaise.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/tension/C_Tension_Main.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/subsystems/tension/C_Tension_ManualLower.java</file>
-            <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/robot/RobotMain.java</file>
             <file>file:/Users/afiol-mahon/Netbeans%20Projects/1218Code/src/robot/OI.java</file>
         </group>
     </open-files>

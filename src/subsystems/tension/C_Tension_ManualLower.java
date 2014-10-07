@@ -16,7 +16,7 @@ public class C_Tension_ManualLower extends CommandBase {
     boolean finished = false;
     
     public C_Tension_ManualLower(double speed) {
-        requires(shooter);
+        requires(tension);
         this.speed = speed;
     }
 
@@ -26,9 +26,7 @@ public class C_Tension_ManualLower extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(tension.isManualMode()){
-            tension.tenModule.setTension(speed);
-        }
+        tension.tenModule.setManualTension(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

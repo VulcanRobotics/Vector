@@ -6,7 +6,9 @@
 package subsystems.tension;
 
 import commands.CommandBase;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
@@ -24,9 +26,11 @@ public class SS_Tension extends Subsystem {
     double Ki = 0.010;
     double Kd = 1.000;
     PIDController tensionPID = new PIDController(Kp, Ki, Kd, tenModule.tenPot, tenModule);
+    DigitalInput shooterDown = new DigitalInput(RobotMap.DIO_Shooter_Down);
+    Solenoid trigger = new Solenoid(RobotMap.Solenoid_Trigger);
     public void initDefaultCommand() {
+        trigger.set(false);
         setDefaultCommand(new C_Tension_Main());
-        tensionPID.setSetpoint(1.0);
     }
     
      public void syncDashboard(){
@@ -36,8 +40,12 @@ public class SS_Tension extends Subsystem {
         SmartDashboard.putBoolean("Lower Soft Limit", !(tenModule.tenPot.pidGet() <= tenModule.tenPotMAX));
         SmartDashboard.putNumber("Tension Potentiometer", tenModule.tenPot.pidGet());
     }
-     
-    public boolean isManualMode(){
-        return CommandBase.oi.Button_ManualOrAuto.get();
+
+    void manualCheck() {
+        if(CommandBase.oi.Button_ManualTensionMode.get()){
+            tensionPID.disable();
+        }else{
+            tensionPID.enable();
+        }
     }
 }
