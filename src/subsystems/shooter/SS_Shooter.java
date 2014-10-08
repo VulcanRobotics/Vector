@@ -53,6 +53,7 @@ public class SS_Shooter extends Subsystem {
         SmartDashboard.putBoolean("Upper Soft Limit", !(tenModule.tenPot.pidGet() >= tenModule.tenPotMIN));
         SmartDashboard.putBoolean("Lower Soft Limit", !(tenModule.tenPot.pidGet() <= tenModule.tenPotMAX));
         SmartDashboard.putNumber("Tension Potentiometer", tenModule.tenPot.pidGet());
+        SmartDashboard.putNumber("Target", tensionPID.getSetpoint());
         //Other Systems
         SmartDashboard.putBoolean("Ball Ready", !BallDetector.get());
     }
