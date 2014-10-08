@@ -35,6 +35,8 @@ public class RobotMain extends IterativeRobot {
         autonomousCommand = new AutonCommand();
         // Initialize all subsystems
         CommandBase.init();
+
+        
     }
 
     public void autonomousInit() {
@@ -62,6 +64,8 @@ public class RobotMain extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        CommandBase.drive.syncDashboard();
+        CommandBase.shooter.syncDashboard();
     }
     
     /**

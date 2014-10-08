@@ -28,7 +28,7 @@ public class SS_Drive extends Subsystem {
     }
     
     public void arcade(){
-        chassis.arcadeDrive(-(CommandBase.oi.driverStick.getY()), CommandBase.oi.driverStick.getX());
+        chassis.arcadeDrive(-CommandBase.oi.driverStick.getY(), -CommandBase.oi.driverStick.getX());
         Timer.delay(0.01);
     }
     
@@ -36,7 +36,7 @@ public class SS_Drive extends Subsystem {
         solenoid_gear_shift.set(state);
     }
 
-    void syncDashboard() {
+    public void syncDashboard() {
         SmartDashboard.putBoolean("Gear Shift", solenoid_gear_shift.get());
     }
 }

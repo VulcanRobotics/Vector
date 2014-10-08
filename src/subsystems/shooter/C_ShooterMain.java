@@ -27,7 +27,6 @@ public class C_ShooterMain extends CommandBase {
         shooter.manualCheck();//enables or disables PID based on manual switch
         shooter.tensionPID.setSetpoint(shooter.tenModule.getTensionTargetSelect());
         shooter.tenModule.tensionRangeCheck();
-        shooter.syncDashboard();
     }
 
     // Make this return true when this Command no longer needs to run execute()
