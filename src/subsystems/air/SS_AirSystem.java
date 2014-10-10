@@ -15,7 +15,6 @@ import robot.RobotMap;
  */
 public class SS_AirSystem extends Subsystem {
     public Compressor compressor = new Compressor(RobotMap.DIO_Compressor, RobotMap.Relay_Compressor);
-    //Solenoids
     
     public void initDefaultCommand() {
             compressor.start();

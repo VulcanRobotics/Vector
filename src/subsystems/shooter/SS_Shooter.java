@@ -41,13 +41,13 @@ public class SS_Shooter extends Subsystem {
         setDefaultCommand(new C_ShooterMain());
     }
     
-    public void initSolenoids(){
+    public void initSolenoids(){ //Initializes our solenoids so we know they are in the correct state.
         solenoid_trigger.set(false); //false is closed
         solenoid_collector.set(false);
         solenoid_extensions.set(false);
     }
     
-    public void syncDashboard(){
+    public void syncDashboard(){ //Publish Subsystem information.
         //Tension
         SmartDashboard.putBoolean("Top Limit Switch", tenModule.Top_Limit_Switch.get());
         SmartDashboard.putBoolean("Bottom Limit Switch", tenModule.Bottom_Limit_Switch.get());
@@ -60,7 +60,7 @@ public class SS_Shooter extends Subsystem {
         SmartDashboard.putBoolean("Ball Ready", !BallDetector.get());
     }
 
-    void manualCheck() {
+    void manualCheck() { //Disables PIDController if we are in manual tension mode.
         if(CommandBase.oi.Button_ManualTensionMode.get()){
             tensionPID.disable();
         }else{

@@ -30,8 +30,8 @@ public class RobotMap {
         public static final int DIO_Bottom_Limit_Switch = 3; //Tension Screw Bottom Limit
     //ETC
         public static final int DIO_Arm_Out = 4; //false is out
-        public static final int DIO_Shooter_Down = 5; 
-        public static final int DIO_Arm_Half_Out = 11;
+        public static final int DIO_Shooter_Down = 5; //true when shooter is low enough to be held by trigger.
+        public static final int DIO_Arm_Half_Out = 11; //Outdated?
         public static final int DIO_Ball_Detector = 12; //true if no ball
     //Tension Potentiometer
         public static final int AnalogModule_Tension_Potentiometer = 1;
@@ -49,8 +49,8 @@ public class RobotMap {
 //Control Systems    
     //Joystick 1 (Driver)
         //Buttons
-        public static final int Button_GearShift = 1;
-        public static final int Button_InvertJoystickY = 11;
+        public static final int Button_GearShift = 1;//Shifts gears
+        public static final int Button_InvertJoystickY = 11; //Inverts Y axis on driver joystick when held.
     //Joystick 2 (Operator)
         //Buttons
         public static final int Button_Trigger = 1; //Trigger

@@ -18,7 +18,7 @@ public class C_Extend extends CommandBase {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize() {//Extends arm and starts pickup roller.
         arm.extend();
         arm.BallPickup.set(-arm.BallPickup_Speed);
     }
@@ -33,7 +33,7 @@ public class C_Extend extends CommandBase {
     }
 
     // Called once after isFinished returns true
-    protected void end() {
+    protected void end() {//Stops roller and retracts arm when complete.
         arm.retract();
         arm.BallPickup.set(0);
     }
@@ -41,5 +41,7 @@ public class C_Extend extends CommandBase {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        arm.retract();
+        arm.BallPickup.set(0);
     }
 }

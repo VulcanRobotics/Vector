@@ -13,12 +13,11 @@ import commands.CommandBase;
  */
 public class C_ShooterFire extends CommandBase {
     
+    boolean finished = false;
     public C_ShooterFire() {
         requires(shooter);
     }
     
-    boolean finished = false;
-
     // Called just before this Command runs the first time
     protected void initialize() {
         System.out.println("C_ShooterFire started");
@@ -29,8 +28,8 @@ public class C_ShooterFire extends CommandBase {
         if(shooter.shooterDown.get()){
             arm.extend();
             if(!arm.Arm_Out.get() | shooter.tenModule.tenPot.pidGet() < 1.5){//can fire if arm is our or tension is below 1.5
-                            shooter.solenoid_trigger.set(true);
-                            finished = true;
+                shooter.solenoid_trigger.set(true);
+                finished = true;
             }
         }
     }

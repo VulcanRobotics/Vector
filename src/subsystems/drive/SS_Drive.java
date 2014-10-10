@@ -24,28 +24,28 @@ public class SS_Drive extends Subsystem {
 
 
     public void initDefaultCommand() {
-        solenoid_gear_shift.set(false); //true is low gear
+        solenoid_gear_shift.set(false); //Init Solenoid(true is low gear).
         setDefaultCommand(new C_ArcadeDrive());
     }
     
-    public void arcade(){
+    public void arcade(){//Joystick drive method, additionally checks voltage for robot, and if battery is dying, compensates to extend battery life.
         double lowVoltageModifier = 1;
-        if(batteryBelow(8.5)){//when voltage drops below 8.5
-            lowVoltageModifier = 0.8; // run motors at 80% power
-            CommandBase.airSystem.compressor.stop(); //disable compressor
-            if(batteryBelow(7.5)){//if below 7.5
-                lowVoltageModifier = 0.7; //run motors at 70%
-                lockLowGear = true; //force robot to run in low gear
+        if(batteryBelow(8.5)){//Stops compressor and runs motors at 80% if battery drops below 8.5 volts.
+            lowVoltageModifier = 0.8;
+            CommandBase.airSystem.compressor.stop();
+            if(batteryBelow(7.5)){//Forces robot to use low gear and runs motors at 75% if battery drops below 7.5 volts.
+                lowVoltageModifier = 0.7;
+                lockLowGear = true;
             }
-        }else{//when running at high voltages
-            CommandBase.airSystem.compressor.start(); //enable compressor
-            lockLowGear = false; //allow high gear
+        }else{//Ensures we can shift gears and compressor is running at high voltages
+            CommandBase.airSystem.compressor.start();
+            lockLowGear = false;
         }
         chassis.arcadeDrive(-(CommandBase.oi.driverStick.getY()*lowVoltageModifier), CommandBase.oi.driverStick.getX()*lowVoltageModifier);
         Timer.delay(0.01);
     }
     
-    boolean lockLowGear = false; //allows other systems to override gear selection and force robot to use low gear
+    boolean lockLowGear = false; //Allows other systems to override gear selection and force robot to use low gear.
      public void setGear(boolean state){
         if(!lockLowGear){
             solenoid_gear_shift.set(state);
@@ -59,7 +59,7 @@ public class SS_Drive extends Subsystem {
     }
     
     double lastVoltage = 12;
-    boolean batteryBelow(double testValue){
+    boolean batteryBelow(double testValue){//Method returns true if robot voltage is below the testValue
         double currentVoltage = DriverStation.getInstance().getBatteryVoltage(); //set to current voltage
         double avgVoltage = (currentVoltage+lastVoltage)/2; //averages last and current voltages
         lastVoltage = currentVoltage; //updates last voltage

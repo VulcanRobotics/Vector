@@ -24,15 +24,15 @@ public class C_ShooterMain extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(oi.Button_Reload.get() && !shooter.shooterDown.get()){
+        if(oi.Button_Reload.get() && !shooter.shooterDown.get()){//If we are in reload mode, and shooter is not down, open trigger and lower shooter.
             shooter.tensionPID.setSetpoint(shooter.uncockTension);
             shooter.solenoid_trigger.set(true);
-        }else{
+        }else{//Bring tension to setpoint and ensure trigger is closed
             shooter.solenoid_trigger.set(false);
             shooter.tensionPID.setSetpoint(shooter.tenModule.getTensionTargetSelect());
         }
         shooter.manualCheck();//enables or disables PID based on manual switch
-        shooter.tenModule.tensionRangeCheck();
+        shooter.tenModule.tensionRangeCheck();//Precautional range check to prevent limits from being exceeded.
     }
 
     // Make this return true when this Command no longer needs to run execute()

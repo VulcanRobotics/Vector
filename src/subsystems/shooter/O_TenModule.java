@@ -45,12 +45,11 @@ public class O_TenModule implements PIDOutput{
         motor = new Talon(channel);
     }
     
-    //output to motor, implemented by PIDOutput
-    public void pidWrite(double output) {
-        setTension(-output);
+    public void pidWrite(double output) {//PIDOutput interface requires this method, this way we can implement our robust motor control with safety checks straight through the PIDController.
+        setTension(-output);//This is inverted so the PIDController moves the tension towards the setpoint.
     }
-    //All calls to motorTension should be handled through this method!
-    public void setTension(double power){
+
+    public void setTension(double power){//All tension motor adjustments should go through this class; it determines ab acceptable output value range and forces our target power into that range.
         int T_limit = 0;
         int L_limit = 0;
         if(tenPot.pidGet() < tenPotMAX && !Bottom_Limit_Switch.get()){
@@ -68,7 +67,7 @@ public class O_TenModule implements PIDOutput{
         }
     }
     
-     public void tensionRangeCheck(){
+    public void tensionRangeCheck(){//Disables the tension motor if it falls outside of it's limits.
         if(motor.get() < 0){
             if(Bottom_Limit_Switch.get() | tenPot.pidGet()> tenPotMAX ){
                 motor.set(0.0);
@@ -80,29 +79,36 @@ public class O_TenModule implements PIDOutput{
         }
     }
 
-    public void setManualTension(double speed) {
+    public void setManualTension(double speed) {//This method gives us an elegant way to ignore the tension buttons if we aren't in manual tension mode.
         if(CommandBase.oi.Button_ManualTensionMode.get()){
             setTension(speed);
         }
     }
     
     public double getTensionTargetSelect(){
+        double fixValue;
         if(CommandBase.oi.Button_shotType.get()){ //Normal Shot Values
             if(CommandBase.oi.Button_HighPower.get()){//high power shot
-                return SmartDashboard.getNumber("longShotPower", shotPowerHigh);
+                fixValue = SmartDashboard.getNumber("longShotPower", shotPowerHigh);
             }else if(CommandBase.oi.Button_LowPower.get()){//low power shot
-                return SmartDashboard.getNumber("shortShotPower", shotPowerLow);
+                fixValue = SmartDashboard.getNumber("shortShotPower", shotPowerLow);
             }else{//mid power shot
-                return SmartDashboard.getNumber("middleShotPower", shotPowerMid);
+                fixValue = SmartDashboard.getNumber("middleShotPower", shotPowerMid);
             }
         }else{ //Truss shot values
             if(CommandBase.oi.Button_HighPower.get()){ //high power truss
-                return SmartDashboard.getNumber("longTrussPower", trusPowerHigh);
+                fixValue = SmartDashboard.getNumber("longTrussPower", trusPowerHigh);
             }else if(CommandBase.oi.Button_LowPower.get()){ //low power truss
-                return SmartDashboard.getNumber("shortTrussPower", trusPowerLow);
+                fixValue = SmartDashboard.getNumber("shortTrussPower", trusPowerLow);
             }else{ //mid power truss
-                return SmartDashboard.getNumber("middleTrussPower", trusPowerMid);
+                fixValue = SmartDashboard.getNumber("middleTrussPower", trusPowerMid);
             }
+        }
+        if(CommandBase.oi.Button_EnableManualShotTrim.get()){
+           double manualTrim = (((int)(CommandBase.oi.controlPanel.getZ()*5))/5)*0.1; //multiply Z axis of controlpanel by 5, convert result to nearest integer, divide by five, and get 10% of that
+           return fixValue+manualTrim; //target is our fixed value offset by our manaulTrim value
+        }else{
+        return fixValue; //if manualTrim is disabled, just return the fixed value
         }
     }
 }

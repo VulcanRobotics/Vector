@@ -24,9 +24,6 @@ public class SS_Arm extends Subsystem {
 
     public void initDefaultCommand() {
         solenoid_ball_loader.set(false); //false is in, true is out
-
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
     
     public void extend(){

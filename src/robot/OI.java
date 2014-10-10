@@ -33,6 +33,7 @@ public class OI {
     public Button Button_HighPower = new JoystickButton(controlPanel, RobotMap.Button_HighPower);
     public Button Button_LowPower = new JoystickButton(controlPanel, RobotMap.Button_LowPower);
     public Button Button_Reload = new JoystickButton(controlPanel, RobotMap.Button_Reload);
+    public Button Button_EnableManualShotTrim = new JoystickButton(controlPanel, RobotMap.Button_EnableManualShotTrim);
 
     
 // Another type of button you can create is a DigitalIOButton, which is
