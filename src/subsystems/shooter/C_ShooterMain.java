@@ -24,7 +24,7 @@ public class C_ShooterMain extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(!shooter.shooterDown.get()){
+        if(oi.Button_Reload.get() && !shooter.shooterDown.get()){
             shooter.tensionPID.setSetpoint(shooter.uncockTension);
             shooter.solenoid_trigger.set(true);
         }else{

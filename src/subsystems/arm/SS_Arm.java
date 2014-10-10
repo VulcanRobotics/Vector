@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
 /**
  *
@@ -35,5 +36,7 @@ public class SS_Arm extends Subsystem {
         solenoid_ball_loader.set(false);
     }
     
-    
+    public void syncDashboard(){
+        SmartDashboard.putBoolean("Arm Out", Arm_Out.get());
+    }
 }
