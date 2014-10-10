@@ -11,43 +11,45 @@ import commands.CommandBase;
  *
  * @author afiol-mahon
  */
-public class C_ShooterMain extends CommandBase {
+public class C_ShooterFire extends CommandBase {
     
-    public C_ShooterMain() {
+    public C_ShooterFire() {
         requires(shooter);
     }
+    
+    boolean finished = false;
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println("C_Shooter_Main Started");
+        System.out.println("C_ShooterFire started");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(!shooter.shooterDown.get()){
-            shooter.tensionPID.setSetpoint(shooter.uncockTension);
-            shooter.solenoid_trigger.set(true);
-        }else{
-            shooter.solenoid_trigger.set(false);
-            shooter.tensionPID.setSetpoint(shooter.tenModule.getTensionTargetSelect());
+        if(shooter.shooterDown.get()){
+            arm.extend();
+            if(!arm.Arm_Out.get()){
+                            shooter.solenoid_trigger.set(true);
+                            finished = true;
+            }
         }
-        shooter.manualCheck();//enables or disables PID based on manual switch
-        shooter.tenModule.tensionRangeCheck();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !oi.Button_Trigger.get();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        System.out.println("C_Shooter_Main Ended");
-
+        System.out.println("C_ShooterFire ended");
+        arm.retract();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        System.out.println("C_ShooterFire interrupted");
+        arm.retract();
     }
 }

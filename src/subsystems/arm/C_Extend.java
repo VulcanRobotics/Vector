@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsystems.shooter;
+package subsystems.arm;
 
 import commands.CommandBase;
 
@@ -11,39 +11,31 @@ import commands.CommandBase;
  *
  * @author afiol-mahon
  */
-public class C_ShooterMain extends CommandBase {
+public class C_Extend extends CommandBase {
     
-    public C_ShooterMain() {
-        requires(shooter);
+    public C_Extend() {
+        requires(arm);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println("C_Shooter_Main Started");
+        arm.extend();
+        arm.BallPickup.set(-arm.BallPickup_Speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(!shooter.shooterDown.get()){
-            shooter.tensionPID.setSetpoint(shooter.uncockTension);
-            shooter.solenoid_trigger.set(true);
-        }else{
-            shooter.solenoid_trigger.set(false);
-            shooter.tensionPID.setSetpoint(shooter.tenModule.getTensionTargetSelect());
-        }
-        shooter.manualCheck();//enables or disables PID based on manual switch
-        shooter.tenModule.tensionRangeCheck();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !oi.Button_Pickup.get();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        System.out.println("C_Shooter_Main Ended");
-
+        arm.retract();
+        arm.BallPickup.set(0);
     }
 
     // Called when another command which requires one or more of the same

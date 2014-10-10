@@ -4,7 +4,9 @@ package robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import subsystems.arm.C_Extend;
 import subsystems.drive.C_GearShift;
+import subsystems.shooter.C_ShooterFire;
 import subsystems.shooter.C_Tension_ManualLower;
 import subsystems.shooter.C_Tension_ManualRaise;
 
@@ -22,7 +24,8 @@ public class OI {
     public Button Button_ManualRaiseTension = new JoystickButton(opStick, RobotMap.Button_ManualRaiseTension);
     public Button Button_ManualLowerTension = new JoystickButton(opStick, RobotMap.Button_ManualLowerTension);
     public Button Button_Trigger = new JoystickButton(opStick, RobotMap.Button_Trigger);
-
+    public Button Button_Pickup = new JoystickButton(opStick, RobotMap.Button_Pickup);
+    
     //Joy 3
     public Joystick controlPanel = new Joystick(3);
     public Button Button_ManualTensionMode = new JoystickButton(controlPanel, RobotMap.Button_ManualOrAuto);
@@ -41,7 +44,10 @@ public class OI {
         Button_GearShift.whenReleased(new C_GearShift(false));
                 
         Button_ManualRaiseTension.whenPressed(new C_Tension_ManualRaise(0.7));        
-        Button_ManualLowerTension.whenPressed(new C_Tension_ManualLower(-0.7));        
+        Button_ManualLowerTension.whenPressed(new C_Tension_ManualLower(-0.7));   
+        
+        Button_Trigger.whenPressed(new C_ShooterFire());
+        Button_Pickup.whenPressed(new C_Extend());
     }
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to

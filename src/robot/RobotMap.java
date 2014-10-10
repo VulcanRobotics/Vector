@@ -11,7 +11,7 @@ public class RobotMap {
     public static final int PWM_LeftDrive = 1;
     public static final int PWM_RightDrive = 2; 
     public static final int PWM_Tension = 3; //negative value raises tension, positive lowers
-    public static final int PWM_BallPickup = 4; //positive rolls in, negative rolls out
+    public static final int PWM_BallPickup = 4; //positive rolls out, negative rolls in
     
 //Systems
     //Compressor
@@ -29,7 +29,7 @@ public class RobotMap {
         public static final int DIO_Top_Limit_Switch = 2; //Tension Screw Top Limit
         public static final int DIO_Bottom_Limit_Switch = 3; //Tension Screw Bottom Limit
     //ETC
-        public static final int DIO_Arm_Out = 4; //reed switch
+        public static final int DIO_Arm_Out = 4; //false is out
         public static final int DIO_Shooter_Down = 5; 
         public static final int DIO_Arm_Half_Out = 11;
         public static final int DIO_Ball_Detector = 12; //true if no ball

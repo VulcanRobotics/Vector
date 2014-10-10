@@ -21,6 +21,7 @@ public class SS_Shooter extends Subsystem {
     
     //Tension
         O_TenModule tenModule = new O_TenModule(RobotMap.PWM_Tension);
+        double uncockTension = 0.15;
         //PID Controller
             double Kp = 4.500;
             double Ki = 0.010;
@@ -54,6 +55,7 @@ public class SS_Shooter extends Subsystem {
         SmartDashboard.putBoolean("Lower Soft Limit", !(tenModule.tenPot.pidGet() <= tenModule.tenPotMAX));
         SmartDashboard.putNumber("Tension Potentiometer", tenModule.tenPot.pidGet());
         SmartDashboard.putNumber("Target", tensionPID.getSetpoint());
+        SmartDashboard.putBoolean("Shooter Down", shooterDown.get());
         //Other Systems
         SmartDashboard.putBoolean("Ball Ready", !BallDetector.get());
     }

@@ -5,7 +5,9 @@
  */
 package subsystems.arm;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import robot.RobotMap;
 /**
@@ -13,7 +15,11 @@ import robot.RobotMap;
  * @author afiolmahon
  */
 public class SS_Arm extends Subsystem {
+    
+    public double BallPickup_Speed = 0.7;
     Solenoid solenoid_ball_loader = new Solenoid(RobotMap.Solenoid_Ball_Loader);
+    Talon BallPickup = new Talon(RobotMap.PWM_BallPickup);
+    public DigitalInput Arm_Out = new DigitalInput(RobotMap.DIO_Arm_Out);
 
     public void initDefaultCommand() {
         solenoid_ball_loader.set(false); //false is in, true is out
@@ -21,4 +27,13 @@ public class SS_Arm extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+    
+    public void extend(){
+        solenoid_ball_loader.set(true);
+    }
+    public void retract(){
+        solenoid_ball_loader.set(false);
+    }
+    
+    
 }
