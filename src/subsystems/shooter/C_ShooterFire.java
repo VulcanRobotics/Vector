@@ -29,8 +29,10 @@ public class C_ShooterFire extends CommandBase {
             arm.extend();
             if(!arm.Arm_Out.get() | shooter.tenModule.tenPot.pidGet() < 1.5){//can fire if arm is our or tension is below 1.5
                 shooter.solenoid_trigger.set(true);
-                finished = true;
             }
+        }
+        if(!oi.Button_Trigger.get()){
+            finished = true;
         }
     }
 
