@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsystems.arm;
+package subsystems.shooter;
 
 import commands.CommandBase;
 
@@ -11,16 +11,17 @@ import commands.CommandBase;
  *
  * @author afiol-mahon
  */
-public class C_Extend extends CommandBase {
+public class C_Pickup extends CommandBase {
     
-    public C_Extend() {
-        requires(arm);
+    public C_Pickup() {
+        requires(shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {//Extends arm and starts pickup roller.
-        arm.extend();
-        arm.BallPickup.set(-arm.BallPickup_Speed);
+        shooter.extendArm();
+        shooter.BallPickup.set(-shooter.BallPickup_Speed);
+        shooter.solenoid_collector.set(false);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,14 +35,14 @@ public class C_Extend extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {//Stops roller and retracts arm when complete.
-        arm.retract();
-        arm.BallPickup.set(0);
+        shooter.retractArm();
+        shooter.BallPickup.set(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        arm.retract();
-        arm.BallPickup.set(0);
+        shooter.retractArm();
+        shooter.BallPickup.set(0);
     }
 }

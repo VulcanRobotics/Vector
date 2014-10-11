@@ -3,7 +3,6 @@ package commands;
 import edu.wpi.first.wpilibj.command.Command;
 import robot.OI;
 import subsystems.air.SS_AirSystem;
-import subsystems.arm.SS_Arm;
 import subsystems.drive.SS_Drive;
 import subsystems.shooter.SS_Shooter;
 
@@ -18,7 +17,6 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     public static SS_Drive drive = new SS_Drive();
     public static SS_AirSystem airSystem = new SS_AirSystem();
-    public static SS_Arm arm = new SS_Arm();
     public static SS_Shooter shooter = new SS_Shooter();
         
     public static void init() {

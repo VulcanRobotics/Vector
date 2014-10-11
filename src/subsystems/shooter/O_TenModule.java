@@ -9,7 +9,6 @@ import commands.CommandBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
 
 /**
@@ -21,14 +20,6 @@ public class O_TenModule implements PIDOutput{
     //Constants
     public double tenPotMAX = 2.55;
     public double tenPotMIN = 0.2;
-    
-    public double trusPowerHigh = 2.6;
-    public double trusPowerMid = 2.2;
-    public double trusPowerLow = 1.75;
-    
-    public double shotPowerHigh = 2.05;
-    public double shotPowerMid = 1.95;
-    public double shotPowerLow = 1.56;
     
     //Inputs
     public DigitalInput Top_Limit_Switch = new DigitalInput(RobotMap.DIO_Top_Limit_Switch);
@@ -82,33 +73,6 @@ public class O_TenModule implements PIDOutput{
     public void setManualTension(double speed) {//This method gives us an elegant way to ignore the tension buttons if we aren't in manual tension mode.
         if(CommandBase.oi.Button_ManualTensionMode.get()){
             setTension(speed);
-        }
-    }
-    
-    public double getTensionTargetSelect(){
-        double fixValue;
-        if(CommandBase.oi.Button_shotType.get()){ //Normal Shot Values
-            if(CommandBase.oi.Button_HighPower.get()){//high power shot
-                fixValue = SmartDashboard.getNumber("longShotPower", shotPowerHigh);
-            }else if(CommandBase.oi.Button_LowPower.get()){//low power shot
-                fixValue = SmartDashboard.getNumber("shortShotPower", shotPowerLow);
-            }else{//mid power shot
-                fixValue = SmartDashboard.getNumber("middleShotPower", shotPowerMid);
-            }
-        }else{ //Truss shot values
-            if(CommandBase.oi.Button_HighPower.get()){ //high power truss
-                fixValue = SmartDashboard.getNumber("longTrussPower", trusPowerHigh);
-            }else if(CommandBase.oi.Button_LowPower.get()){ //low power truss
-                fixValue = SmartDashboard.getNumber("shortTrussPower", trusPowerLow);
-            }else{ //mid power truss
-                fixValue = SmartDashboard.getNumber("middleTrussPower", trusPowerMid);
-            }
-        }
-        if(CommandBase.oi.Button_EnableManualShotTrim.get()){
-           double manualTrim = (((int)(CommandBase.oi.controlPanel.getZ()*5))/5)*0.1; //multiply Z axis of controlpanel by 5, convert result to nearest integer, divide by five, and get 10% of that
-           return fixValue+manualTrim; //target is our fixed value offset by our manaulTrim value
-        }else{
-        return fixValue; //if manualTrim is disabled, just return the fixed value
         }
     }
 }

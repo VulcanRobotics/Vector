@@ -9,48 +9,45 @@ import commands.CommandBase;
 
 /**
  *
- * @author afiol-mahon
+ * @author afiolmahon
  */
-public class C_ShooterFire extends CommandBase {
+public class C_Pass extends CommandBase {
     
-    boolean finished = false;
-    public C_ShooterFire() {
+    public C_Pass() {
         requires(shooter);
     }
-    
+
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println("C_ShooterFire started");
+        System.out.println("C_armRoller started");
+        shooter.BallPickup.set(shooter.BallPickup_Speed);
+        shooter.solenoid_collector.set(false);
+        shooter.solenoid_extensions.set(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(shooter.shooterDown.get()){
-            shooter.extendArm();
-            if(!shooter.Arm_Out.get() | shooter.tenModule.tenPot.pidGet() < 1.5){//can fire if arm is our or tension is below 1.5
-                shooter.solenoid_trigger.set(true);
-            }
-        }
-        if(!oi.Button_Trigger.get()){
-            finished = true;
-        }
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !oi.Button_Trigger.get();
+        return !oi.Button_Passball.get();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        System.out.println("C_ShooterFire ended");
-        shooter.retractArm();
+        shooter.BallPickup.set(0);
+        shooter.collectorRoutine();
+        shooter.solenoid_extensions.set(false);
+
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        System.out.println("C_ShooterFire interrupted");
-        shooter.retractArm();
+        shooter.BallPickup.set(0);
+        shooter.collectorRoutine();
+        shooter.solenoid_extensions.set(false);
     }
 }

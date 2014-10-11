@@ -38,32 +38,30 @@ public class RobotMap {
                 public static final int DIO_Bottom_Limit_Switch = 3; //Tension Screw Bottom Limit
     //Arm
         public static final int PWM_BallPickup = 4; //positive rolls out, negative rolls in
-        public static final int DIO_Arm_Half_Out = 11; //Outdated?
         public static final int DIO_Arm_Out = 4; //false is out
+        
 //Control Systems    
     //Joystick 1 (Driver)
         //Buttons
         public static final int Button_GearShift = 1;//Shifts gears
-        //public static final int Button_InvertJoystickY = 11; //Inverts Y axis on driver joystick when held.
     //Joystick 2 (Operator)
         //Buttons
         public static final int Button_Trigger = 1; //Trigger
         public static final int Button_Pickup = 2; //activate pickup
-        public static final int Button_Passball = 3; //Backs ball out/passes
+        public static final int Button_PassBall = 3; //Backs ball out/passes
         public static final int Button_ManualRaiseTension = 4; //In manual mode raise tension
         public static final int Button_ManualRoller = 5; //Manual ball roll in
         public static final int Button_ManualLowerTension = 6; //In manual mode lower tension
         public static final int Button_AutoGyroDrive = 7; //Gyroscope drives robot straight
         public static final int Button_GyroReset = 8; //Reset Gyro
         public static final int Button_ForceCollectorDown = 9; //if true force Collector down
-        public static final int Button_EnableGyroSpin = 11; //Enables Gyro Spin
+        public static final int Button_EnableGyroSpin = 11; //Force Collector Up?
         
     //Joystick 3 (USB3)
         //Axis
             //axis 3 is used for tension trimming when manual shot trim is enabled
         //Buttons
         public static final int Button_ShootingOrTruss = 1; //True is Normal Shot
-        //DEPRICATED SHOOTER DOWN NEW/OLD SELECTOR(WAS BUTTON 2)
         public static final int Button_ManualOrAuto = 3; //False is Auto mode
         public static final int Button_HighPower = 4; //True is longShotPower/longTrussPower
         public static final int Button_LowPower = 5; //True is shortShotPower/shortTrussPower

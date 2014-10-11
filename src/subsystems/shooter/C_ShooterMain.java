@@ -29,10 +29,11 @@ public class C_ShooterMain extends CommandBase {
             shooter.solenoid_trigger.set(true);
         }else{//Bring tension to setpoint and ensure trigger is closed
             shooter.solenoid_trigger.set(false);
-            shooter.tensionPID.setSetpoint(shooter.tenModule.getTensionTargetSelect());
+            shooter.tensionPID.setSetpoint(shooter.configureShot());
         }
         shooter.manualCheck();//enables or disables PID based on manual switch
         shooter.tenModule.tensionRangeCheck();//Precautional range check to prevent limits from being exceeded.
+        shooter.collectorRoutine();//Sets collector up when a ball is detected
     }
 
     // Make this return true when this Command no longer needs to run execute()
