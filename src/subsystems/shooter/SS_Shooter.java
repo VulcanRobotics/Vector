@@ -21,7 +21,7 @@ import robot.RobotMap;
 public class SS_Shooter extends Subsystem {
     
     //Tension
-        O_TenModule tenModule = new O_TenModule(RobotMap.PWM_Tension);
+        public O_TenModule tenModule = new O_TenModule(RobotMap.PWM_Tension);
         double uncockTension = 0.15;
         //Shot tension values
         public double trusPowerHigh = 2.6;

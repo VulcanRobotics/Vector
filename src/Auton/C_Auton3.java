@@ -3,30 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package commands;
+package Auton;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import commands.CommandBase;
 
 /**
  *
- * @author afiol-mahon
+ * @author afiolmahon
  */
-public class AutonCommand extends CommandBase {
-    
-    public AutonCommand() {
+public class C_Auton3 extends CommandBase {
+    //Driving 1 Ball
+    public C_Auton3() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        CommandBase.airSystem.compressor.start();
-        
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        SmartDashboard.putNumber("Tension Potentiometer", shooter.tenModule.tenPot.pidGet()); //Report Tension
     }
 
     // Make this return true when this Command no longer needs to run execute()

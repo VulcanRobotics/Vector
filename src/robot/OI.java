@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import subsystems.shooter.C_Pass;
 import subsystems.shooter.C_Pickup;
 import subsystems.drive.C_GearShift;
+import subsystems.drive.C_GyroSpin;
+import subsystems.drive.C_ResetGyro;
 import subsystems.shooter.C_ForceCollectorDown;
 import subsystems.shooter.C_ShooterFire;
 import subsystems.shooter.C_Tension_ManualLower;
@@ -17,10 +19,9 @@ import subsystems.shooter.C_Tension_ManualRaise;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-
+    //Driver Stick
     public Joystick driverStick = new Joystick(1);
     public Button Button_GearShift = new JoystickButton(driverStick, RobotMap.Button_GearShift);
-    
     //opStick
     public Joystick opStick = new Joystick(2);
     public Button Button_ManualRaiseTension = new JoystickButton(opStick, RobotMap.Button_ManualRaiseTension);
@@ -29,7 +30,8 @@ public class OI {
     public Button Button_Pickup = new JoystickButton(opStick, RobotMap.Button_Pickup);
     public Button Button_Passball = new JoystickButton(opStick, RobotMap.Button_PassBall);
     public Button Button_ForceCollectorDown = new JoystickButton(opStick, RobotMap.Button_ForceCollectorDown);
-    
+    public Button Button_AutoGyroDrive = new JoystickButton(opStick, RobotMap.Button_AutoGyroDrive);
+    public Button Button_GyroReset = new JoystickButton(opStick, RobotMap.Button_GyroReset);
     //Joy 3
     public Joystick controlPanel = new Joystick(3);
     public Button Button_ManualTensionMode = new JoystickButton(controlPanel, RobotMap.Button_ManualOrAuto);
@@ -55,6 +57,10 @@ public class OI {
         Button_Pickup.whenPressed(new C_Pickup());
         Button_Passball.whenPressed(new C_Pass());
         Button_ForceCollectorDown.whenPressed(new C_ForceCollectorDown());
+        
+        //Gyro
+        Button_AutoGyroDrive.whenPressed(new C_GyroSpin(0));
+        Button_GyroReset.whenPressed(new C_ResetGyro());
     }
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
