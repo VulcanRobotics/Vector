@@ -7,6 +7,7 @@ package subsystems.drive;
 
 import commands.CommandBase;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -22,8 +23,11 @@ import robot.RobotMap;
 public class SS_Drive extends Subsystem {
     RobotDrive chassis = new RobotDrive(RobotMap.PWM_LeftDrive, RobotMap.PWM_RightDrive);
     Solenoid solenoid_gear_shift = new Solenoid(RobotMap.Solenoid_Gear_Shift);
-    Gyro driveGyro = new Gyro(RobotMap.AI_Gyro);
-    O_DrivePIDOutput PIDDrive = new O_DrivePIDOutput();
+    //Gyro
+        Gyro driveGyro = new Gyro(RobotMap.AI_Gyro);
+        O_DrivePIDOutput PIDDrive = new O_DrivePIDOutput();
+    //Autodrive
+        Encoder leftEncoder = new Encoder(RobotMap.DIO1_LeftEncoder, RobotMap.DIO2_LeftEncoder);
     
     public void initDefaultCommand() {
         solenoid_gear_shift.set(false); //Init Solenoid(true is low gear).
