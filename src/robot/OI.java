@@ -9,7 +9,7 @@ import subsystems.shooter.C_Pickup;
 import subsystems.drive.C_GearShift;
 import subsystems.drive.C_GyroSpin;
 import subsystems.drive.C_ResetGyro;
-import subsystems.shooter.C_ForceCollectorDown;
+import subsystems.shooter.C_ManualExtension;
 import subsystems.shooter.C_ShooterFire;
 import subsystems.shooter.C_Tension_ManualLower;
 import subsystems.shooter.C_Tension_ManualRaise;
@@ -40,27 +40,29 @@ public class OI {
     public Button Button_LowPower = new JoystickButton(controlPanel, RobotMap.Button_LowPower);
     public Button Button_Reload = new JoystickButton(controlPanel, RobotMap.Button_Reload);
     public Button Button_EnableManualShotTrim = new JoystickButton(controlPanel, RobotMap.Button_EnableManualShotTrim);
-
+    public Button Button_ManualExtension = new JoystickButton(controlPanel, RobotMap.Button_ManualExtension);
     
 // Another type of button you can create is a DigitalIOButton, which is
     // a button or switch hooked up to the cypress module. These are useful if
     // you want to build a customized operator interface.
     // Button button = new DigitalIOButton(1);
     public OI (){
-        Button_GearShift.whenPressed(new C_GearShift(true));
-        Button_GearShift.whenReleased(new C_GearShift(false));
-                
-        Button_ManualRaiseTension.whenPressed(new C_Tension_ManualRaise(0.7));        
-        Button_ManualLowerTension.whenPressed(new C_Tension_ManualLower(-0.7));   
-        
-        Button_Trigger.whenPressed(new C_ShooterFire());
-        Button_Pickup.whenPressed(new C_Pickup());
-        Button_Passball.whenPressed(new C_Pass());
-        Button_ForceCollectorDown.whenPressed(new C_ForceCollectorDown());
-        
-        //Gyro
-        Button_AutoGyroDrive.whenPressed(new C_GyroSpin(0));
-        Button_GyroReset.whenPressed(new C_ResetGyro());
+        //Driver
+            Button_GearShift.whenPressed(new C_GearShift(true));
+            Button_GearShift.whenReleased(new C_GearShift(false));
+        //Operator       
+            Button_ManualRaiseTension.whenPressed(new C_Tension_ManualRaise(0.7));        
+            Button_ManualLowerTension.whenPressed(new C_Tension_ManualLower(-0.7));   
+            Button_Trigger.whenPressed(new C_ShooterFire());
+            Button_Pickup.whenPressed(new C_Pickup());
+            Button_Passball.whenPressed(new C_Pass());
+            //Gyro
+                Button_AutoGyroDrive.whenPressed(new C_GyroSpin(0));
+                Button_GyroReset.whenPressed(new C_ResetGyro());  
+        //ControlPanel  
+            //Extension switch
+                Button_ManualExtension.whenPressed(new C_ManualExtension(true));
+                Button_ManualExtension.whenReleased(new C_ManualExtension(false));
     }
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to

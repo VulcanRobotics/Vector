@@ -31,7 +31,7 @@ public class SS_Drive extends Subsystem {
     
     public void initDefaultCommand() {
         solenoid_gear_shift.set(false); //Init Solenoid(true is low gear).
-        setDefaultCommand(new C_ArcadeDrive());
+        setDefaultCommand(new CM_ArcadeDrive());
     }
     
     public void arcade(){//Joystick drive method, additionally checks voltage for robot, and if battery is dying, compensates to extend battery life.
@@ -47,7 +47,7 @@ public class SS_Drive extends Subsystem {
             CommandBase.airSystem.compressor.start();
             lockLowGear = false;
         }
-        chassis.arcadeDrive(-(CommandBase.oi.driverStick.getY()*lowVoltageModifier), CommandBase.oi.driverStick.getX()*lowVoltageModifier);
+        chassis.arcadeDrive(-(CommandBase.oi.driverStick.getY()*lowVoltageModifier), -(CommandBase.oi.driverStick.getX()*lowVoltageModifier));
         Timer.delay(0.01);
     }
     
@@ -62,6 +62,7 @@ public class SS_Drive extends Subsystem {
 
     public void syncDashboard() {
         SmartDashboard.putBoolean("Gear Shift", solenoid_gear_shift.get());
+        SmartDashboard.putNumber("Gyro Angle", driveGyro.getAngle());
     }
     
     double lastVoltage = 12;

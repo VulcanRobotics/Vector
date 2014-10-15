@@ -9,36 +9,39 @@ import commands.CommandBase;
 
 /**
  *
- * @author afiolmahon
+ * @author afiol-mahon
  */
-public class C_ForceCollectorDown extends CommandBase {
+public class C_ManualExtension extends CommandBase {
     
-    public C_ForceCollectorDown() {
+    boolean state;
+    
+    public C_ManualExtension(boolean state) {
         requires(shooter);
+        this.state=state;
     }
 
+    boolean finished = false;
     // Called just before this Command runs the first time
     protected void initialize() {
+        shooter.setForceExtend(state);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        shooter.solenoid_collector.set(true);
+        finished = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !oi.Button_ForceCollectorDown.get();
+        return finished;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        shooter.collectorRoutine();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        shooter.collectorRoutine();
     }
 }

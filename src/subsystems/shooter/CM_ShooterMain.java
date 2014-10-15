@@ -11,9 +11,9 @@ import commands.CommandBase;
  *
  * @author afiol-mahon
  */
-public class C_ShooterMain extends CommandBase {
+public class CM_ShooterMain extends CommandBase {
     
-    public C_ShooterMain() {
+    public CM_ShooterMain() {
         requires(shooter);
     }
 

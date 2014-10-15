@@ -36,10 +36,9 @@ public class RobotMap {
             //Limits
                 public static final int DIO_Top_Limit_Switch = 2; //Tension Screw Top Limit
                 public static final int DIO_Bottom_Limit_Switch = 3; //Tension Screw Bottom Limit
-    //Arm
-        public static final int PWM_BallPickup = 4; //positive rolls out, negative rolls in
-        public static final int DIO_Arm_Out = 4; //false is out
-        
+        //Arm
+            public static final int PWM_BallPickup = 4; //positive rolls out, negative rolls in
+            public static final int DIO_Arm_Out = 4; //false is out
 //Control Systems    
     //Joystick 1 (Driver)
         //Buttons

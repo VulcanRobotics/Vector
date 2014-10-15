@@ -40,7 +40,7 @@ public class C_Pass extends CommandBase {
         shooter.BallPickup.set(0);
         shooter.collectorRoutine();
         shooter.solenoid_extensions.set(false);
-
+        
     }
 
     // Called when another command which requires one or more of the same

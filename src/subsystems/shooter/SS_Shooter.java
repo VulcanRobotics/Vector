@@ -24,13 +24,12 @@ public class SS_Shooter extends Subsystem {
         public O_TenModule tenModule = new O_TenModule(RobotMap.PWM_Tension);
         double uncockTension = 0.15;
         //Shot tension values
-        public double trusPowerHigh = 2.6;
-        public double trusPowerMid = 2.2;
-        public double trusPowerLow = 1.75;
-    
-        public double shotPowerHigh = 2.05;
-        public double shotPowerMid = 1.95;
-        public double shotPowerLow = 1.56;
+            public double trusPowerHigh = 2.6;
+            public double trusPowerMid = 2.2;
+            public double trusPowerLow = 1.75;
+            public double shotPowerHigh = 2.05;
+            public double shotPowerMid = 1.95;
+            public double shotPowerLow = 1.56;
         //PID Controller
             double Kp = 4.500;
             double Ki = 0.010;
@@ -43,8 +42,8 @@ public class SS_Shooter extends Subsystem {
             public Solenoid solenoid_extensions = new Solenoid(RobotMap.Solenoid_Extensions);
             public Solenoid solenoid_Ball_Loader = new Solenoid(RobotMap.Solenoid_Ball_Loader);
         //Digital In
-        DigitalInput BallDetector = new DigitalInput(RobotMap.DIO_Ball_Detector);
-        DigitalInput shooterDown = new DigitalInput(RobotMap.DIO_Shooter_Down);
+            DigitalInput BallDetector = new DigitalInput(RobotMap.DIO_Ball_Detector);
+            DigitalInput shooterDown = new DigitalInput(RobotMap.DIO_Shooter_Down);
     //Arm
         public double BallPickup_Speed = 0.7;
         public Talon BallPickup = new Talon(RobotMap.PWM_BallPickup);
@@ -52,7 +51,7 @@ public class SS_Shooter extends Subsystem {
 
     public void initDefaultCommand() {
         initSolenoids();
-        setDefaultCommand(new C_ShooterMain());
+        setDefaultCommand(new CM_ShooterMain());
     }
     
     void initSolenoids(){ //Initializes our solenoids so we know they are in the correct state.
@@ -64,16 +63,16 @@ public class SS_Shooter extends Subsystem {
     
     public void syncDashboard(){ //Publish Subsystem information.
         //Tension
-        SmartDashboard.putBoolean("Top Limit Switch", tenModule.Top_Limit_Switch.get());
-        SmartDashboard.putBoolean("Bottom Limit Switch", tenModule.Bottom_Limit_Switch.get());
-        SmartDashboard.putBoolean("Upper Soft Limit", !(tenModule.tenPot.pidGet() >= tenModule.tenPotMIN));
-        SmartDashboard.putBoolean("Lower Soft Limit", !(tenModule.tenPot.pidGet() <= tenModule.tenPotMAX));
-        SmartDashboard.putNumber("Tension Potentiometer", tenModule.tenPot.pidGet());
-        SmartDashboard.putNumber("Target", tensionPID.getSetpoint());
-        SmartDashboard.putBoolean("Shooter Down", shooterDown.get());
+            SmartDashboard.putBoolean("Top Limit Switch", tenModule.Top_Limit_Switch.get());
+            SmartDashboard.putBoolean("Bottom Limit Switch", tenModule.Bottom_Limit_Switch.get());
+            SmartDashboard.putBoolean("Upper Soft Limit", !(tenModule.tenPot.pidGet() >= tenModule.tenPotMIN));
+            SmartDashboard.putBoolean("Lower Soft Limit", !(tenModule.tenPot.pidGet() <= tenModule.tenPotMAX));
+            SmartDashboard.putNumber("Tension Potentiometer", tenModule.tenPot.pidGet());
+            SmartDashboard.putNumber("Target", tensionPID.getSetpoint());
+            SmartDashboard.putBoolean("Shooter Down", shooterDown.get());
         //Other Systems
-        SmartDashboard.putBoolean("Ball Ready", !BallDetector.get());
-        SmartDashboard.putBoolean("Arm Out", Arm_Out.get());
+            SmartDashboard.putBoolean("Ball Ready", !BallDetector.get());
+            SmartDashboard.putBoolean("Arm Out", Arm_Out.get());
     }
 
     void manualCheck() { //Disables PIDController if we are in manual tension mode.
@@ -85,10 +84,12 @@ public class SS_Shooter extends Subsystem {
     }
     
     public void collectorRoutine(){
-        if(!BallDetector.get()){
-            solenoid_Ball_Loader.set(true);
+        if(CommandBase.oi.Button_ForceCollectorDown.get()){
+            solenoid_collector.set(false);
+        }else if(!BallDetector.get()){
+            solenoid_collector.set(true);
         }else{
-            solenoid_Ball_Loader.set(false);
+            solenoid_collector.set(false);
         }
     }
     
@@ -97,28 +98,29 @@ public class SS_Shooter extends Subsystem {
         if(CommandBase.oi.Button_shotType.get()){ //Normal Shot Values
             if(CommandBase.oi.Button_HighPower.get()){//high power shot
                 fixValue = SmartDashboard.getNumber("longShotPower", shotPowerHigh);
-                CommandBase.shooter.solenoid_extensions.set(true);
+                CommandBase.shooter.setExtension(true);
             }else if(CommandBase.oi.Button_LowPower.get()){//low power shot
                 fixValue = SmartDashboard.getNumber("shortShotPower", shotPowerLow);
+                CommandBase.shooter.setExtension(false);
             }else{//mid power shot
-                CommandBase.shooter.solenoid_extensions.set(false);
                 fixValue = SmartDashboard.getNumber("middleShotPower", shotPowerMid);
-                CommandBase.shooter.solenoid_extensions.set(true);
+                CommandBase.shooter.setExtension(true);
             }
         }else{ //Truss shot values
             if(CommandBase.oi.Button_HighPower.get()){ //high power truss
                 fixValue = SmartDashboard.getNumber("longTrussPower", trusPowerHigh);
-                CommandBase.shooter.solenoid_extensions.set(true);
+                CommandBase.shooter.setExtension(true);
             }else if(CommandBase.oi.Button_LowPower.get()){ //low power truss
                 fixValue = SmartDashboard.getNumber("shortTrussPower", trusPowerLow);
-                CommandBase.shooter.solenoid_extensions.set(false);
+                CommandBase.shooter.setExtension(false);
             }else{ //mid power truss
                 fixValue = SmartDashboard.getNumber("middleTrussPower", trusPowerMid);
-                CommandBase.shooter.solenoid_extensions.set(true);
+                CommandBase.shooter.setExtension(true);
             }
         }
         if(CommandBase.oi.Button_EnableManualShotTrim.get()){
            double manualTrim = (((int)(CommandBase.oi.controlPanel.getZ()*5))/5)*0.1; //multiply Z axis of controlpanel by 5, convert result to nearest integer, divide by five, and get 10% of that
+           SmartDashboard.putNumber("Adjust", manualTrim);
            return fixValue+manualTrim; //target is our fixed value offset by our manaulTrim value
         }else{
         return fixValue; //if manualTrim is disabled, just return the fixed value
@@ -131,5 +133,18 @@ public class SS_Shooter extends Subsystem {
     
     public void retractArm(){
         solenoid_Ball_Loader.set(false);
+    }
+    
+    void setForceExtend(boolean enabled){//method used by command to lock extension out
+        forceExtend = enabled;
+    }
+    //extension state setting goes through this to make the extension switch function
+    boolean forceExtend = false;//extension switch sets this boolean which forces the extensions out when true
+    void setExtension(boolean state){
+        if(forceExtend){
+           solenoid_extensions.set(true);
+        }else{
+            solenoid_extensions.set(state);
+        }
     }
 }

@@ -15,12 +15,13 @@ import edu.wpi.first.wpilibj.PIDSource;
 public class O_TenPotPIDSource implements PIDSource{ //This class allows the pid controller to directly read our conventional tension format of 5-PotentiometerVoltage.
     double initValue;
     AnalogChannel pot;
+    
     public O_TenPotPIDSource(double initValue, int AnalogInChannel){
-    this.initValue = initValue;
-    this.pot = new AnalogChannel(AnalogInChannel);
+        this.initValue = initValue;
+        this.pot = new AnalogChannel(AnalogInChannel);
     }
+    
     public double pidGet() {
         return initValue-pot.getVoltage();
     }
-    
 }

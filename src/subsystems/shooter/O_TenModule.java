@@ -18,19 +18,16 @@ import robot.RobotMap;
 public class O_TenModule implements PIDOutput{
 
     //Constants
-    public double tenPotMAX = 2.55;
-    public double tenPotMIN = 0.2;
-    
+        public double tenPotMAX = 2.55;
+        public double tenPotMIN = 0.2;
     //Inputs
-    public DigitalInput Top_Limit_Switch = new DigitalInput(RobotMap.DIO_Top_Limit_Switch);
-    public DigitalInput Bottom_Limit_Switch = new DigitalInput(RobotMap.DIO_Bottom_Limit_Switch);
-    
+        public DigitalInput Top_Limit_Switch = new DigitalInput(RobotMap.DIO_Top_Limit_Switch);
+        public DigitalInput Bottom_Limit_Switch = new DigitalInput(RobotMap.DIO_Bottom_Limit_Switch);
     //PIDSource
-    public O_TenPotPIDSource tenPot = new O_TenPotPIDSource(5.00, RobotMap.AI_Tension_Potentiometer);
-    
+        public O_TenPotPIDSource tenPot = new O_TenPotPIDSource(5.00, RobotMap.AI_Tension_Potentiometer);
     //Output
-    private Talon motor;
-    
+        private Talon motor;
+        
     //constructor
     public O_TenModule(int channel){
         motor = new Talon(channel);
