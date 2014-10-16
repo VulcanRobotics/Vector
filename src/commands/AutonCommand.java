@@ -5,7 +5,15 @@
  */
 package commands;
 
+import Auton.CG_Auton0;
+import Auton.CG_Auton1;
+import Auton.CG_Auton2;
+import Auton.CG_Auton3;
+import Auton.CG_Auton4;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import subsystems.drive.C_CalibrateEncoderGyro;
 
 /**
  *
@@ -21,6 +29,19 @@ public class AutonCommand extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         CommandBase.airSystem.compressor.start();
+        Scheduler.getInstance().add(new C_CalibrateEncoderGyro());
+        int autonMode = (int)DriverStation.getInstance().getAnalogIn(1);
+        if(autonMode == 0){
+            Scheduler.getInstance().add(new CG_Auton0());
+        }else if(autonMode == 1){
+            Scheduler.getInstance().add(new CG_Auton1());
+        }else if(autonMode == 2){
+            Scheduler.getInstance().add(new CG_Auton2());
+        }else if(autonMode == 3){
+            Scheduler.getInstance().add(new CG_Auton3());
+        }else if(autonMode == 4){
+            Scheduler.getInstance().add(new CG_Auton4());
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run

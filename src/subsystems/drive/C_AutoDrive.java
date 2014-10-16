@@ -7,6 +7,7 @@ package subsystems.drive;
 
 import commands.CommandBase;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
@@ -27,9 +28,15 @@ public class C_AutoDrive extends CommandBase {
         PIDController autoDrivePID;
         O_AutoDrivePIDOutput AutoDriveOutput;
 
-    public C_AutoDrive(double target) {
+    double threshold = 1.0;
+        
+    Timer timer = new Timer();
+    double timeLimit;
+    public C_AutoDrive(double target, double timeLimit) {
         requires(drive);
+        timer.start();
         this.target = target;
+        this.timeLimit = timeLimit;
         AutoDriveOutput = new O_AutoDrivePIDOutput(target);
         autoDrivePID = new PIDController(Kp, Ki, Kd, drive.leftEncoder, AutoDriveOutput);
         autoDrivePID.setOutputRange(outputRangeLow, outputRangeHigh);
@@ -47,7 +54,8 @@ public class C_AutoDrive extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        double targetValue = (target-drive.leftEncoder.get()) > 0 ? (target-drive.leftEncoder.get()) : -(target-drive.leftEncoder.get());
+        return timer.get() > timeLimit | targetValue < threshold ;
     }
 
     // Called once after isFinished returns true
