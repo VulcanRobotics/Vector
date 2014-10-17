@@ -27,8 +27,8 @@ public class SS_Drive extends Subsystem {
         Gyro driveGyro = new Gyro(RobotMap.AI_Gyro);
         O_DrivePIDOutput PIDDrive = new O_DrivePIDOutput();
     //Autodrive
-        Encoder leftEncoder = new Encoder(RobotMap.DIO1_LeftEncoder, RobotMap.DIO2_LeftEncoder);
-    
+        public Encoder leftEncoder = new Encoder(RobotMap.DIO1_LeftEncoder, RobotMap.DIO2_LeftEncoder);
+            
     public void initDefaultCommand() {
         solenoid_gear_shift.set(false); //Init Solenoid(true is low gear).
         setDefaultCommand(new CM_ArcadeDrive());

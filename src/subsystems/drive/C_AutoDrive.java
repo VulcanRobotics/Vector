@@ -44,6 +44,7 @@ public class C_AutoDrive extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        autoDrivePID.setPercentTolerance(1);
         autoDrivePID.setSetpoint(target);
         autoDrivePID.enable();
     }
@@ -61,6 +62,7 @@ public class C_AutoDrive extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         autoDrivePID.disable();
+        System.out.println("autodrive complete" +timer.get());
     }
 
     // Called when another command which requires one or more of the same

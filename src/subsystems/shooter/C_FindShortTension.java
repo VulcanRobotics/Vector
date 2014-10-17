@@ -27,6 +27,7 @@ public class C_FindShortTension extends CommandBase {//Used by auton to try to r
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        shooter.tensionPID.setPercentTolerance(5);
         shooter.tensionPID.enable();
         shooter.solenoid_trigger.set(false);
         shooter.tensionPID.setSetpoint(DriverStation.getInstance().getAnalogIn(2));
@@ -40,6 +41,7 @@ public class C_FindShortTension extends CommandBase {//Used by auton to try to r
     // Called once after isFinished returns true
     protected void end() {
         shooter.tensionPID.disable();
+        System.out.println("FindShortTension complete");
     }
 
     // Called when another command which requires one or more of the same

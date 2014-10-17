@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.PIDOutput;
 
 /**
  *
- * @author afiolmahon
+ * @author afiol-mahon
  */
-public class O_DrivePIDOutput implements PIDOutput{
+class O_DrivePIDOutput implements PIDOutput{
 
-    public void pidWrite(double d) {
-        CommandBase.drive.chassis.arcadeDrive(-d, 0);
+    public void pidWrite(double output) {
+        CommandBase.drive.chassis.arcadeDrive(-output, 0);
     }
     
 }

@@ -8,7 +8,6 @@ package Auton;
 import commands.CommandBase;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import subsystems.drive.C_AutoDrive;
-import subsystems.drive.C_ShouldTurnRight;
 import subsystems.shooter.C_FindShortTension;
 import subsystems.shooter.C_WaitForArmOut;
 
@@ -21,13 +20,15 @@ public class CG_Auton1 extends CommandGroup {
     double driveLength = 11;
     
     public CG_Auton1() {
-        addParallel(new C_AutoDrive(driveLength, 20));
+        addSequential(new C_AutoDrive(driveLength, 10));
         addSequential(new C_FindShortTension());
         CommandBase.shooter.solenoid_collector.set(true);
+        System.out.println("setCollector");
         CommandBase.shooter.solenoid_Ball_Loader.set(true);
+        System.out.println("setBallLoader");
         CommandBase.shooter.solenoid_extensions.set(false);
+        System.out.println("setExtensions");
         addSequential(new C_WaitForArmOut());
-        addSequential(new C_ShouldTurnRight(3));
         CommandBase.shooter.solenoid_trigger.set(true);
         // Add Commands here:
         // e.g. addSequential(new Command1());
