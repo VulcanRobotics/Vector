@@ -6,8 +6,10 @@
 package subsystems.shooter;
 
 import commands.CommandBase;
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Talon;
 import robot.RobotMap;
 
@@ -27,8 +29,7 @@ public class O_TenModule implements PIDOutput{
         public O_TenPotPIDSource tenPot = new O_TenPotPIDSource(5.00, RobotMap.AI_Tension_Potentiometer);
     //Output
         private Talon motor;
-        
-    //constructor
+
     public O_TenModule(int channel){
         motor = new Talon(channel);
     }
@@ -70,6 +71,20 @@ public class O_TenModule implements PIDOutput{
     public void setManualTension(double speed) {//This method gives us an elegant way to ignore the tension buttons if we aren't in manual tension mode.
         if(CommandBase.oi.Button_ManualTensionMode.get()){
             setTension(speed);
+        }
+    }
+    
+    public class O_TenPotPIDSource implements PIDSource{ //This class allows the pid controller to directly read our conventional tension format of 5-PotentiometerVoltage.
+        double initValue;
+        AnalogChannel pot;
+
+        public O_TenPotPIDSource(double initValue, int AnalogInChannel){
+            this.initValue = initValue;
+            this.pot = new AnalogChannel(AnalogInChannel);
+        }
+
+        public double pidGet() {
+            return initValue-pot.getVoltage();
         }
     }
 }

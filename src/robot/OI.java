@@ -52,7 +52,7 @@ public class OI {
         //Driver
             Button_GearShift.whenPressed(new C_GearShift(true));
             Button_GearShift.whenReleased(new C_GearShift(false));
-        //Operator       
+        //Operator
             Button_ManualRaiseTension.whenPressed(new C_Tension_ManualRaise(0.7));        
             Button_ManualLowerTension.whenPressed(new C_Tension_ManualLower(-0.7));   
             Button_Trigger.whenPressed(new C_ShooterFire());

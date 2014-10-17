@@ -21,13 +21,12 @@ import robot.RobotMap;
  * @author afiol-mahon
  */
 public class SS_Drive extends Subsystem {
-    RobotDrive chassis = new RobotDrive(RobotMap.PWM_LeftDrive, RobotMap.PWM_RightDrive);
-    Solenoid solenoid_gear_shift = new Solenoid(RobotMap.Solenoid_Gear_Shift);
-    //Gyro
+    //Outputs
+        RobotDrive chassis = new RobotDrive(RobotMap.PWM_LeftDrive, RobotMap.PWM_RightDrive);
+        Solenoid solenoid_gear_shift = new Solenoid(RobotMap.Solenoid_Gear_Shift);
+    //Sensors
         Gyro driveGyro = new Gyro(RobotMap.AI_Gyro);
-        O_DrivePIDOutput PIDDrive = new O_DrivePIDOutput();
-    //Autodrive
-        public Encoder leftEncoder = new Encoder(RobotMap.DIO1_LeftEncoder, RobotMap.DIO2_LeftEncoder);
+        Encoder leftEncoder = new Encoder(RobotMap.DIO1_LeftEncoder, RobotMap.DIO2_LeftEncoder);
             
     public void initDefaultCommand() {
         solenoid_gear_shift.set(false); //Init Solenoid(true is low gear).
@@ -53,11 +52,7 @@ public class SS_Drive extends Subsystem {
     
     boolean lockLowGear = false; //Allows other systems to override gear selection and force robot to use low gear.
      public void setGear(boolean state){
-        if(!lockLowGear){
-            solenoid_gear_shift.set(state);
-        }else{
-            solenoid_gear_shift.set(true);
-        }
+        solenoid_gear_shift.set(lockLowGear ? true : state);
      }
 
     public void syncDashboard() {
