@@ -10,6 +10,7 @@ import subsystems.drive.C_GearShift;
 import subsystems.drive.C_GyroSpin;
 import subsystems.drive.C_ResetGyro;
 import subsystems.shooter.C_ManualExtension;
+import subsystems.shooter.C_Roll_In;
 import subsystems.shooter.C_ShooterFire;
 import subsystems.shooter.C_Tension_ManualLower;
 import subsystems.shooter.C_Tension_ManualRaise;
@@ -20,28 +21,29 @@ import subsystems.shooter.C_Tension_ManualRaise;
  */
 public class OI {
     //Driver Stick
-    public Joystick driverStick = new Joystick(1);
-    public Button Button_GearShift = new JoystickButton(driverStick, RobotMap.Button_GearShift);
+        public Joystick driverStick = new Joystick(1);
+        public Button Button_GearShift = new JoystickButton(driverStick, RobotMap.Button_GearShift);
     //opStick
-    public Joystick opStick = new Joystick(2);
-    public Button Button_ManualRaiseTension = new JoystickButton(opStick, RobotMap.Button_ManualRaiseTension);
-    public Button Button_ManualLowerTension = new JoystickButton(opStick, RobotMap.Button_ManualLowerTension);
-    public Button Button_Trigger = new JoystickButton(opStick, RobotMap.Button_Trigger);
-    public Button Button_Pickup = new JoystickButton(opStick, RobotMap.Button_Pickup);
-    public Button Button_Passball = new JoystickButton(opStick, RobotMap.Button_PassBall);
-    public Button Button_ForceCollectorDown = new JoystickButton(opStick, RobotMap.Button_ForceCollectorDown);
-    public Button Button_AutoGyroDrive = new JoystickButton(opStick, RobotMap.Button_AutoGyroDrive);
-    public Button Button_GyroReset = new JoystickButton(opStick, RobotMap.Button_GyroReset);
+        public Joystick opStick = new Joystick(2);
+        public Button Button_ManualRaiseTension = new JoystickButton(opStick, RobotMap.Button_ManualRaiseTension);
+        public Button Button_ManualLowerTension = new JoystickButton(opStick, RobotMap.Button_ManualLowerTension);
+        public Button Button_Trigger = new JoystickButton(opStick, RobotMap.Button_Trigger);
+        public Button Button_Pickup = new JoystickButton(opStick, RobotMap.Button_Pickup);
+        public Button Button_Passball = new JoystickButton(opStick, RobotMap.Button_PassBall);
+        public Button Button_ForceCollectorDown = new JoystickButton(opStick, RobotMap.Button_ForceCollectorDown);
+        public Button Button_AutoGyroDrive = new JoystickButton(opStick, RobotMap.Button_AutoGyroDrive);
+        public Button Button_GyroReset = new JoystickButton(opStick, RobotMap.Button_GyroReset);
+        public Button Button_ManualRoller = new JoystickButton(opStick, RobotMap.Button_ManualRoller);
     //Joy 3
-    public Joystick controlPanel = new Joystick(3);
-    public Button Button_ManualTensionMode = new JoystickButton(controlPanel, RobotMap.Button_ManualOrAuto);
-    public Button Button_shotType = new JoystickButton(controlPanel, RobotMap.Button_ShootingOrTruss); //true is normal shot
-    public Button Button_HighPower = new JoystickButton(controlPanel, RobotMap.Button_HighPower);
-    public Button Button_LowPower = new JoystickButton(controlPanel, RobotMap.Button_LowPower);
-    public Button Button_Reload = new JoystickButton(controlPanel, RobotMap.Button_Reload);
-    public Button Button_EnableManualShotTrim = new JoystickButton(controlPanel, RobotMap.Button_EnableManualShotTrim);
-    public Button Button_ManualExtension = new JoystickButton(controlPanel, RobotMap.Button_ManualExtension);
-    
+        public Joystick controlPanel = new Joystick(3);
+        public Button Button_ManualTensionMode = new JoystickButton(controlPanel, RobotMap.Button_ManualOrAuto);
+        public Button Button_shotType = new JoystickButton(controlPanel, RobotMap.Button_ShootingOrTruss); //true is normal shot
+        public Button Button_HighPower = new JoystickButton(controlPanel, RobotMap.Button_HighPower);
+        public Button Button_LowPower = new JoystickButton(controlPanel, RobotMap.Button_LowPower);
+        public Button Button_Reload = new JoystickButton(controlPanel, RobotMap.Button_Reload);
+        public Button Button_EnableManualShotTrim = new JoystickButton(controlPanel, RobotMap.Button_EnableManualShotTrim);
+        public Button Button_ManualExtension = new JoystickButton(controlPanel, RobotMap.Button_ManualExtension);
+
 // Another type of button you can create is a DigitalIOButton, which is
     // a button or switch hooked up to the cypress module. These are useful if
     // you want to build a customized operator interface.
@@ -56,6 +58,7 @@ public class OI {
             Button_Trigger.whenPressed(new C_ShooterFire());
             Button_Pickup.whenPressed(new C_Pickup());
             Button_Passball.whenPressed(new C_Pass());
+            Button_ManualRoller.whenPressed(new C_Roll_In());
             //Gyro
                 Button_AutoGyroDrive.whenPressed(new C_GyroSpin(0));
                 Button_GyroReset.whenPressed(new C_ResetGyro());  
