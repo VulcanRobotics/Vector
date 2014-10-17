@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package subsystems.drive;
 
 import commands.CommandBase;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
 
 /**
  *
@@ -14,44 +10,51 @@ import edu.wpi.first.wpilibj.PIDController;
  */
 public class C_GyroSpin extends CommandBase {
     
-    //PID
-    double OutputRangeTop = 0.7;
-    double OutputRangeBottom = -0.7;
-    double Kp = 3.000;
-    double Ki = 0.000;
-    double Kd = 0.000;
-    PIDController GyroPid = new PIDController(Kp, Ki, Kd, drive.driveGyro, drive.PIDDrive);
-    double desiredAngle;
-    
+    //PID Values
+        double OutputRangeTop = 0.7;
+        double OutputRangeBottom = -0.7;
+        double Kp = 3.000;
+        double Ki = 0.000;
+        double Kd = 0.000;
+    //Control Objects
+        O_DrivePIDOutput PIDDrive = new O_DrivePIDOutput();
+        PIDController GyroPid = new PIDController(Kp, Ki, Kd, drive.driveGyro, PIDDrive);
+    //Control Values
+        double desiredAngle;
+        double TargetAngleAllowance = 3;
+        double TurnSpeedAllowance = 0.1;
+        
     public C_GyroSpin(double desiredAngle) {
         requires(drive);
         this.desiredAngle = desiredAngle;
         GyroPid.setOutputRange(OutputRangeBottom, OutputRangeTop);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
-        GyroPid.setSetpoint(Kp);
+        GyroPid.setSetpoint(desiredAngle);
         GyroPid.enable();
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return !oi.Button_AutoGyroDrive.get();
     }
 
-    // Called once after isFinished returns true
     protected void end() {
         GyroPid.disable();
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
         GyroPid.disable();
     }
+    
+    class O_DrivePIDOutput implements PIDOutput{
+
+    public void pidWrite(double output) {
+        CommandBase.drive.chassis.arcadeDrive(-output, 0);
+    }
+    
+}
 }

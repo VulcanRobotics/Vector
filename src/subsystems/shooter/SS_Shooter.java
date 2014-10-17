@@ -123,7 +123,7 @@ public class SS_Shooter extends Subsystem {
            SmartDashboard.putNumber("Adjust", manualTrim);
            return fixValue+manualTrim; //target is our fixed value offset by our manaulTrim value
         }else{
-        return fixValue; //if manualTrim is disabled, just return the fixed value
+            return fixValue; //if manualTrim is disabled, just return the fixed value
         }
     }
     
@@ -141,10 +141,6 @@ public class SS_Shooter extends Subsystem {
     //extension state setting goes through this to make the extension switch function
     boolean forceExtend = false;//extension switch sets this boolean which forces the extensions out when true
     void setExtension(boolean state){
-        if(forceExtend){
-           solenoid_extensions.set(true);
-        }else{
-            solenoid_extensions.set(state);
-        }
+        solenoid_extensions.set(forceExtend ? true : state);
     }
 }
