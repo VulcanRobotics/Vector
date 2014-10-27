@@ -18,7 +18,7 @@ public class CG_Auton2 extends CommandGroup {
         
     public CG_Auton2() {
         addSequential(new PreDrive());
-        addSequential(new C_AutoDrive(7.0));
+        addSequential(new C_AutoDrive(11.5));
         addSequential(new PostDrive());
     }
     
@@ -41,9 +41,8 @@ public class CG_Auton2 extends CommandGroup {
             else if(state == 1){
                 state += shooter.Arm_Out.get() ? 1 : 0;
             }else if(state == 2){
-                shooter.BallPickup.set(-1.0);
                 Timer.delay(1.0);
-                shooter.BallPickup.set(-0.1);
+                shooter.BallPickup.set(-0.07);
                 state +=1;
             }
         }
@@ -53,9 +52,11 @@ public class CG_Auton2 extends CommandGroup {
         }
 
         protected void end() {
+            System.out.println("Auton2[PreDrive] Ended");
         }
 
         protected void interrupted() {
+            System.out.println("Auton2[PreDrive] Interrupted");
         }
     
     }
@@ -106,13 +107,13 @@ public class CG_Auton2 extends CommandGroup {
         protected void end() {
             shooter.BallPickup.set(0.0);
             drive.stopDrive();
-            System.out.println("Auton2 Ended");
+            System.out.println("Auton2[PostDrive] Ended");
         }
 
         protected void interrupted() {
             shooter.BallPickup.set(0.0);
             drive.stopDrive();
-            System.out.println("Auton2 Interrupted");
+            System.out.println("Auton2[PostDrive] Interrupted");
         }
     
     }
