@@ -6,8 +6,11 @@
 package subsystems.drive;
 
 import commands.CommandBase;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  *
@@ -56,7 +59,7 @@ public class C_AutoDrive extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return autoDrivePID.onTarget();
+        return autoDrivePID.onTarget() | !DriverStation.getInstance().isAutonomous();
     }
 
     // Called once after isFinished returns true
@@ -75,10 +78,9 @@ public class C_AutoDrive extends CommandBase {
     }
     
     class O_AutoDrivePIDOutput implements PIDOutput{//Defines the component that maps the PIDController to the Motor output
-        double LastPIDOut = 0.75;
         public void pidWrite(double PIDControllerOutput) {//keep passing pid values while above threshold value(pass 0 when below or equal)
+            System.out.println("AutoDrivePIDOutput called with "+PIDControllerOutput+" as motorspeed");
             drive.chassis.arcadeDrive(PIDControllerOutput, drive.driveGyro.getAngle()*gyroScale); //drive
-            LastPIDOut = PIDControllerOutput;
         }
     }
 }
