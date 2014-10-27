@@ -20,19 +20,29 @@ import robot.RobotMap;
  *
  * @author afiol-mahon
  */
-public class SS_Drive extends Subsystem {
+public class SS_Drive extends Subsystem {   
     //Outputs
-        RobotDrive chassis = new RobotDrive(RobotMap.PWM_LeftDrive, RobotMap.PWM_RightDrive);
+        public RobotDrive chassis = new RobotDrive(RobotMap.PWM_LeftDrive, RobotMap.PWM_RightDrive);
         Solenoid solenoid_gear_shift = new Solenoid(RobotMap.Solenoid_Gear_Shift);
     //Sensors
-        Gyro driveGyro = new Gyro(RobotMap.AI_Gyro);
-        Encoder leftEncoder = new Encoder(RobotMap.DIO1_LeftEncoder, RobotMap.DIO2_LeftEncoder);
+        public Gyro driveGyro = new Gyro(RobotMap.AI_Gyro){{
+            this.setSensitivity(-0.007);
+            this.reset();
+        }};
+        public Encoder leftEncoder = new Encoder(RobotMap.DIO1_LeftEncoder, RobotMap.DIO2_LeftEncoder){{
+            this.setReverseDirection(true);
+            this.setPIDSourceParameter(PIDSourceParameter.kDistance);
+            this.setDistancePerPulse(((4.0*3.14159*(40.0/45.0))/100.0/12.0));
+            this.start();
+            this.reset();
+            
+        }};
             
     public void initDefaultCommand() {
         solenoid_gear_shift.set(false); //Init Solenoid(true is low gear).
         setDefaultCommand(new CM_ArcadeDrive());
     }
-    
+
     public void arcade(){//Joystick drive method, additionally checks voltage for robot, and if battery is dying, compensates to extend battery life.
         double lowVoltageModifier = 1;
         if(batteryBelow(8.5)){//Stops compressor and runs motors at 80% if battery drops below 8.5 volts.
@@ -46,7 +56,8 @@ public class SS_Drive extends Subsystem {
             CommandBase.airSystem.compressor.start();
             lockLowGear = false;
         }
-        chassis.arcadeDrive(-(CommandBase.oi.driverStick.getY()*lowVoltageModifier), -(CommandBase.oi.driverStick.getX()*lowVoltageModifier));
+        double trim = (CommandBase.oi.driverStick.getThrottle()/2.0)+0.5;
+        chassis.arcadeDrive(-(CommandBase.oi.driverStick.getY()*(lowVoltageModifier == 1 ? trim : lowVoltageModifier)), -(CommandBase.oi.driverStick.getX()*(lowVoltageModifier == 1 ? trim : lowVoltageModifier)));
         Timer.delay(0.01);
     }
     
@@ -66,5 +77,8 @@ public class SS_Drive extends Subsystem {
         double avgVoltage = (currentVoltage+lastVoltage)/2; //averages last and current voltages
         lastVoltage = currentVoltage; //updates last voltage
         return avgVoltage < testValue;
+    }
+    public void stopDrive(){
+        chassis.drive(0, 0);
     }
 }

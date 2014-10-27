@@ -22,7 +22,7 @@ public class SS_Shooter extends Subsystem {
     
     //Tension
         public O_TenModule tenModule = new O_TenModule(RobotMap.PWM_Tension);
-        double uncockTension = 0.15;
+        public double uncockTension = 0.15;
         //Shot tension values
             public double trusPowerHigh = 2.6;
             public double trusPowerMid = 2.2;
@@ -34,7 +34,7 @@ public class SS_Shooter extends Subsystem {
             double Kp = 4.500;
             double Ki = 0.010;
             double Kd = 1.000;
-            PIDController tensionPID = new PIDController(Kp, Ki, Kd, tenModule.tenPot, tenModule);
+            public PIDController tensionPID = new PIDController(Kp, Ki, Kd, tenModule.tenPot, tenModule);
     //Non-Tension Systems
         //Solenoids
             public Solenoid solenoid_trigger = new Solenoid(RobotMap.Solenoid_Trigger);
@@ -42,11 +42,11 @@ public class SS_Shooter extends Subsystem {
             public Solenoid solenoid_extensions = new Solenoid(RobotMap.Solenoid_Extensions);
             public Solenoid solenoid_Ball_Loader = new Solenoid(RobotMap.Solenoid_Ball_Loader);
         //Digital In
-            DigitalInput BallDetector = new DigitalInput(RobotMap.DIO_Ball_Detector);
-            DigitalInput shooterDown = new DigitalInput(RobotMap.DIO_Shooter_Down);
+            public DigitalInput BallDetector = new DigitalInput(RobotMap.DIO_Ball_Detector);
+            public DigitalInput shooterDown = new DigitalInput(RobotMap.DIO_Shooter_Down);
     //Arm
         public double BallPickup_Speed = 0.7;
-        public Talon BallPickup = new Talon(RobotMap.PWM_BallPickup);
+        public Talon BallPickup = new Talon(RobotMap.PWM_BallPickup);//negative value is roll in
         public DigitalInput Arm_Out = new DigitalInput(RobotMap.DIO_Arm_Out);
 
     public void initDefaultCommand() {
@@ -54,7 +54,7 @@ public class SS_Shooter extends Subsystem {
         setDefaultCommand(new CM_ShooterMain());
     }
     
-    void initSolenoids(){ //Initializes our solenoids so we know they are in the correct state.
+    public void initSolenoids(){ //Initializes our solenoids so we know they are in the correct state.
         solenoid_trigger.set(false); //false is closed
         solenoid_collector.set(false); //false is down
         solenoid_extensions.set(false); //false is retracted

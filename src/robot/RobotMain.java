@@ -57,6 +57,8 @@ public class RobotMain extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         autonomousCommand.cancel();
+        CommandBase.drive.stopDrive();
+        CommandBase.shooter.initSolenoids();
     }
 
     /**
@@ -66,7 +68,7 @@ public class RobotMain extends IterativeRobot {
         Scheduler.getInstance().run();
         CommandBase.drive.syncDashboard();
         CommandBase.shooter.syncDashboard();
-    }
+     }
     
     /**
      * This function is called periodically during test mode

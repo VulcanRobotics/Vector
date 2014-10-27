@@ -27,7 +27,9 @@ public class C_ShooterFire extends CommandBase {
     protected void execute() {
         if(shooter.shooterDown.get()){
             shooter.extendArm();
+            System.out.println("Waiting for shooterDown Switch");
             if(!shooter.Arm_Out.get() | shooter.tenModule.tenPot.pidGet() < 1.5){//can fire if arm is our or tension is below 1.5
+                System.out.println("Shoot Conditions met");
                 shooter.solenoid_trigger.set(true);
             }
         }
