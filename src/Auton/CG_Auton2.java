@@ -100,7 +100,7 @@ public class CG_Auton2 extends CommandGroup {
         }
 
         protected boolean isFinished() {
-            return state == 6;
+            return state == 7;
         }
 
         protected void end() {
