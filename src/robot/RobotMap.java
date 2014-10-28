@@ -51,7 +51,6 @@ public class RobotMap {
         public static final int Button_ManualRaiseTension = 4; //In manual mode raise tension
         public static final int Button_ManualRoller = 5; //Manual ball roll in
         public static final int Button_ManualLowerTension = 6; //In manual mode lower tension
-        public static final int Button_AutoGyroDrive = 7; //Gyroscope drives robot straight
         public static final int Button_GyroReset = 8; //Reset Gyro
         public static final int Button_ForceCollectorDown = 9; //if true force Collector down
         public static final int Button_EnableGyroSpin = 11; //Force Collector Up?

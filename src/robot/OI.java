@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import subsystems.drive.C_GearShift;
-import subsystems.drive.C_GyroSpin;
 import subsystems.drive.C_ResetGyro;
 import subsystems.pickup.C_Eject_Ball;
 import subsystems.pickup.A_PickupBall;
@@ -32,7 +31,6 @@ public class OI {
         public Button Button_Pickup = new JoystickButton(opStick, RobotMap.Button_Pickup);
         public Button Button_Passball = new JoystickButton(opStick, RobotMap.Button_PassBall);
         public Button Button_ForceCollectorDown = new JoystickButton(opStick, RobotMap.Button_ForceCollectorDown);
-        public Button Button_AutoGyroDrive = new JoystickButton(opStick, RobotMap.Button_AutoGyroDrive);
         public Button Button_GyroReset = new JoystickButton(opStick, RobotMap.Button_GyroReset);
         public Button Button_ManualRoller = new JoystickButton(opStick, RobotMap.Button_ManualRoller);
     //Joy 3
@@ -61,7 +59,6 @@ public class OI {
             Button_Passball.whileHeld(new C_Eject_Ball());
             Button_ManualRoller.whileHeld(new A_Roll_In());
             //Gyro
-                Button_AutoGyroDrive.whenPressed(new C_GyroSpin(0));
                 Button_GyroReset.whenPressed(new C_ResetGyro());  
         //ControlPanel  
           

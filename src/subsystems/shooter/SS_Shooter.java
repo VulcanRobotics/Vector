@@ -113,10 +113,10 @@ public class SS_Shooter extends Subsystem {
     void setExtension(boolean state){
         solenoid_extensions.set(state);
     }
-    void extensionsOut() {
+    public void extensionsOut() {
         setExtension(true);
     }
-    void extensionsIn() {
+    public void extensionsIn() {
         setExtension(false);
     }
     

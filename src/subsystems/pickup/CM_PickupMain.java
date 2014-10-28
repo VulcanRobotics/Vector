@@ -23,7 +23,9 @@ public class CM_PickupMain extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        pickup.solenoid_collector.set(pickup.hasBall());
+        //if(pickup.isArmOut()){
+          //  pickup.solenoid_collector.set(pickup.hasBall());
+        //}
     }
 
     // Make this return true when this Command no longer needs to run execute()

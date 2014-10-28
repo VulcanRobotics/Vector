@@ -18,6 +18,7 @@ public class C_Eject_Ball extends CommandBase {
     
     public C_Eject_Ball() {
         requires(pickup);
+        requires(shooter);
     }
     public C_Eject_Ball(double timeout) {
         requires(pickup);
@@ -27,6 +28,7 @@ public class C_Eject_Ball extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        shooter.extensionsOut();
         pickup.rollBallOut();
         pickup.collectorDown();
         pickup.armIn();
@@ -45,11 +47,13 @@ public class C_Eject_Ball extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         pickup.stopRollers();
+        pickup.collectorUp();
+        shooter.extensionsIn();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        pickup.stopRollers();
+        end();
     }
 }
