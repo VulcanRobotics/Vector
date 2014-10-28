@@ -84,7 +84,7 @@ public class SS_Pickup extends Subsystem {
     
     public void defaultState(){
         armIn();
-        collectorDown();
+        collectorUp();
         stopRollers();
     }
 

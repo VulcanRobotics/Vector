@@ -4,12 +4,9 @@
  * and open the template in the editor.
  */
 package subsystems.pickup;
-import edu.wpi.first.wpilibj.Timer;
-import commands.CommandBase;
 import commands.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import subsystems.drive.C_AutoDrive;
+
 
 /**
  *

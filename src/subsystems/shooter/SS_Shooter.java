@@ -44,7 +44,6 @@ public class SS_Shooter extends Subsystem {
             
             public DigitalInput shooterDown = new DigitalInput(RobotMap.DIO_Shooter_Down);
 
-
     public void initDefaultCommand() {
         setDefaultCommand(new CM_ShooterMain());
     }
