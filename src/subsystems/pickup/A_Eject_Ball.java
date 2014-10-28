@@ -3,46 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsystems.shooter;
+package subsystems.pickup;
 
 import commands.CommandBase;
 
 /**
  *
- * @author afiol-mahon
+ * @author liamcook
  */
-public class C_Pickup extends CommandBase {
+public class A_Eject_Ball extends CommandBase {
     
-    public C_Pickup() {
-        requires(shooter);
+    public A_Eject_Ball() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+        requires(pickup);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {//Extends arm and starts pickup roller.
-        shooter.extendArm();
-        shooter.BallPickup.set(-shooter.BallPickup_Speed);
-        shooter.solenoid_collector.set(false);
+    protected void initialize() {
+        pickup.rollBallOut();
+        pickup.collectorDown();
+        pickup.armIn();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        System.out.println("executing A_Eject_Ball");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !oi.Button_Pickup.get();
+        return true;
     }
 
     // Called once after isFinished returns true
-    protected void end() {//Stops roller and retracts arm when complete.
-        shooter.retractArm();
-        shooter.BallPickup.set(0);
+    protected void end() {
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        shooter.retractArm();
-        shooter.BallPickup.set(0);
     }
 }

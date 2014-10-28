@@ -87,4 +87,8 @@ public class O_TenModule implements PIDOutput{
             return initValue-pot.getVoltage();
         }
     }
+    
+    public boolean isTensionDangerous() {
+        return tenPot.pidGet() > 1.5;
+    }
 }

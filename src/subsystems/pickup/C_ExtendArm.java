@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsystems.shooter;
+package subsystems.pickup;
 
 import commands.CommandBase;
 
 /**
  *
- * @author afiolmahon
+ * @author liamcook
  */
-public class C_WaitForArmOut extends CommandBase {
+public class C_ExtendArm extends CommandBase {
     
-    public C_WaitForArmOut() {
-        requires(shooter);
+    public C_ExtendArm() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+        requires(pickup);
     }
 
     // Called just before this Command runs the first time
@@ -23,11 +25,12 @@ public class C_WaitForArmOut extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        pickup.armOut();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !shooter.Arm_Out.get();
+        return pickup.isArmOut();
     }
 
     // Called once after isFinished returns true

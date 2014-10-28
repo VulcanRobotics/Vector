@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import robot.OI;
 import subsystems.air.SS_AirSystem;
 import subsystems.drive.SS_Drive;
+import subsystems.pickup.SS_Pickup;
 import subsystems.shooter.SS_Shooter;
 
 /**
@@ -18,7 +19,8 @@ public abstract class CommandBase extends Command {
     public static SS_Drive drive = new SS_Drive();
     public static SS_AirSystem airSystem = new SS_AirSystem();
     public static SS_Shooter shooter = new SS_Shooter();
-        
+    public static SS_Pickup pickup = new SS_Pickup();
+    
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from
@@ -26,6 +28,7 @@ public abstract class CommandBase extends Command {
         // yet. Thus, their requires() statements may grab null pointers. Bad
         // news. Don't move it.
         oi = new OI();
+        pickup = new SS_Pickup();
         // Show what command your subsystem is running on the SmartDashboard
     }
 

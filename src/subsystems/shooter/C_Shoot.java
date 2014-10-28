@@ -6,46 +6,47 @@
 package subsystems.shooter;
 
 import commands.CommandBase;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
- * @author afiolmahon
+ * @author liamcook
  */
-public class C_FindShortTension extends CommandBase {//Used by auton to try to reach tension in under 3 seconds
+public class C_Shoot extends CommandBase {
     
-    public C_FindShortTension() {
+    public C_Shoot() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
         requires(shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        setTimeout(3);
+        shooter.openLatch();
+        setTimeout(5);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        shooter.tensionPID.setPercentTolerance(5);
-        shooter.tensionPID.enable();
-        shooter.solenoid_trigger.set(false);
-        shooter.tensionPID.setSetpoint(DriverStation.getInstance().getAnalogIn(2));
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut() | shooter.tensionPID.onTarget();
+        if (isTimedOut())
+        {
+            System.out.println("trying to shoot for 5 seconds - cannot");
+            return true;
+        }
+        return shooter.isShooterDown();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        shooter.tensionPID.disable();
-        System.out.println("FindShortTension complete");
+        
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        shooter.tensionPID.disable();
     }
 }

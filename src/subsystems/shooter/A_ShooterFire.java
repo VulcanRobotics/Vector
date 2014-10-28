@@ -11,34 +11,48 @@ import commands.CommandBase;
  *
  * @author afiol-mahon
  */
-public class C_Roll_In extends CommandBase {
+public class A_ShooterFire extends CommandBase {
     
-    public C_Roll_In() {
+    boolean finished = false;
+    public A_ShooterFire() {
         requires(shooter);
     }
-
+    
     // Called just before this Command runs the first time
     protected void initialize() {
-        shooter.BallPickup.set(-shooter.BallPickup_Speed);
+        System.out.println("C_ShooterFire started");
+        if(shooter.shooterDown.get()){
+//extend arm
+            System.out.println("Waiting for shooterDown Switch");
+            if(!shooter.Arm_Out.get() | shooter.tenModule.tenPot.pidGet() < 1.5){//can fire if arm is out or tension is below 1.5
+                System.out.println("Shoot Conditions met");
+                shooter.solenoid_trigger.set(true);
+            }
+        }
+        if(!oi.Button_Trigger.get()){
+            finished = true;
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !oi.Button_ManualRoller.get();
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        shooter.BallPickup.set(0);
+        System.out.println("C_ShooterFire ended");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        shooter.BallPickup.set(0);
+        System.out.println("C_ShooterFire interrupted");
+       
     }
 }

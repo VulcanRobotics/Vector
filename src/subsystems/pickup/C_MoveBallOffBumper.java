@@ -3,48 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsystems.shooter;
+package subsystems.pickup;
 
 import commands.CommandBase;
 
 /**
  *
- * @author afiol-mahon
+ * @author liamcook
  */
-public class C_Tension_ManualRaise extends CommandBase {
-    double speed;
-    boolean finished = false;
+public class C_MoveBallOffBumper extends CommandBase {
     
-    public C_Tension_ManualRaise(double speed) {
-        requires(shooter);
-        this.speed = speed;
+    public C_MoveBallOffBumper() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+        requires(pickup);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println("C_Tension_ManualRaise started");
+        pickup.rollBallIn((float)0.5);
+        setTimeout(0.3);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        shooter.tenModule.setManualTension(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !CommandBase.oi.Button_ManualRaiseTension.get();
-
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        shooter.tenModule.setTension(0);
-        System.out.println("C_Tension_ManualRaise ended");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        shooter.tenModule.setTension(0);
     }
 }

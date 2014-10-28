@@ -33,7 +33,6 @@ public class CM_ShooterMain extends CommandBase {
         }
         shooter.manualCheck();//enables or disables PID based on manual switch
         shooter.tenModule.tensionRangeCheck();//Precautional range check to prevent limits from being exceeded.
-        shooter.collectorRoutine();//Sets collector up when a ball is detected
     }
 
     // Make this return true when this Command no longer needs to run execute()

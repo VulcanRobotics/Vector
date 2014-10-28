@@ -4,16 +4,16 @@ package robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import subsystems.shooter.C_Pass;
-import subsystems.shooter.C_Pickup;
+
 import subsystems.drive.C_GearShift;
 import subsystems.drive.C_GyroSpin;
 import subsystems.drive.C_ResetGyro;
-import subsystems.shooter.C_ManualExtension;
-import subsystems.shooter.C_Roll_In;
-import subsystems.shooter.C_ShooterFire;
-import subsystems.shooter.C_Tension_ManualLower;
-import subsystems.shooter.C_Tension_ManualRaise;
+import subsystems.pickup.A_Eject_Ball;
+import subsystems.pickup.A_PickupBall;
+
+import subsystems.shooter.A_ShooterFire;
+import subsystems.shooter.A_Tension_ManualLower;
+import subsystems.shooter.A_Tension_ManualRaise;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -53,19 +53,17 @@ public class OI {
             Button_GearShift.whenPressed(new C_GearShift(true));
             Button_GearShift.whenReleased(new C_GearShift(false));
         //Operator
-            Button_ManualRaiseTension.whenPressed(new C_Tension_ManualRaise(0.7));        
-            Button_ManualLowerTension.whenPressed(new C_Tension_ManualLower(-0.7));   
-            Button_Trigger.whenPressed(new C_ShooterFire());
-            Button_Pickup.whenPressed(new C_Pickup());
-            Button_Passball.whenPressed(new C_Pass());
+            Button_ManualRaiseTension.whenPressed(new A_Tension_ManualRaise(0.7));        
+            Button_ManualLowerTension.whenPressed(new A_Tension_ManualLower(-0.7));   
+            Button_Trigger.whenPressed(new A_ShooterFire());
+            Button_Pickup.whileHeld(new A_PickupBall());
+            Button_Passball.whileHeld(new A_Eject_Ball());
             Button_ManualRoller.whenPressed(new C_Roll_In());
             //Gyro
                 Button_AutoGyroDrive.whenPressed(new C_GyroSpin(0));
                 Button_GyroReset.whenPressed(new C_ResetGyro());  
         //ControlPanel  
-            //Extension switch
-                Button_ManualExtension.whenPressed(new C_ManualExtension(true));
-                Button_ManualExtension.whenReleased(new C_ManualExtension(false));
+          
     }
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to

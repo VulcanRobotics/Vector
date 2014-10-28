@@ -11,48 +11,39 @@ import commands.CommandBase;
  *
  * @author afiol-mahon
  */
-public class C_ShooterFire extends CommandBase {
-    
+public class A_Tension_ManualLower extends CommandBase {
+    double speed;
     boolean finished = false;
-    public C_ShooterFire() {
-        requires(shooter);
-    }
     
+    public A_Tension_ManualLower(double speed) {
+        requires(shooter);
+        this.speed = speed;
+    }
+
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println("C_ShooterFire started");
+        System.out.println("C_Tension_ManualLower started");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(shooter.shooterDown.get()){
-            shooter.extendArm();
-            System.out.println("Waiting for shooterDown Switch");
-            if(!shooter.Arm_Out.get() | shooter.tenModule.tenPot.pidGet() < 1.5){//can fire if arm is our or tension is below 1.5
-                System.out.println("Shoot Conditions met");
-                shooter.solenoid_trigger.set(true);
-            }
-        }
-        if(!oi.Button_Trigger.get()){
-            finished = true;
-        }
+        shooter.tenModule.setManualTension(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !oi.Button_Trigger.get();
+        return !CommandBase.oi.Button_ManualLowerTension.get();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        System.out.println("C_ShooterFire ended");
-        shooter.retractArm();
+        shooter.tenModule.setTension(0);
+        System.out.println("C_Tension_ManualLower ended");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        System.out.println("C_ShooterFire interrupted");
-        shooter.retractArm();
+        shooter.tenModule.setTension(0);
     }
 }

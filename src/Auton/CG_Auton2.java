@@ -9,7 +9,11 @@ import commands.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import subsystems.drive.C_AutoDrive;
-
+import subsystems.pickup.C_ExtendArm;
+import subsystems.pickup.C_MoveBallOffBumper;
+import subsystems.pickup.C_PickupBall;
+import subsystems.pickup.C_PickupBallToBumper;
+import subsystems.shooter.C_Shoot;
 /**
  *
  * @author afiolmahon
@@ -17,9 +21,20 @@ import subsystems.drive.C_AutoDrive;
 public class CG_Auton2 extends CommandGroup {
         
     public CG_Auton2() {
-        addSequential(new PreDrive());
+        addSequential(new C_ExtendArm());
+        addSequential(new C_PickupBallToBumper());
+        
         addSequential(new C_AutoDrive(11.5));
-        addSequential(new PostDrive());
+        //add reload
+        addSequential(new C_ExtendArm());
+        addSequential(new C_MoveBallOffBumper());
+        addSequential(new C_ExtendArm()); //just to be sure
+        addSequential(new C_Shoot());
+        //reload
+        addSequential(new C_PickupBall());
+        addSequential(new C_ExtendArm()); //just to be sure
+        addSequential(new C_Shoot());
+        
     }
     
     class PreDrive extends CommandBase{

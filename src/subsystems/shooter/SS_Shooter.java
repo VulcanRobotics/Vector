@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
 
+
 /**
  *
  * @author afiol-mahon
@@ -38,16 +39,11 @@ public class SS_Shooter extends Subsystem {
     //Non-Tension Systems
         //Solenoids
             public Solenoid solenoid_trigger = new Solenoid(RobotMap.Solenoid_Trigger);
-            public Solenoid solenoid_collector = new Solenoid(RobotMap.Solenoid_Collector);
             public Solenoid solenoid_extensions = new Solenoid(RobotMap.Solenoid_Extensions);
-            public Solenoid solenoid_Ball_Loader = new Solenoid(RobotMap.Solenoid_Ball_Loader);
         //Digital In
-            public DigitalInput BallDetector = new DigitalInput(RobotMap.DIO_Ball_Detector);
+            
             public DigitalInput shooterDown = new DigitalInput(RobotMap.DIO_Shooter_Down);
-    //Arm
-        public double BallPickup_Speed = 0.7;
-        public Talon BallPickup = new Talon(RobotMap.PWM_BallPickup);//negative value is roll in
-        public DigitalInput Arm_Out = new DigitalInput(RobotMap.DIO_Arm_Out);
+
 
     public void initDefaultCommand() {
         initSolenoids();
@@ -56,9 +52,7 @@ public class SS_Shooter extends Subsystem {
     
     public void initSolenoids(){ //Initializes our solenoids so we know they are in the correct state.
         solenoid_trigger.set(false); //false is closed
-        solenoid_collector.set(false); //false is down
         solenoid_extensions.set(false); //false is retracted
-        solenoid_Ball_Loader.set(false);//false is in
     }
     
     public void syncDashboard(){ //Publish Subsystem information.
@@ -70,9 +64,6 @@ public class SS_Shooter extends Subsystem {
             SmartDashboard.putNumber("Tension Potentiometer", tenModule.tenPot.pidGet());
             SmartDashboard.putNumber("Target", tensionPID.getSetpoint());
             SmartDashboard.putBoolean("Shooter Down", shooterDown.get());
-        //Other Systems
-            SmartDashboard.putBoolean("Ball Ready", !BallDetector.get());
-            SmartDashboard.putBoolean("Arm Out", Arm_Out.get());
     }
 
     void manualCheck() { //Disables PIDController if we are in manual tension mode.
@@ -80,16 +71,6 @@ public class SS_Shooter extends Subsystem {
             tensionPID.disable();
         }else{
             tensionPID.enable();
-        }
-    }
-    
-    public void collectorRoutine(){
-        if(CommandBase.oi.Button_ForceCollectorDown.get()){
-            solenoid_collector.set(false);
-        }else if(!BallDetector.get()){
-            solenoid_collector.set(true);
-        }else{
-            solenoid_collector.set(false);
         }
     }
     
@@ -126,21 +107,32 @@ public class SS_Shooter extends Subsystem {
             return fixValue; //if manualTrim is disabled, just return the fixed value
         }
     }
-    
-    public void extendArm(){
-        solenoid_Ball_Loader.set(true);
-    }
-    
-    public void retractArm(){
-        solenoid_Ball_Loader.set(false);
-    }
-    
-    void setForceExtend(boolean enabled){//method used by command to lock extension out
-        forceExtend = enabled;
-    }
+   
+   
     //extension state setting goes through this to make the extension switch function
     boolean forceExtend = false;//extension switch sets this boolean which forces the extensions out when true
     void setExtension(boolean state){
-        solenoid_extensions.set(forceExtend ? true : state);
+        solenoid_extensions.set(state);
     }
+    void extensionsOut() {
+        setExtension(true);
+    }
+    void extensionsIn() {
+        setExtension(false);
+    }
+    
+    void openLatch() {
+        if (!isShooterDown() || tenModule.isTensionDangerous() || CommandBase.pickup.isArmOut())
+        {
+            solenoid_trigger.set(true);
+        }
+    }
+    void closeLatch() {
+        solenoid_trigger.set(false);
+    }
+    
+    boolean isShooterDown(){
+        return shooterDown.get();
+    }
+    
 }
