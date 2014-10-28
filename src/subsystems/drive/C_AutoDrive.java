@@ -9,8 +9,6 @@ import commands.CommandBase;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  *

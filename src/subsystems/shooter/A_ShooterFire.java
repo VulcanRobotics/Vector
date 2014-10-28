@@ -9,7 +9,7 @@ import commands.CommandBase;
 
 /**
  *
- * @author afiol-mahon
+ * @author afiolmahon
  */
 public class A_ShooterFire extends CommandBase {
     
@@ -24,7 +24,7 @@ public class A_ShooterFire extends CommandBase {
         if(shooter.shooterDown.get()){
 //extend arm
             System.out.println("Waiting for shooterDown Switch");
-            if(!shooter.Arm_Out.get() | shooter.tenModule.tenPot.pidGet() < 1.5){//can fire if arm is out or tension is below 1.5
+            if(pickup.isArmOut() | shooter.tenModule.tenPot.pidGet() < 1.5){//can fire if arm is out or tension is below 1.5
                 System.out.println("Shoot Conditions met");
                 shooter.solenoid_trigger.set(true);
             }
@@ -41,7 +41,7 @@ public class A_ShooterFire extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return finished;
     }
 
     // Called once after isFinished returns true

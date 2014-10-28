@@ -9,7 +9,6 @@ import commands.CommandBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
@@ -122,7 +121,7 @@ public class SS_Shooter extends Subsystem {
     }
     
     void openLatch() {
-        if (!isShooterDown() || tenModule.isTensionDangerous() || CommandBase.pickup.isArmOut())
+        if (!tenModule.isTensionDangerous() && CommandBase.pickup.isArmOut())
         {
             solenoid_trigger.set(true);
         }

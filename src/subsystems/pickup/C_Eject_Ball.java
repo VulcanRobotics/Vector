@@ -10,13 +10,19 @@ import commands.CommandBase;
 /**
  *
  * @author liamcook
+ * @author afiolmahon
  */
-public class A_Eject_Ball extends CommandBase {
+public class C_Eject_Ball extends CommandBase {
     
-    public A_Eject_Ball() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    double timeout = 0;
+    
+    public C_Eject_Ball() {
         requires(pickup);
+    }
+    public C_Eject_Ball(double timeout) {
+        requires(pickup);
+        this.timeout = timeout;
+        setTimeout(this.timeout);
     }
 
     // Called just before this Command runs the first time
@@ -33,15 +39,17 @@ public class A_Eject_Ball extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        pickup.stopRollers();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        pickup.stopRollers();
     }
 }

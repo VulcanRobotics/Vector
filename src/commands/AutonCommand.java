@@ -5,7 +5,7 @@
  */
 package commands;
 
-import Auton.CG_Auton2;
+import Auton.Auton_2Ball;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -25,7 +25,7 @@ public class AutonCommand extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         CommandBase.airSystem.compressor.start();
-        Scheduler.getInstance().add(new CG_Auton2());
+        Scheduler.getInstance().add(new Auton_2Ball());
         finished = true;
     }
 

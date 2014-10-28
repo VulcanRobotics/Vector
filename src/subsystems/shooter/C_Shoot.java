@@ -13,16 +13,20 @@ import commands.CommandBase;
  */
 public class C_Shoot extends CommandBase {
     
+    double timeout = 5;
+    
     public C_Shoot() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
         requires(shooter);
+    }
+    public C_Shoot(double timeout){
+        requires(shooter);
+        this.timeout = timeout;
+        setTimeout(this.timeout);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         shooter.openLatch();
-        setTimeout(5);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,7 +38,7 @@ public class C_Shoot extends CommandBase {
     protected boolean isFinished() {
         if (isTimedOut())
         {
-            System.out.println("trying to shoot for 5 seconds - cannot");
+            System.out.println("trying to shoot for ["+timeout+"] seconds - cannot");
             return true;
         }
         return shooter.isShooterDown();

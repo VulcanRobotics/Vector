@@ -14,8 +14,6 @@ import commands.CommandBase;
 public class A_MoveArmOut extends CommandBase {
     
     public A_MoveArmOut() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
         requires(pickup);
     }
 

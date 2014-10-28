@@ -78,6 +78,7 @@ public class SS_Drive extends Subsystem {
         lastVoltage = currentVoltage; //updates last voltage
         return avgVoltage < testValue;
     }
+    
     public void stopDrive(){
         chassis.drive(0, 0);
     }
