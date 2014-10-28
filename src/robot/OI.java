@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import subsystems.drive.C_GearShift;
 import subsystems.drive.C_ResetGyro;
-import subsystems.pickup.C_Eject_Ball;
+import subsystems.pickup.A_Eject_Ball;
 import subsystems.pickup.A_PickupBall;
 import subsystems.pickup.A_Roll_In;
 
@@ -56,7 +56,7 @@ public class OI {
             Button_ManualLowerTension.whenPressed(new A_Tension_ManualLower(-0.7));   
             Button_Trigger.whileHeld(new A_ShooterFire());
             Button_Pickup.whileHeld(new A_PickupBall());
-            Button_Passball.whileHeld(new C_Eject_Ball());
+            Button_Passball.whileHeld(new A_Eject_Ball());
             Button_ManualRoller.whileHeld(new A_Roll_In());
             //Gyro
                 Button_GyroReset.whenPressed(new C_ResetGyro());  

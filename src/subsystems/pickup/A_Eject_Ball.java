@@ -12,15 +12,15 @@ import commands.CommandBase;
  * @author liamcook
  * @author afiolmahon
  */
-public class C_Eject_Ball extends CommandBase {
+public class A_Eject_Ball extends CommandBase {
     
     double timeout = 0;
     
-    public C_Eject_Ball() {
+    public A_Eject_Ball() {
         requires(pickup);
         requires(shooter);
     }
-    public C_Eject_Ball(double timeout) {
+    public A_Eject_Ball(double timeout) {
         requires(pickup);
         this.timeout = timeout;
         setTimeout(this.timeout);
