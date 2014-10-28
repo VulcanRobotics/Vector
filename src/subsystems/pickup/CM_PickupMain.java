@@ -9,23 +9,21 @@ import commands.CommandBase;
 
 /**
  *
- * @author liamcook
+ * @author afiol-mahon
  */
-public class A_Roll_In extends CommandBase {
+public class CM_PickupMain extends CommandBase {
     
-    public A_Roll_In() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public CM_PickupMain() {
         requires(pickup);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        pickup.rollBallIn();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        pickup.solenoid_collector.set(pickup.hasBall());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,12 +33,10 @@ public class A_Roll_In extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        pickup.setDefaultState();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        end();
     }
 }

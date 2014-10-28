@@ -41,7 +41,7 @@ public class C_Shoot extends CommandBase {
             System.out.println("trying to shoot for ["+timeout+"] seconds - cannot");
             return true;
         }
-        return shooter.isShooterDown();
+        return !shooter.isShooterDown();
     }
 
     // Called once after isFinished returns true

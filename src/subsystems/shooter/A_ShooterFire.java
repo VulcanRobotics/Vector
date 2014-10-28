@@ -16,27 +16,19 @@ public class A_ShooterFire extends CommandBase {
     boolean finished = false;
     public A_ShooterFire() {
         requires(shooter);
+        requires(pickup);
     }
     
     // Called just before this Command runs the first time
     protected void initialize() {
         System.out.println("C_ShooterFire started");
-        if(shooter.shooterDown.get()){
-//extend arm
-            System.out.println("Waiting for shooterDown Switch");
-            if(pickup.isArmOut() | shooter.tenModule.tenPot.pidGet() < 1.5){//can fire if arm is out or tension is below 1.5
-                System.out.println("Shoot Conditions met");
-                shooter.solenoid_trigger.set(true);
-            }
-        }
-        if(!oi.Button_Trigger.get()){
-            finished = true;
-        }
+        pickup.armOut();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        
+        pickup.armOut();
+        finished = shooter.openLatch();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -46,13 +38,12 @@ public class A_ShooterFire extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        System.out.println("C_ShooterFire ended");
+        pickup.setDefaultState();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        System.out.println("C_ShooterFire interrupted");
-       
+       pickup.setDefaultState();
     }
 }

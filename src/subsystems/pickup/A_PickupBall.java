@@ -34,9 +34,7 @@ public class A_PickupBall extends CommandBase {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-        System.out.println("executing A_Pickupball ... bad .. this is an error");
-        
+    protected void execute() {        
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -46,10 +44,12 @@ public class A_PickupBall extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        pickup.setDefaultState();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        end();
     }
 }

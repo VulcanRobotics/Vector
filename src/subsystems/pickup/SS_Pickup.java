@@ -28,8 +28,7 @@ public class SS_Pickup extends Subsystem {
     public Talon ballPickup = new Talon(RobotMap.PWM_BallPickup);//negative value is roll in
         
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new CM_PickupMain());
     }
     
     //controlling arm
@@ -84,5 +83,11 @@ public class SS_Pickup extends Subsystem {
      */
     public boolean hasBall() {
         return !ballDetector.get();
+    }
+    
+    public void setDefaultState(){
+        stopRollers();
+        armIn();
+        collectorUp();
     }
 }

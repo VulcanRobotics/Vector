@@ -56,10 +56,10 @@ public class OI {
         //Operator
             Button_ManualRaiseTension.whenPressed(new A_Tension_ManualRaise(0.7));        
             Button_ManualLowerTension.whenPressed(new A_Tension_ManualLower(-0.7));   
-            Button_Trigger.whenPressed(new A_ShooterFire());
+            Button_Trigger.whileHeld(new A_ShooterFire());
             Button_Pickup.whileHeld(new A_PickupBall());
             Button_Passball.whileHeld(new C_Eject_Ball());
-            Button_ManualRoller.whenPressed(new A_Roll_In());
+            Button_ManualRoller.whileHeld(new A_Roll_In());
             //Gyro
                 Button_AutoGyroDrive.whenPressed(new C_GyroSpin(0));
                 Button_GyroReset.whenPressed(new C_ResetGyro());  

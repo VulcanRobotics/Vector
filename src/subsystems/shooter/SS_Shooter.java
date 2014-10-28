@@ -120,12 +120,15 @@ public class SS_Shooter extends Subsystem {
         setExtension(false);
     }
     
-    void openLatch() {
-        if (!tenModule.isTensionDangerous() && CommandBase.pickup.isArmOut())
-        {
+    boolean openLatch() {
+        if (!tenModule.isTensionDangerous() | CommandBase.pickup.isArmOut()){
             solenoid_trigger.set(true);
+            return true;
+        }else{
+            return false;
         }
     }
+    
     void closeLatch() {
         solenoid_trigger.set(false);
     }
