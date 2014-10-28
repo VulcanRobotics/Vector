@@ -31,7 +31,7 @@ public class C_PickupBall extends CommandBase {
        //extends arm before picking up
         pickup.rollBallIn();
         pickup.armOut();
-        Timer.delay(0.25);
+
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -40,7 +40,7 @@ public class C_PickupBall extends CommandBase {
             pickup.collectorUp();
             pickup.armIn();
             pickup.rollBallIn(0.2f);
-            setTimeout(0.2);
+            Timer.delay(0.25);
             finished = true;
         }
         else{
