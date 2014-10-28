@@ -10,36 +10,49 @@ import commands.CommandBase;
 /**
  *
  * @author liamcook
+ * @author afiolmahon
  */
-public class C_MoveBallOffBumper extends CommandBase {
+public class C_Eject_Ball extends CommandBase {
     
-    public C_MoveBallOffBumper() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    double timeout = 0;
+    
+    public C_Eject_Ball() {
         requires(pickup);
+    }
+    public C_Eject_Ball(double timeout) {
+        requires(pickup);
+        this.timeout = timeout;
+        setTimeout(this.timeout);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        pickup.rollBallIn((float)0.5);
-        setTimeout(0.3);
+        pickup.rollBallOut();
+        pickup.collectorDown();
+        pickup.armIn();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        System.out.println("executing A_Eject_Ball");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return false;
     }
-
     // Called once after isFinished returns true
     protected void end() {
+
+        pickup.stopRollers();
+
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+
+        pickup.stopRollers();
+
     }
 }

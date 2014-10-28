@@ -10,12 +10,11 @@ import commands.CommandBase;
 /**
  *
  * @author liamcook
+ * @author afiolmahon
  */
 public class C_ExtendArm extends CommandBase {
     
     public C_ExtendArm() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
         requires(pickup);
     }
 

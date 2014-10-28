@@ -10,39 +10,41 @@ import commands.CommandBase;
 /**
  *
  * @author liamcook
+ * @author afiolmahon
  */
-public class A_Eject_Ball extends CommandBase {
+public class C_LoadBallOnBumper extends CommandBase {
     
-    public A_Eject_Ball() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    boolean finished = false;
+    
+    public C_LoadBallOnBumper() {
         requires(pickup);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        pickup.rollBallOut();
-        pickup.collectorDown();
-        pickup.armIn();
+        pickup.rollBallIn(0.5f);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        System.out.println("executing A_Eject_Ball");
+        if(pickup.hasBall()){
+            finished = true;
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return finished;
     }
+
     // Called once after isFinished returns true
     protected void end() {
-        pickup.defaultState();
+        pickup.stopRollers();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        end();
+        pickup.stopRollers();
     }
 }

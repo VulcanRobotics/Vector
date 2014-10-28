@@ -9,7 +9,7 @@ import commands.CommandBase;
 
 /**
  *
- * @author afiol-mahon
+ * @author afiolmahon
  */
 public class A_ShooterFire extends CommandBase {
     
@@ -21,7 +21,21 @@ public class A_ShooterFire extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         System.out.println("C_ShooterFire started");
+<<<<<<< HEAD
         shooter.openLatch(); 
+=======
+        if(shooter.shooterDown.get()){
+//extend arm
+            System.out.println("Waiting for shooterDown Switch");
+            if(pickup.isArmOut() | shooter.tenModule.tenPot.pidGet() < 1.5){//can fire if arm is out or tension is below 1.5
+                System.out.println("Shoot Conditions met");
+                shooter.solenoid_trigger.set(true);
+            }
+        }
+        if(!oi.Button_Trigger.get()){
+            finished = true;
+        }
+>>>>>>> 1f2a186eade3f38e4977cc716a5f6c82d8a2a88f
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,7 +45,11 @@ public class A_ShooterFire extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+<<<<<<< HEAD
         return false;
+=======
+        return finished;
+>>>>>>> 1f2a186eade3f38e4977cc716a5f6c82d8a2a88f
     }
 
     // Called once after isFinished returns true

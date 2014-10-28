@@ -11,15 +11,17 @@ import commands.CommandBase;
  *
  * @author liamcook
  */
-public class A_MoveArmOut extends CommandBase {
+public class A_Roll_In extends CommandBase {
     
-    public A_MoveArmOut() {
+    public A_Roll_In() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
         requires(pickup);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        pickup.armOut();
+        pickup.rollBallIn();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,17 +30,15 @@ public class A_MoveArmOut extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-         pickup.defaultState();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        end();
     }
 }

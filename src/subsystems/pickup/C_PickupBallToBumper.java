@@ -11,43 +11,44 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  * @author liamcook
+ * @author afiolmahon
  */
 public class C_PickupBallToBumper extends CommandBase {
     
+    boolean finished = false;
+    
     public C_PickupBallToBumper() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
         requires(pickup);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        
        //extends arm before picking up
-        pickup.rollBallIn(); //can also change speed
-       while(!pickup.isArmOut())
-       {
-           pickup.armOut();
-       }
-       Timer.delay(0.25);
-       setTimeout(0.25); //time ball is rolled up
+       pickup.armOut();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        if(pickup.isArmOut()){
+            pickup.rollBallIn(); //can also change speed
+            Timer.delay(0.25);
+            finished = true;
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return finished;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        pickup.stopRollers();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        pickup.stopRollers();
     }
 }

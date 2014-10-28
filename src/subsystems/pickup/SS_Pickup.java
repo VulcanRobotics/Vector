@@ -15,11 +15,8 @@ import robot.RobotMap;
  *
  * @author liamcook
  */
-public class SS_Pickup extends Subsystem {
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-    
-    
+public class SS_Pickup extends Subsystem {    
+
     public Solenoid solenoid_Ball_Loader = new Solenoid(RobotMap.Solenoid_Ball_Loader);
     public Solenoid solenoid_collector = new Solenoid(RobotMap.Solenoid_Collector);
     
@@ -58,28 +55,35 @@ public class SS_Pickup extends Subsystem {
         ballPickup.set(0);
     }
     public void rollBallIn() {
-        ballPickup.set(BallPickup_Speed);
+        ballPickup.set(-(Math.abs(BallPickup_Speed)));
     }
     
     
     public void rollBallOut() {
-        ballPickup.set(-BallPickup_Speed);
+        ballPickup.set(Math.abs(BallPickup_Speed));
     }
+    
     public void rollBallIn(float speed) {
-        ballPickup.set(speed);
+        ballPickup.set(-(Math.abs(speed)));
     }
     
     public void rollBallOut(float speed) {
-        ballPickup.set(-speed);
+        ballPickup.set(Math.abs(speed));
     }
     
     //sensing
+    /**
+     * Returns true if arm is out.
+     */
     public boolean isArmOut() {
-        return Arm_Out.get();
+        return !Arm_Out.get();
     }
     
+    /**
+     * Returns true if ball is held.
+     */
     public boolean hasBall() {
-        return ballDetector.get();
+        return !ballDetector.get();
     }
     
     public void defaultState(){
