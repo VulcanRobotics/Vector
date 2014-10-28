@@ -30,16 +30,14 @@ public class SS_Shooter extends Subsystem {
             public double shotPowerHigh = 2.05;
             public double shotPowerMid = 1.95;
             public double shotPowerLow = 1.56;
-        //PID Controller
-            double Kp = 4.500;
-            double Ki = 0.010;
-            double Kd = 1.000;
-            public PIDController tensionPID = new PIDController(Kp, Ki, Kd, tenModule.tenPot, tenModule);
+
+          
     //Non-Tension Systems
         //Solenoids
             public Solenoid solenoid_trigger = new Solenoid(RobotMap.Solenoid_Trigger);
             public Solenoid solenoid_extensions = new Solenoid(RobotMap.Solenoid_Extensions);
         //Digital In
+            
             
             public DigitalInput shooterDown = new DigitalInput(RobotMap.DIO_Shooter_Down);
 
@@ -137,4 +135,9 @@ public class SS_Shooter extends Subsystem {
         return shooterDown.get();
     }
     
+    boolean raiseTension() {
+        if (!Bottom_Limit_Switch.get()) {
+            
+        }
+    }
 }

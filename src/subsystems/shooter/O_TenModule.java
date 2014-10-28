@@ -23,10 +23,9 @@ public class O_TenModule implements PIDOutput{
         public double tenPotMAX = 2.55;
         public double tenPotMIN = 0.2;
     //Inputs
-        public DigitalInput Top_Limit_Switch = new DigitalInput(RobotMap.DIO_Top_Limit_Switch);
-        public DigitalInput Bottom_Limit_Switch = new DigitalInput(RobotMap.DIO_Bottom_Limit_Switch);
+        
     //PIDSource
-        public O_TenPotPIDSource tenPot = new O_TenPotPIDSource(5.00, RobotMap.AI_Tension_Potentiometer);
+        
     //Output
         private Talon motor;
 

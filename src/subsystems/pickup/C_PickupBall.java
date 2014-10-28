@@ -40,8 +40,6 @@ public class C_PickupBall extends CommandBase {
             pickup.collectorUp();
             pickup.armIn();
             pickup.rollBallIn(0.2f);
-            Timer.delay(0.25);
-            finished = true;
         }
         else{
             pickup.rollBallIn();
@@ -53,7 +51,7 @@ public class C_PickupBall extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return finished;
+        return pickup.hasBall();
     }
 
     // Called once after isFinished returns true
