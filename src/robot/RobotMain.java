@@ -58,7 +58,6 @@ public class RobotMain extends IterativeRobot {
         // this line or comment it out.
         autonomousCommand.cancel();
         CommandBase.drive.stopDrive();
-        CommandBase.shooter.initSolenoids();
     }
 
     /**

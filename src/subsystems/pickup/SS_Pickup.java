@@ -81,4 +81,11 @@ public class SS_Pickup extends Subsystem {
     public boolean hasBall() {
         return ballDetector.get();
     }
+    
+    public void defaultState(){
+        armIn();
+        collectorDown();
+        stopRollers();
+    }
+
 }

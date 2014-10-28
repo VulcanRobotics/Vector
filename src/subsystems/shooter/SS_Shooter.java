@@ -46,13 +46,7 @@ public class SS_Shooter extends Subsystem {
 
 
     public void initDefaultCommand() {
-        initSolenoids();
         setDefaultCommand(new CM_ShooterMain());
-    }
-    
-    public void initSolenoids(){ //Initializes our solenoids so we know they are in the correct state.
-        solenoid_trigger.set(false); //false is closed
-        solenoid_extensions.set(false); //false is retracted
     }
     
     public void syncDashboard(){ //Publish Subsystem information.
@@ -108,9 +102,7 @@ public class SS_Shooter extends Subsystem {
         }
     }
    
-   
     //extension state setting goes through this to make the extension switch function
-    boolean forceExtend = false;//extension switch sets this boolean which forces the extensions out when true
     void setExtension(boolean state){
         solenoid_extensions.set(state);
     }
@@ -121,11 +113,13 @@ public class SS_Shooter extends Subsystem {
         setExtension(false);
     }
     
-    void openLatch() {
+    boolean openLatch() {
         if (!isShooterDown() || tenModule.isTensionDangerous() || CommandBase.pickup.isArmOut())
         {
             solenoid_trigger.set(true);
+            return true;
         }
+        return false;
     }
     void closeLatch() {
         solenoid_trigger.set(false);

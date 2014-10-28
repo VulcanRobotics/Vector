@@ -21,11 +21,12 @@ import subsystems.shooter.C_Shoot;
 public class CG_Auton2 extends CommandGroup {
         
     public CG_Auton2() {
+        addParallel(new C_FindShortTension);
         addSequential(new C_ExtendArm());
         addSequential(new C_PickupBallToBumper());
         
         addSequential(new C_AutoDrive(11.5));
-        //add reload
+        
         addSequential(new C_ExtendArm());
         addSequential(new C_MoveBallOffBumper());
         addSequential(new C_ExtendArm()); //just to be sure
@@ -47,17 +48,17 @@ public class CG_Auton2 extends CommandGroup {
         protected void execute() {
             System.out.println("Auton2 State[PreDrive]: "+state);
             if(state == 0){
-                shooter.extendArm();
+               // shooter.extendArm();
                 shooter.tensionPID.setAbsoluteTolerance(0.1);
                 shooter.tensionPID.setSetpoint(shooter.shotPowerHigh);
                 shooter.tensionPID.enable();
                 state += 1;
             }
             else if(state == 1){
-                state += shooter.Arm_Out.get() ? 1 : 0;
+               // state += shooter.Arm_Out.get() ? 1 : 0;
             }else if(state == 2){
                 Timer.delay(1.0);
-                shooter.BallPickup.set(-0.07);
+               // shooter.BallPickup.set(-0.07);
                 state +=1;
             }
         }
@@ -85,25 +86,25 @@ public class CG_Auton2 extends CommandGroup {
         protected void execute() {
             System.out.println("Auton2 State[PostDrive]: "+state);
             if(state == 0){
-                shooter.solenoid_extensions.set(true);
-                shooter.solenoid_trigger.set(true);
+                //shooter.solenoid_extensions.set(true);
+                //shooter.solenoid_trigger.set(true);
                 Timer.delay(1.0);
-                shooter.tensionPID.setSetpoint(shooter.uncockTension);
+                //shooter.tensionPID.setSetpoint(shooter.uncockTension);
                 state += 1;
             }else if(state == 1){
-                state += shooter.shooterDown.get() ? 1 : 0;  
+                //state += shooter.shooterDown.get() ? 1 : 0;  
             }else if(state == 2){
-                shooter.solenoid_trigger.set(false);
-                shooter.tensionPID.setSetpoint(shooter.shotPowerHigh);
-                shooter.solenoid_collector.set(false);
-                shooter.BallPickup.set(-1.0);
-                shooter.retractArm();
+                //shooter.solenoid_trigger.set(false);
+                //shooter.tensionPID.setSetpoint(shooter.shotPowerHigh);
+                //shooter.solenoid_collector.set(false);
+                //shooter.BallPickup.set(-1.0);
+               // shooter.retractArm();
                 state += 1;
             }else if(state == 3){
-                state += !shooter.Arm_Out.get() ? 1 : 0;
+               // state += !shooter.Arm_Out.get() ? 1 : 0;
             }else if(state == 4){
-                shooter.extendArm();
-                shooter.solenoid_collector.set(true);
+                //shooter.extendArm();
+                ////shooter.solenoid_collector.set(true);
                 state += 1;
             }else if(state ==5){
                 state += shooter.tensionPID.onTarget() ? 1 : 0;
@@ -120,13 +121,13 @@ public class CG_Auton2 extends CommandGroup {
         }
 
         protected void end() {
-            shooter.BallPickup.set(0.0);
+            //shooter.BallPickup.set(0.0);
             drive.stopDrive();
             System.out.println("Auton2[PostDrive] Ended");
         }
 
         protected void interrupted() {
-            shooter.BallPickup.set(0.0);
+            //shooter.BallPickup.set(0.0);
             drive.stopDrive();
             System.out.println("Auton2[PostDrive] Interrupted");
         }
