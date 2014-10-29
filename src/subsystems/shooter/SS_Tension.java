@@ -41,6 +41,7 @@ public class SS_Tension extends PIDSubsystem {
         // setSetpoint() -  Sets where the PID controller should move the system
         //       
         setTarget(2);
+        setPercentTolerance(5);
         disable(); //- Enables the PID controller.
     }
     
@@ -84,28 +85,13 @@ public class SS_Tension extends PIDSubsystem {
     }
     
     boolean bottomSoftLimit(){
-        return tenPot.pidGet() > tenPotMIN;
+        return tenPot.pidGet() < tenPotMIN;
     }
     boolean topSoftLimit(){
-        return tenPot.pidGet() < tenPotMAX;
+        return tenPot.pidGet() > tenPotMAX;
     }
     
     boolean setTarget(double target) {
-        
-        if (target < tenPotMIN)
-        {
-            System.out.println("setpoint too low");
-            disable();
-            return false;
-        }
-        
-        if (target > tenPotMAX)
-        {
-            System.out.println("setpoint too high");
-            disable();
-            return false;
-            
-        }
         enable();
         setSetpoint(target);
         return true;
@@ -114,6 +100,11 @@ public class SS_Tension extends PIDSubsystem {
     void cock() {
        setTarget(tenPotMIN);
        enable();
+    }    
+    
+    boolean isTensionDangerous()
+    {
+        return tenPot.pidGet() > 1.5;
     }
     
 }

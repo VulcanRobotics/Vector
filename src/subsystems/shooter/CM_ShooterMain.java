@@ -6,6 +6,7 @@
 package subsystems.shooter;
 
 import commands.CommandBase;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
@@ -24,15 +25,19 @@ public class CM_ShooterMain extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(oi.Button_Reload.get() && !shooter.shooterDown.get()){//If we are in reload mode, and shooter is not down, open trigger and lower shooter.
-            shooter.tensionPID.setSetpoint(shooter.uncockTension);
-            shooter.solenoid_trigger.set(true);
-        }else{//Bring tension to setpoint and ensure trigger is closed
-            shooter.solenoid_trigger.set(false);
-            shooter.tensionPID.setSetpoint(shooter.configureShot());
+        
+        if (shooter.isShooterDown())
+        {
+            tension.cock();
+            shooter.openLatch();
         }
-        shooter.manualCheck();//enables or disables PID based on manual switch
-        shooter.tenModule.tensionRangeCheck();//Precautional range check to prevent limits from being exceeded.
+        else
+        {
+            shooter.closeLatch();
+            tension.setTarget(shooter.configureShot());
+        }
+        
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()

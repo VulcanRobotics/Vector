@@ -20,8 +20,6 @@ import robot.RobotMap;
  */
 public class SS_Shooter extends Subsystem {
     
-    //Tension
-        public O_TenModule tenModule = new O_TenModule(RobotMap.PWM_Tension);
         public double uncockTension = 0.15;
         //Shot tension values
             public double trusPowerHigh = 2.6;
@@ -37,10 +35,10 @@ public class SS_Shooter extends Subsystem {
             public Solenoid solenoid_trigger = new Solenoid(RobotMap.Solenoid_Trigger);
             public Solenoid solenoid_extensions = new Solenoid(RobotMap.Solenoid_Extensions);
         //Digital In
-            
-            
+
             public DigitalInput shooterDown = new DigitalInput(RobotMap.DIO_Shooter_Down);
 
+            public double target;
 
     public void initDefaultCommand() {
         initSolenoids();
@@ -52,31 +50,16 @@ public class SS_Shooter extends Subsystem {
         solenoid_extensions.set(false); //false is retracted
     }
     
-    public void syncDashboard(){ //Publish Subsystem information.
-        //Tension
-            SmartDashboard.putBoolean("Top Limit Switch", tenModule.Top_Limit_Switch.get());
-            SmartDashboard.putBoolean("Bottom Limit Switch", tenModule.Bottom_Limit_Switch.get());
-            SmartDashboard.putBoolean("Upper Soft Limit", !(tenModule.tenPot.pidGet() >= tenModule.tenPotMIN));
-            SmartDashboard.putBoolean("Lower Soft Limit", !(tenModule.tenPot.pidGet() <= tenModule.tenPotMAX));
-            SmartDashboard.putNumber("Tension Potentiometer", tenModule.tenPot.pidGet());
-            SmartDashboard.putNumber("Target", tensionPID.getSetpoint());
-            SmartDashboard.putBoolean("Shooter Down", shooterDown.get());
-    }
+    
 
-    void manualCheck() { //Disables PIDController if we are in manual tension mode.
-        if(CommandBase.oi.Button_ManualTensionMode.get()){
-            tensionPID.disable();
-        }else{
-            tensionPID.enable();
-        }
-    }
+    
     
     public double configureShot(){
         double fixValue;
         if(CommandBase.oi.Button_shotType.get()){ //Normal Shot Values
             if(CommandBase.oi.Button_HighPower.get()){//high power shot
                 fixValue = SmartDashboard.getNumber("longShotPower", shotPowerHigh);
-                CommandBase.shooter.setExtension(true);
+                CommandBase.shooter.setExtension(true); //is this just calling self?
             }else if(CommandBase.oi.Button_LowPower.get()){//low power shot
                 fixValue = SmartDashboard.getNumber("shortShotPower", shotPowerLow);
                 CommandBase.shooter.setExtension(false);
@@ -103,6 +86,7 @@ public class SS_Shooter extends Subsystem {
         }else{
             return fixValue; //if manualTrim is disabled, just return the fixed value
         }
+        target = fixValue;
     }
    
    
@@ -119,7 +103,7 @@ public class SS_Shooter extends Subsystem {
     }
     
     boolean openLatch() {
-        if (!tenModule.isTensionDangerous() | CommandBase.pickup.isArmOut()){
+        if (CommandBase.tension.isTensionDangerous() | CommandBase.pickup.isArmOut()){
             solenoid_trigger.set(true);
             return true;
         }else{
@@ -133,11 +117,5 @@ public class SS_Shooter extends Subsystem {
     
     boolean isShooterDown(){
         return shooterDown.get();
-    }
-    
-    boolean raiseTension() {
-        if (!Bottom_Limit_Switch.get()) {
-            
-        }
     }
 }
