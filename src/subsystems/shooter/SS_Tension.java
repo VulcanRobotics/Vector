@@ -91,20 +91,29 @@ public class SS_Tension extends PIDSubsystem {
     }
     
     boolean setTarget(double target) {
+        
         if (target < tenPotMIN)
         {
             System.out.println("setpoint too low");
+            disable();
             return false;
         }
         
         if (target > tenPotMAX)
         {
             System.out.println("setpoint too high");
+            disable();
             return false;
+            
         }
-        
+        enable();
         setSetpoint(target);
         return true;
+    }
+    
+    void cock() {
+       setTarget(tenPotMIN);
+       enable();
     }
     
 }
