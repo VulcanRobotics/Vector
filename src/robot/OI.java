@@ -58,13 +58,12 @@ public class OI {
             Button_ManualLowerTension.whenPressed(new A_Tension_ManualLower(-0.7));   
             Button_Trigger.whileHeld(new A_ShooterFire());
             Button_Pickup.whileHeld(new A_PickupBall());
-<<<<<<< HEAD
             Button_Passball.whileHeld(new A_Eject_Ball());
             Button_ManualRoller.whileHeld(new A_Roll_In());
-=======
+
             Button_Passball.whileHeld(new C_Eject_Ball());
             Button_ManualRoller.whenPressed(new A_Roll_In());
->>>>>>> 1f2a186eade3f38e4977cc716a5f6c82d8a2a88f
+
             //Gyro
                 Button_AutoGyroDrive.whenPressed(new C_GyroSpin(0));
                 Button_GyroReset.whenPressed(new C_ResetGyro());  
