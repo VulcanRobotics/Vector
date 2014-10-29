@@ -7,6 +7,7 @@ package subsystems.shooter;
 
 import commands.CommandBase;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import robot.OI;
 
 /**
  *
@@ -26,6 +27,7 @@ public class CM_ShooterMain extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         
+        shooter.setExtensions(OI.shouldExtentionsBeOut());
         if (shooter.isShooterDown())
         {
             tension.cock();
@@ -34,7 +36,7 @@ public class CM_ShooterMain extends CommandBase {
         else
         {
             shooter.closeLatch();
-            tension.setTarget(shooter.configureShot());
+            tension.setTarget(OI.getShotPower());
         }
         
         

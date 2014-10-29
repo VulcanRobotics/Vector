@@ -45,10 +45,10 @@ public class SS_Drive extends Subsystem {
 
     public void arcade(){//Joystick drive method, additionally checks voltage for robot, and if battery is dying, compensates to extend battery life.
         double lowVoltageModifier = 1;
-        if(batteryBelow(8.5)){//Stops compressor and runs motors at 80% if battery drops below 8.5 volts.
+        if(batteryBelow(8)){//Stops compressor and runs motors at 80% if battery drops below 8.5 volts.
             lowVoltageModifier = 0.8;
             CommandBase.airSystem.compressor.stop();
-            if(batteryBelow(7.5)){//Forces robot to use low gear and runs motors at 75% if battery drops below 7.5 volts.
+            if(batteryBelow(7)){//Forces robot to use low gear and runs motors at 75% if battery drops below 7.5 volts.
                 lowVoltageModifier = 0.7;
                 lockLowGear = true;
             }

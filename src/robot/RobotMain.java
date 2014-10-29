@@ -67,7 +67,6 @@ public class RobotMain extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         CommandBase.drive.syncDashboard();
-        CommandBase.shooter.syncDashboard();
      }
     
     /**

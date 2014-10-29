@@ -1,9 +1,11 @@
 
 package robot;
 
+import commands.CommandBase;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import subsystems.drive.C_GearShift;
 import subsystems.drive.C_ResetGyro;
@@ -12,8 +14,7 @@ import subsystems.pickup.A_PickupBall;
 import subsystems.pickup.A_Roll_In;
 
 import subsystems.shooter.A_ShooterFire;
-import subsystems.shooter.A_Tension_ManualLower;
-import subsystems.shooter.A_Tension_ManualRaise;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -38,30 +39,68 @@ public class OI {
         public Button Button_ManualTensionMode = new JoystickButton(controlPanel, RobotMap.Button_ManualOrAuto);
         public Button Button_shotType = new JoystickButton(controlPanel, RobotMap.Button_ShootingOrTruss); //true is normal shot
         public Button Button_HighPower = new JoystickButton(controlPanel, RobotMap.Button_HighPower);
-        public Button Button_LowPower = new JoystickButton(controlPanel, RobotMap.Button_LowPower);
+        static public Button Button_LowPower = new JoystickButton(controlPanel, RobotMap.Button_LowPower);
         public Button Button_Reload = new JoystickButton(controlPanel, RobotMap.Button_Reload);
         public Button Button_EnableManualShotTrim = new JoystickButton(controlPanel, RobotMap.Button_EnableManualShotTrim);
         public Button Button_ManualExtension = new JoystickButton(controlPanel, RobotMap.Button_ManualExtension);
 
+        
+            static public double trusPowerHigh = 2.4;
+            static public double trusPowerMid = 2.2;
+            static public double trusPowerLow = 1.75;
+            static public double shotPowerHigh = 2.05;
+            static public double shotPowerMid = 1.95;
+            static public double shotPowerLow = 1.56;
+            static public double fixValue;
 // Another type of button you can create is a DigitalIOButton, which is
     // a button or switch hooked up to the cypress module. These are useful if
     // you want to build a customized operator interface.
     // Button button = new DigitalIOButton(1);
+            
     public OI (){
         //Driver
             Button_GearShift.whenPressed(new C_GearShift(true));
             Button_GearShift.whenReleased(new C_GearShift(false));
-        //Operator
-            Button_ManualRaiseTension.whenPressed(new A_Tension_ManualRaise(0.7));        
-            Button_ManualLowerTension.whenPressed(new A_Tension_ManualLower(-0.7));   
+        //Operator 
             Button_Trigger.whileHeld(new A_ShooterFire());
             Button_Pickup.whileHeld(new A_PickupBall());
             Button_Passball.whileHeld(new A_Eject_Ball());
             Button_ManualRoller.whileHeld(new A_Roll_In());
             //Gyro
                 Button_GyroReset.whenPressed(new C_ResetGyro());  
-        //ControlPanel  
+        //ControlPanel          //ControlPanel  
           
+              //Shot tension values          
+              //Shot tension values
+    }
+   
+    static public double getShotPower(){
+        
+          if(CommandBase.oi.Button_shotType.get()){ //Normal Shot Values
+            if(CommandBase.oi.Button_HighPower.get()){//high power shot
+                fixValue = SmartDashboard.getNumber("longShotPower", shotPowerHigh);
+                
+            }else if(CommandBase.oi.Button_LowPower.get()){//low power shot
+                fixValue = SmartDashboard.getNumber("shortShotPower", shotPowerLow);
+               
+            }else{//mid power shot
+                fixValue = SmartDashboard.getNumber("middleShotPower", shotPowerMid);
+                
+            }
+        }else{ //Truss shot values
+            if(CommandBase.oi.Button_HighPower.get()){ //high power truss
+                fixValue = SmartDashboard.getNumber("longTrussPower", trusPowerHigh);
+            }else if(CommandBase.oi.Button_LowPower.get()){ //low power truss
+                fixValue = SmartDashboard.getNumber("shortTrussPower", trusPowerLow);
+            }else{ //mid power truss
+                fixValue = SmartDashboard.getNumber("middleTrussPower", trusPowerMid);
+            }
+        }
+        return fixValue;
+      }
+    
+    static public boolean shouldExtentionsBeOut() {
+        return !Button_LowPower.get();
     }
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
