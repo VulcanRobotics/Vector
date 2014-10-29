@@ -64,7 +64,7 @@ public class SS_Tension extends PIDSubsystem {
         if (isGoingUp) {
            if(!topSoftLimit() | !Top_Limit_Switch.get())
            {
-                motor.set(output);
+                motor.set(-output);
            }
            else
            {
@@ -75,7 +75,7 @@ public class SS_Tension extends PIDSubsystem {
         {
            if(!bottomSoftLimit() | !Bottom_Limit_Switch.get())
            {
-                motor.set(output);
+                motor.set(-output);
            }
            else
            {
@@ -85,10 +85,10 @@ public class SS_Tension extends PIDSubsystem {
     }
     
     boolean bottomSoftLimit(){
-        return tenPot.pidGet() < tenPotMIN;
+        return getTensionPot() < tenPotMAX;
     }
     boolean topSoftLimit(){
-        return tenPot.pidGet() > tenPotMAX;
+        return getTensionPot() > tenPotMIN;
     }
     
     boolean setTarget(double target) {
@@ -104,7 +104,10 @@ public class SS_Tension extends PIDSubsystem {
     
     boolean isTensionDangerous()
     {
-        return tenPot.pidGet() > 1.5;
+        return getTensionPot() > 1.5;
     }
-    
+ 
+    double getTensionPot(){
+        return 5.0 - tenPot.pidGet();
+    }
 }
