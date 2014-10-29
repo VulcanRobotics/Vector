@@ -23,22 +23,21 @@ public class RobotMap {
         //ETC
             public static final int Solenoid_Gear_Shift = 1; //true is low gear
             public static final int AI_Gyro = 2;
-    //Shooter
-        public static final int DIO_Shooter_Down = 5; //true when shooter is low enough to be held by trigger.
+    //Pickup
         public static final int DIO_Ball_Detector = 12; //true if no ball
         public static final int Solenoid_Ball_Loader = 2; //false is in, true is out
+        public static final int PWM_BallPickup = 4; //positive rolls out, negative rolls in
+        public static final int DIO_Arm_Out = 4; //false is out
+        public static final int Solenoid_Collector = 5; //hold ball in, false is down
+    //Shooter
+        public static final int DIO_Shooter_Down = 5; //true when shooter is low enough to be held by trigger.
         public static final int Solenoid_Trigger = 3; //true is fire/unlatch
         public static final int Solenoid_Extensions = 4; //true is out
-        public static final int Solenoid_Collector = 5; //hold ball in, false is down
         //Tension
             public static final int PWM_Tension = 3; //negative value raises tension, positive lowers
             public static final int AI_Tension_Potentiometer = 1;
-            //Limits
-                public static final int DIO_Top_Limit_Switch = 2; //Tension Screw Top Limit
-                public static final int DIO_Bottom_Limit_Switch = 3; //Tension Screw Bottom Limit
-        //Arm
-            public static final int PWM_BallPickup = 4; //positive rolls out, negative rolls in
-            public static final int DIO_Arm_Out = 4; //false is out
+            public static final int DIO_Top_Limit_Switch = 2; //Tension Screw Top Limit
+            public static final int DIO_Bottom_Limit_Switch = 3; //Tension Screw Bottom Limit
 //Control Systems    
     //Joystick 1 (Driver)
         //Buttons
