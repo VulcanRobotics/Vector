@@ -12,6 +12,8 @@ import subsystems.drive.C_ResetGyro;
 import subsystems.pickup.A_Eject_Ball;
 import subsystems.pickup.A_PickupBall;
 import subsystems.pickup.A_Roll_In;
+import subsystems.shooter.A_LessTension;
+import subsystems.shooter.A_MoreTension;
 
 import subsystems.shooter.A_ShooterFire;
 
@@ -35,7 +37,7 @@ public class OI {
         public Button Button_GyroReset = new JoystickButton(opStick, RobotMap.Button_GyroReset);
         public Button Button_ManualRoller = new JoystickButton(opStick, RobotMap.Button_ManualRoller);
     //Joy 3
-        public Joystick controlPanel = new Joystick(3);
+        static public Joystick controlPanel = new Joystick(3);
         public Button Button_ManualTensionMode = new JoystickButton(controlPanel, RobotMap.Button_ManualOrAuto);
         public Button Button_shotType = new JoystickButton(controlPanel, RobotMap.Button_ShootingOrTruss); //true is normal shot
         public Button Button_HighPower = new JoystickButton(controlPanel, RobotMap.Button_HighPower);
@@ -58,6 +60,9 @@ public class OI {
     // Button button = new DigitalIOButton(1);
             
     public OI (){
+        //manual tension
+        Button_ManualRaiseTension.whileHeld(new A_MoreTension());
+        Button_ManualLowerTension.whileHeld(new A_LessTension());
         //Driver
             Button_GearShift.whenPressed(new C_GearShift(true));
             Button_GearShift.whenReleased(new C_GearShift(false));

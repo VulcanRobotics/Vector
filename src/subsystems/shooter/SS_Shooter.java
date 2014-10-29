@@ -65,6 +65,7 @@ public class SS_Shooter extends Subsystem {
     }
     
     boolean isShooterDown(){
+        System.out.println(shooterDown.get());
         return shooterDown.get();
     }
 }

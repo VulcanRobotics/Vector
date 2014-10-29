@@ -54,36 +54,50 @@ public class SS_Tension extends PIDSubsystem {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-        return tenPot.pidGet();
+        return getTensionPot();
     }
     
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
         boolean isGoingUp = output > 0;
+        System.out.println("pid target: "+ this.getSetpoint());
         if (isGoingUp) {
-           if(!topSoftLimit() | !Top_Limit_Switch.get())
-           {
-                motor.set(-output);
-           }
-           else
-           {
-               motor.set(0);
-           }
+           moveUp(output);
         }
         else
         {
-           if(!bottomSoftLimit() | !Bottom_Limit_Switch.get())
+           moveDown(output);
+        }
+    }
+    void moveDown(double speed)
+    {
+        speed = Math.abs(speed);
+        if(!topSoftLimit() | !Top_Limit_Switch.get())
            {
-                motor.set(-output);
+                motor.set(-speed*0.15);
            }
            else
            {
                motor.set(0);
            }
-        }
+    }
+    void moveUp(double speed){
+        speed = Math.abs(speed);
+        if(!bottomSoftLimit() | !Bottom_Limit_Switch.get())
+           {
+                motor.set(speed*0.15);
+           }
+           else
+           {
+               motor.set(0);
+           }
     }
     
+    
+     void stopMotor(){
+         motor.set(0);
+     }
     boolean bottomSoftLimit(){
         return getTensionPot() < tenPotMAX;
     }
@@ -108,6 +122,8 @@ public class SS_Tension extends PIDSubsystem {
     }
  
     double getTensionPot(){
+        System.out.println("tension is: " + (5.0 - tenPot.pidGet()));
         return 5.0 - tenPot.pidGet();
     }
+   
 }
