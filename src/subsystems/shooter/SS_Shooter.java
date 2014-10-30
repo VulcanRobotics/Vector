@@ -32,6 +32,7 @@ public class SS_Shooter extends Subsystem {
     public void initDefaultCommand() {
         initSolenoids();
         setDefaultCommand(new CM_ShooterMain());
+        
     }
     
     public void initSolenoids(){ //Initializes our solenoids so we know they are in the correct state.
@@ -65,7 +66,7 @@ public class SS_Shooter extends Subsystem {
     }
     
     boolean isShooterDown(){
-        System.out.println(shooterDown.get());
+        //System.out.println(shooterDown.get());
         return shooterDown.get();
     }
 }

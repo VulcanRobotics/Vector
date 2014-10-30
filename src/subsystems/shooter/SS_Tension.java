@@ -61,7 +61,7 @@ public class SS_Tension extends PIDSubsystem {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
         boolean isGoingUp = output > 0;
-        System.out.println("pid target: "+ this.getSetpoint());
+        //System.out.println("pid target: "+ this.getSetpoint());
         if (isGoingUp) {
            moveUp(output);
         }
@@ -122,8 +122,11 @@ public class SS_Tension extends PIDSubsystem {
     }
  
     double getTensionPot(){
-        System.out.println("tension is: " + (5.0 - tenPot.getAverageVoltage()));
+        //System.out.println("tension is: " + (5.0 - tenPot.getAverageVoltage()));
         return 5.0 - tenPot.getAverageVoltage();
     }
    
+    boolean customIsAtTarget(){
+        return Math.abs(getTensionPot() - this.getSetpoint()) > 0.1;
+    }
 }

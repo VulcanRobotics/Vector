@@ -13,8 +13,10 @@ import subsystems.pickup.C_ExtendArm;
 import subsystems.pickup.C_LoadBallOnBumper;
 import subsystems.pickup.C_PickupBall;
 import subsystems.pickup.C_PickupBallToBumper;
+import subsystems.shooter.CM_ShooterMain;
 import subsystems.shooter.C_GoToShot;
 import subsystems.shooter.C_Shoot;
+import subsystems.shooter.SS_Shooter;
 /**
  *
  * @author liamcook
@@ -22,8 +24,9 @@ import subsystems.shooter.C_Shoot;
  */
 public class Auton_2Ball extends CommandGroup {
         float autonShotPower = 1.6f;
+        Timer runningTime;
     public Auton_2Ball() {
-        
+        //runningTime = new Timer();
         addParallel(new C_GoToShot(autonShotPower));
         addSequential(new C_ExtendArm());
         addSequential(new C_PickupBallToBumper());
@@ -40,8 +43,8 @@ public class Auton_2Ball extends CommandGroup {
         addSequential(new C_PickupBall());
         addSequential(new C_ExtendArm()); //just to be sure
         
+        Timer.delay(9 - runningTime.get());
         addSequential(new C_Shoot());
-      
     }
         
 }

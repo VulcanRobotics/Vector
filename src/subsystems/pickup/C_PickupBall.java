@@ -25,13 +25,14 @@ public class C_PickupBall extends CommandBase {
         pickup.armOut();
        pickup.rollBallIn();
        pickup.collectorDown();
-        setTimeout(1); //set amount of time arm should stay out
+        setTimeout(1.35); //set amount of time arm should stay out
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if (isTimedOut()) {
             pickup.armIn();
+            pickup.rollBallIn(0.3f);
         }
     }
 
@@ -45,6 +46,7 @@ public class C_PickupBall extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
         pickup.collectorUp();
+        pickup.stopRollers();
     }
 
     // Called when another command which requires one or more of the same

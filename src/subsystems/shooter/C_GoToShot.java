@@ -34,6 +34,7 @@ public class C_GoToShot extends CommandBase {
     }
     // Called just before this Command runs the first time
     protected void initialize() {
+        setTimeout(7);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -54,7 +55,9 @@ public class C_GoToShot extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return shooter.isShooterDown() && tension.onTarget();
+        System.out.println("is shooter down: " + shooter.isShooterDown());
+        System.out.println("on target: " + tension.customIsAtTarget());
+        return (shooter.isShooterDown() && tension.customIsAtTarget()) | isTimedOut();
     }
 
     // Called once after isFinished returns true
