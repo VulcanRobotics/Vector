@@ -30,7 +30,7 @@ public class CM_ShooterMain extends CommandBase {
         System.out.println("runnig shooter main");
         tension.enable();
         shooter.setExtensions(OI.shouldExtentionsBeOut());
-        if (shooter.isShooterDown())
+        if (!shooter.isShooterDown())
         {
             tension.cock();
             shooter.openLatch();

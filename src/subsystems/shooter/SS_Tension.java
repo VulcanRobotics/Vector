@@ -70,23 +70,23 @@ public class SS_Tension extends PIDSubsystem {
            moveDown(output);
         }
     }
-    void moveDown(double speed)
+    void moveUp(double speed)
     {
         speed = Math.abs(speed);
-        if(!topSoftLimit() | !Top_Limit_Switch.get())
+        if(!topSoftLimit() | !Bottom_Limit_Switch.get())
            {
-                motor.set(-speed*0.15);
+                motor.set(-speed);
            }
            else
            {
                motor.set(0);
            }
     }
-    void moveUp(double speed){
+    void moveDown(double speed){
         speed = Math.abs(speed);
-        if(!bottomSoftLimit() | !Bottom_Limit_Switch.get())
+        if(!bottomSoftLimit() |  !Top_Limit_Switch.get())
            {
-                motor.set(speed*0.15);
+                motor.set(speed);
            }
            else
            {
@@ -122,8 +122,8 @@ public class SS_Tension extends PIDSubsystem {
     }
  
     double getTensionPot(){
-        System.out.println("tension is: " + (5.0 - tenPot.pidGet()));
-        return 5.0 - tenPot.pidGet();
+        System.out.println("tension is: " + (5.0 - tenPot.getAverageVoltage()));
+        return 5.0 - tenPot.getAverageVoltage();
     }
    
 }

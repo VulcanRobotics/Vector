@@ -21,14 +21,14 @@ import subsystems.shooter.C_Shoot;
  * @author afiolmahon
  */
 public class Auton_2Ball extends CommandGroup {
-        float autonShotPower = 2.5f;
+        float autonShotPower = 1.6f;
     public Auton_2Ball() {
         
         addParallel(new C_GoToShot(autonShotPower));
         addSequential(new C_ExtendArm());
         addSequential(new C_PickupBallToBumper());
         
-        addSequential(new C_AutoDrive(11.5));
+        //addSequential(new C_AutoDrive(1));
         
         addSequential(new C_ExtendArm());
         addSequential(new C_LoadBallOnBumper());
@@ -36,10 +36,12 @@ public class Auton_2Ball extends CommandGroup {
         addSequential(new C_Shoot());
         addSequential(new C_GoToShot(autonShotPower));
         
+        System.out.println("found shot tension");
         addSequential(new C_PickupBall());
         addSequential(new C_ExtendArm()); //just to be sure
         
         addSequential(new C_Shoot());
-        
+      
     }
+        
 }

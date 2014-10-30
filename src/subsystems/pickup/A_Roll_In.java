@@ -22,6 +22,7 @@ public class A_Roll_In extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         pickup.rollBallIn();
+        pickup.collectorDown();
     }
 
     // Called repeatedly when this Command is scheduled to run

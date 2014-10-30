@@ -52,7 +52,7 @@ public class SS_Shooter extends Subsystem {
     }
     
     boolean openLatch() {
-        if (CommandBase.tension.isTensionDangerous() | CommandBase.pickup.isArmOut()){
+        if (!CommandBase.tension.isTensionDangerous() | CommandBase.pickup.isArmOut()){
             solenoid_trigger.set(true);
             return true;
         }else{

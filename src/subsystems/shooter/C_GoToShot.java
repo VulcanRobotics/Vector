@@ -38,8 +38,9 @@ public class C_GoToShot extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        shooter.extensionsOut();
-        if (shooter.isShooterDown())
+        tension.enable();
+        shooter.setExtensions(false);
+        if (!shooter.isShooterDown())
         {
             tension.cock();
             shooter.openLatch();
@@ -58,7 +59,6 @@ public class C_GoToShot extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        tension.cock();
     }
 
     // Called when another command which requires one or more of the same
