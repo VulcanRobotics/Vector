@@ -14,48 +14,37 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class C_PickupBall extends CommandBase {
     
-    double timeout = 11.0;
-    boolean finished = false;
-    
-    public C_PickupBall() {
+    public C_PickupBall(){
         requires(pickup);
-    }
-    public C_PickupBall(double timeout){
-        requires(pickup);
-        this.timeout = timeout;
-        setTimeout(this.timeout);
+
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
        //extends arm before picking up
-        pickup.rollBallIn();
         pickup.armOut();
-
+       pickup.rollBallIn();
+       pickup.collectorDown();
+        setTimeout(1); //set amount of time arm should stay out
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (pickup.hasBall()){
-            pickup.collectorUp();
+        if (isTimedOut()) {
             pickup.armIn();
-            pickup.rollBallIn(0.2f);
         }
-        else{
-            pickup.rollBallIn();
-            pickup.collectorDown();
-            pickup.armOut();  
-        }
-    
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return pickup.hasBall();
+        return pickup.hasBall(); // will hang if it tries to pickup nothing
+                                //not really a problem imo because there's no reason to finish auton if
+                                //the robot doesn't have a loaded ball
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        pickup.collectorUp();
     }
 
     // Called when another command which requires one or more of the same
