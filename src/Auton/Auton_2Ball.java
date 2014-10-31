@@ -6,6 +6,7 @@
 package Auton;
 
 import commands.CommandBase;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import subsystems.drive.C_AutoDrive;
@@ -81,17 +82,18 @@ public class Auton_2Ball extends CommandGroup {
             }else if(state == 2){
                 shooter.solenoid_trigger.set(false);
                 shooter.tensionPID.setSetpoint(shooter.shotPowerHigh);
-                pickup.collectorDown();
+                pickup.collectorDown(); 
                 pickup.rollBallIn(1.0f);
                 pickup.armIn();
                 state += 1;
             }else if(state == 3){
-                state += !pickup.Arm_Out.get() ? 1 : 0;
+                Timer.delay(1);
+                state += 1;
             }else if(state == 4){
                 pickup.armOut();
                 state += 1;
             }else if(state ==5){
-                state += shooter.tensionPID.onTarget() ? 1 : 0;
+                state += shooter.tensionPID.onTarget() && pickup.hasBall()? 1 : 0;
             }else if(state == 6){
                 pickup.collectorUp();
                 shooter.tensionPID.disable();
@@ -102,7 +104,7 @@ public class Auton_2Ball extends CommandGroup {
         }
 
         protected boolean isFinished() {
-            return state == 7;
+            return state == 7 | !DriverStation.getInstance().isAutonomous();
         }
 
         protected void end() {

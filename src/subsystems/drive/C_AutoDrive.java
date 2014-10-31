@@ -54,7 +54,6 @@ public class C_AutoDrive extends CommandBase {
         System.out.println("Raw: "+drive.leftEncoder.getRaw()+" Feet: "+drive.leftEncoder.getDistance());
         System.out.println("AutoDrive Distance Left: "+autoDrivePID.getError());
         System.out.println("AutoDrivePID Enabled: "+autoDrivePID.isEnable());
-        
     }
 
     // Make this return true when this Command no longer needs to run execute()
