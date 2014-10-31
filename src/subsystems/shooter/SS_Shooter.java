@@ -34,7 +34,9 @@ public class SS_Shooter extends Subsystem {
             double Kp = 4.500;
             double Ki = 0.010;
             double Kd = 1.000;
-            public PIDController tensionPID = new PIDController(Kp, Ki, Kd, tenModule.tenPot, tenModule);
+            public PIDController tensionPID = new PIDController(Kp, Ki, Kd, tenModule.tenPot, tenModule){{
+                this.setAbsoluteTolerance(0.2);
+            }};
     //Non-Tension Systems
         //Solenoids
             public Solenoid solenoid_trigger = new Solenoid(RobotMap.Solenoid_Trigger);

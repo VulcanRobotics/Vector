@@ -25,12 +25,13 @@ public class C_AutoDrive extends CommandBase {
     //Regulation Values
         double target;
         double threshold = 1.0;
-        double gyroScale = 0.01;
+        double gyroScale = -0.1;
     //Control Objects
         PIDController autoDrivePID;
         O_AutoDrivePIDOutput AutoDrivePIDOutput;
     
     public C_AutoDrive(double target) {
+        this.setTimeout(5.0);
         requires(drive);
         this.target = target;
         AutoDrivePIDOutput = new O_AutoDrivePIDOutput();

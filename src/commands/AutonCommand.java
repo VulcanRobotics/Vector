@@ -5,7 +5,9 @@
  */
 package commands;
 
+import Auton.Auton_1Ball;
 import Auton.Auton_2Ball;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -18,14 +20,17 @@ public class AutonCommand extends CommandBase {
     boolean finished = false;
     
     public AutonCommand() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         CommandBase.airSystem.compressor.start();
-        Scheduler.getInstance().add(new Auton_2Ball());
+        int autonMode = (int)DriverStation.getInstance().getAnalogIn(1);
+        if(autonMode == 1){
+            Scheduler.getInstance().add(new Auton_1Ball());
+        }else if(autonMode == 2){
+            Scheduler.getInstance().add(new Auton_2Ball());
+        }
         finished = true;
     }
 

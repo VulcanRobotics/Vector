@@ -9,11 +9,6 @@ import commands.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import subsystems.drive.C_AutoDrive;
-import subsystems.pickup.C_ExtendArm;
-import subsystems.pickup.C_LoadBallOnBumper;
-import subsystems.pickup.C_PickupBall;
-import subsystems.pickup.C_PickupBallToBumper;
-import subsystems.shooter.C_Shoot;
 /**
  *
  * @author liamcook
@@ -22,21 +17,9 @@ import subsystems.shooter.C_Shoot;
 public class Auton_2Ball extends CommandGroup {
         
     public Auton_2Ball() {
-        addSequential(new C_ExtendArm());
-        addSequential(new C_PickupBallToBumper());
-        
+        addSequential(new PreDrive());
         addSequential(new C_AutoDrive(11.5));
-        //add reload
-        addSequential(new C_ExtendArm());
-        addSequential(new C_LoadBallOnBumper());
-        addSequential(new C_ExtendArm()); //just to be sure
-        addSequential(new C_Shoot());
-        //reload
-        addSequential(new C_PickupBall());
-        //Need to add reload command into this sequence
-        addSequential(new C_ExtendArm()); //just to be sure
-        addSequential(new C_Shoot());
-        
+        addSequential(new PostDrive());
     }
     
     //state machine commands defined below
@@ -106,11 +89,11 @@ public class Auton_2Ball extends CommandGroup {
                 state += !pickup.Arm_Out.get() ? 1 : 0;
             }else if(state == 4){
                 pickup.armOut();
-                pickup.collectorUp();
                 state += 1;
             }else if(state ==5){
                 state += shooter.tensionPID.onTarget() ? 1 : 0;
             }else if(state == 6){
+                pickup.collectorUp();
                 shooter.tensionPID.disable();
                 shooter.solenoid_trigger.set(true);
                 Timer.delay(1.0);
