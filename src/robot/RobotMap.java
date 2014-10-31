@@ -42,6 +42,7 @@ public class RobotMap {
     //Joystick 1 (Driver)
         //Buttons
         public static final int Button_GearShift = 1;//Shifts gears
+        public static final int Button_xBoxShift = 6;
     //Joystick 2 (Operator)
         //Buttons
         public static final int Button_Trigger = 1; //Trigger

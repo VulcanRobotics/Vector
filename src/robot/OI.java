@@ -23,6 +23,7 @@ public class OI {
     //Driver Stick
         public Joystick driverStick = new Joystick(1);
         public Button Button_GearShift = new JoystickButton(driverStick, RobotMap.Button_GearShift);
+        public Button Button_xBoxShift = new JoystickButton(driverStick, RobotMap.Button_xBoxShift);
     //opStick
         public Joystick opStick = new Joystick(2);
         public Button Button_ManualRaiseTension = new JoystickButton(opStick, RobotMap.Button_ManualRaiseTension);
@@ -51,6 +52,8 @@ public class OI {
         //Driver
             Button_GearShift.whenPressed(new C_GearShift(true));
             Button_GearShift.whenReleased(new C_GearShift(false));
+            Button_xBoxShift.whenPressed(new C_GearShift(true));
+            Button_xBoxShift.whenReleased(new C_GearShift(false));
         //Operator
             Button_ManualRaiseTension.whenPressed(new A_Tension_ManualRaise(0.7));        
             Button_ManualLowerTension.whenPressed(new A_Tension_ManualLower(-0.7));   

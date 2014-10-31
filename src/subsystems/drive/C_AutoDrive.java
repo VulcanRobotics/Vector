@@ -42,6 +42,7 @@ public class C_AutoDrive extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        drive.leftEncoder.reset();
         drive.driveGyro.reset();
         autoDrivePID.setSetpoint(target);
         autoDrivePID.enable();
@@ -79,7 +80,7 @@ public class C_AutoDrive extends CommandBase {
     class O_AutoDrivePIDOutput implements PIDOutput{//Defines the component that maps the PIDController to the Motor output
         public void pidWrite(double PIDControllerOutput) {//keep passing pid values while above threshold value(pass 0 when below or equal)
             System.out.println("AutoDrivePIDOutput called with "+PIDControllerOutput+" as motorspeed");
-            drive.chassis.arcadeDrive(PIDControllerOutput, drive.driveGyro.getAngle()*gyroScale); //drive
+            drive.chassis.arcadeDrive(Math.abs(PIDControllerOutput), drive.driveGyro.getAngle()*gyroScale); //drive
         }
     }
 }

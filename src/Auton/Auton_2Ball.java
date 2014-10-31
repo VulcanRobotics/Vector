@@ -96,6 +96,7 @@ public class Auton_2Ball extends CommandGroup {
                 state += shooter.tensionPID.onTarget() && pickup.hasBall()? 1 : 0;
             }else if(state == 6){
                 pickup.collectorUp();
+                Timer.delay(0.5);
                 shooter.tensionPID.disable();
                 shooter.solenoid_trigger.set(true);
                 Timer.delay(1.0);

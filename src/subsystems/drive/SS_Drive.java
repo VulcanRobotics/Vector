@@ -55,7 +55,8 @@ public class SS_Drive extends Subsystem {
             lockLowGear = false;
         }
         double trim = (CommandBase.oi.driverStick.getThrottle()/2.0)+0.5;
-        chassis.arcadeDrive(-(CommandBase.oi.driverStick.getY()*(lowVoltageModifier == 1 ? trim : lowVoltageModifier)), -(CommandBase.oi.driverStick.getX()*(lowVoltageModifier == 1 ? trim : lowVoltageModifier)));
+        //chassis.arcadeDrive(-(CommandBase.oi.driverStick.getY()*(lowVoltageModifier == 1 ? trim : lowVoltageModifier)), -(CommandBase.oi.driverStick.getX()*(lowVoltageModifier == 1 ? trim : lowVoltageModifier)));
+        chassis.arcadeDrive(-CommandBase.oi.driverStick.getRawAxis(2), -CommandBase.oi.driverStick.getRawAxis(4));
         Timer.delay(0.01);
     }
     
