@@ -37,6 +37,7 @@ public class OI {
     //Joy 3
         public Joystick controlPanel = new Joystick(3);
         public Button Button_ManualTensionMode = new JoystickButton(controlPanel, RobotMap.Button_ManualOrAuto);
+        public Button Button_JoystickMode = new JoystickButton(controlPanel, RobotMap.Button_JoystickMode);
         public Button Button_shotType = new JoystickButton(controlPanel, RobotMap.Button_ShootingOrTruss); //true is normal shot
         public Button Button_HighPower = new JoystickButton(controlPanel, RobotMap.Button_HighPower);
         public Button Button_LowPower = new JoystickButton(controlPanel, RobotMap.Button_LowPower);

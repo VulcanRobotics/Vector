@@ -16,6 +16,7 @@ public class C_ExtendArm extends CommandBase {
     
     public C_ExtendArm() {
         requires(pickup);
+        this.setTimeout(0.4);
     }
 
     // Called just before this Command runs the first time

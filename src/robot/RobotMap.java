@@ -60,6 +60,7 @@ public class RobotMap {
             //axis 3 is used for tension trimming when manual shot trim is enabled
         //Buttons
         public static final int Button_ShootingOrTruss = 1; //True is Normal Shot
+        public static final int Button_JoystickMode = 2;
         public static final int Button_ManualOrAuto = 3; //False is Auto mode
         public static final int Button_HighPower = 4; //True is longShotPower/longTrussPower
         public static final int Button_LowPower = 5; //True is shortShotPower/shortTrussPower
