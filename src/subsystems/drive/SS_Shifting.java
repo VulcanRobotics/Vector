@@ -43,7 +43,7 @@ public class SS_Shifting extends Subsystem {
     public long shiftCooldownTime = 500; //in milliseconds like System.currentTimeMillis();
     
     boolean inHighGear;
-    long lastShiftTime;
+    long lastShiftTime = 0;
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -52,20 +52,27 @@ public class SS_Shifting extends Subsystem {
     
     public void setGear(boolean state)
     {
-        solenoid_gear_shift.set(state);
-        inHighGear = state;
+        solenoid_gear_shift.set(!state);
+        inHighGear = !state;
         lastShiftTime = System.currentTimeMillis();
     }
     
     boolean isCooledOff() {
-        return lastShiftTime - shiftCooldownTime > System.currentTimeMillis();
+        return lastShiftTime + shiftCooldownTime < System.currentTimeMillis();
+    }
+    
+    void updateShiftThreshold(){
+        upShiftSpeedThreshold = (float)((OI.controlPanel.getX() +1) * 3);
+        System.out.println("threshold: " + upShiftSpeedThreshold);
     }
     
     public void autoShift(){
         //don't shift while turning
         //don't shift if shifted too recently
+        System.out.println("autoshifting");
         if (isCooledOff() & !OI.isTurning()) //both required to shift
         {
+            System.out.println("shifting allowable");
             if (speed() > upShiftSpeedThreshold & acceleration() > this.upShiftAccelerationThreshold) {
                 setGear(true);
             }
@@ -81,7 +88,9 @@ public class SS_Shifting extends Subsystem {
     double speed() {
         //wheel spinning should be slow, should't mess up auto shifiting 
         //filter heavily 
+        System.out.println(Math.abs(leftEncoder.getRate()));
         return Math.abs(leftEncoder.getRate());
+        
     }
     
     double acceleration() {

@@ -6,6 +6,7 @@
 package subsystems.drive;
 
 import commands.CommandBase;
+import robot.OI;
 
 /**
  *
@@ -16,13 +17,12 @@ public class C_GearShift extends CommandBase {
     int state;
 
     public C_GearShift(boolean state) {
-        requires(drive);
         requires(shifter);
         this.state = state ? shifter.HIGH: shifter.LOW;
     }
     
     public C_GearShift() {
-        requires(drive);
+        requires(shifter);
     }
 
     // Called just before this Command runs the first time
@@ -33,6 +33,10 @@ public class C_GearShift extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        shifter.updateShiftThreshold();
+        if (OI.Button_ManualExtension.get()) {
+            state = shifter.AUTO;
+        }
         if (state == shifter.AUTO)
         {
             shifter.autoShift();

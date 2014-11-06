@@ -30,11 +30,7 @@ public class SS_Drive extends Subsystem {
             this.setSensitivity(-0.007);
             this.reset();
         }};
-        public Encoder leftEncoder = new Encoder(RobotMap.DIO1_LeftEncoder, RobotMap.DIO2_LeftEncoder, true, CounterBase.EncodingType.k2X){{
-            this.setPIDSourceParameter(PIDSourceParameter.kDistance);
-            this.setDistancePerPulse(((4.0*3.14159*(40.0/45.0))/100.0/12.0));
-            this.start();            
-        }};
+        
             
     public void initDefaultCommand() {
         //solenoid_gear_shift.set(false); //Init Solenoid(true is low gear).

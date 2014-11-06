@@ -37,7 +37,7 @@ public class OI {
         public Button Button_GyroReset = new JoystickButton(opStick, RobotMap.Button_GyroReset);
         public Button Button_ManualRoller = new JoystickButton(opStick, RobotMap.Button_ManualRoller);
     //Joy 3
-        public Joystick controlPanel = new Joystick(3);
+        static public Joystick controlPanel = new Joystick(3);
         public Button Button_ManualTensionMode = new JoystickButton(controlPanel, RobotMap.Button_ManualOrAuto);
         public Button Button_JoystickMode = new JoystickButton(controlPanel, RobotMap.Button_JoystickMode);
         public Button Button_shotType = new JoystickButton(controlPanel, RobotMap.Button_ShootingOrTruss); //true is normal shot
@@ -45,7 +45,7 @@ public class OI {
         public Button Button_LowPower = new JoystickButton(controlPanel, RobotMap.Button_LowPower);
         public Button Button_Reload = new JoystickButton(controlPanel, RobotMap.Button_Reload);
         public Button Button_EnableManualShotTrim = new JoystickButton(controlPanel, RobotMap.Button_EnableManualShotTrim);
-        public Button Button_ManualExtension = new JoystickButton(controlPanel, RobotMap.Button_ManualExtension);
+        static public Button Button_ManualExtension = new JoystickButton(controlPanel, RobotMap.Button_ManualExtension);
 
 // Another type of button you can create is a DigitalIOButton, which is
     // a button or switch hooked up to the cypress module. These are useful if
@@ -64,6 +64,7 @@ public class OI {
             Button_Pickup.whileHeld(new A_PickupBall());
             Button_Passball.whileHeld(new A_Eject_Ball());
             Button_ManualRoller.whileHeld(new A_Roll_In());
+            Button_ManualExtension.whileHeld(new C_GearShift());
             //Gyro
                 Button_GyroReset.whenPressed(new C_ResetGyro());  
         //ControlPanel  

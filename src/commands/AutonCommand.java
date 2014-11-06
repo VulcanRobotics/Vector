@@ -5,8 +5,7 @@
  */
 package commands;
 
-import Auton.Auton_1Ball;
-import Auton.Auton_2Ball;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -24,12 +23,6 @@ public class AutonCommand extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         CommandBase.airSystem.compressor.start();
-        int autonMode = (int)DriverStation.getInstance().getAnalogIn(1);
-        if(autonMode == 1){
-            Scheduler.getInstance().add(new Auton_1Ball());
-        }else if(autonMode == 2){
-            Scheduler.getInstance().add(new Auton_2Ball());
-        }
         finished = true;
     }
 
