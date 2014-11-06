@@ -12,12 +12,17 @@ import commands.CommandBase;
  * @author afiolmahon
  */
 public class C_GearShift extends CommandBase {
-    
-    boolean finished=false;
-    boolean state;
+
+    int state;
+
     public C_GearShift(boolean state) {
         requires(drive);
-        this.state = state;
+        requires(shifter);
+        this.state = state ? shifter.HIGH: shifter.LOW;
+    }
+    
+    public C_GearShift() {
+        requires(drive);
     }
 
     // Called just before this Command runs the first time
@@ -28,13 +33,22 @@ public class C_GearShift extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        drive.setGear(state);
-        finished=true;
+        if (state == shifter.AUTO)
+        {
+            shifter.autoShift();
+        }
+        if(state == shifter.HIGH) {
+            shifter.setGear(true);
+        }
+        if (state == shifter.LOW) {
+            shifter.setGear(false);
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return finished;
+        return state != shifter.AUTO;
+        
     }
 
     // Called once after isFinished returns true

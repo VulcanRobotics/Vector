@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import robot.OI;
 import subsystems.air.SS_AirSystem;
 import subsystems.drive.SS_Drive;
+import subsystems.drive.SS_Shifting;
 import subsystems.pickup.SS_Pickup;
 import subsystems.shooter.SS_Shooter;
 
@@ -20,7 +21,7 @@ public abstract class CommandBase extends Command {
     public static SS_AirSystem airSystem = new SS_AirSystem();
     public static SS_Shooter shooter = new SS_Shooter();
     public static SS_Pickup pickup = new SS_Pickup();
-    
+    public static SS_Shifting shifter = new SS_Shifting();
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from

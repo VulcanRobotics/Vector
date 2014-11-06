@@ -24,7 +24,7 @@ import robot.RobotMap;
 public class SS_Drive extends Subsystem {   
     //Outputs
         public RobotDrive chassis = new RobotDrive(RobotMap.PWM_LeftDrive, RobotMap.PWM_RightDrive);
-        Solenoid solenoid_gear_shift = new Solenoid(RobotMap.Solenoid_Gear_Shift);
+        
     //Sensors
         public Gyro driveGyro = new Gyro(RobotMap.AI_Gyro){{
             this.setSensitivity(-0.007);
@@ -37,7 +37,7 @@ public class SS_Drive extends Subsystem {
         }};
             
     public void initDefaultCommand() {
-        solenoid_gear_shift.set(false); //Init Solenoid(true is low gear).
+        //solenoid_gear_shift.set(false); //Init Solenoid(true is low gear).
         setDefaultCommand(new CM_ArcadeDrive());
     }
 
@@ -65,12 +65,10 @@ public class SS_Drive extends Subsystem {
     }
     
     boolean lockLowGear = false; //Allows other systems to override gear selection and force robot to use low gear.
-     public void setGear(boolean state){
-        solenoid_gear_shift.set(lockLowGear ? true : state);
-     }
+     
 
     public void syncDashboard() {
-        SmartDashboard.putBoolean("Gear Shift", solenoid_gear_shift.get());
+       // SmartDashboard.putBoolean("Gear Shift", solenoid_gear_shift.get());
         SmartDashboard.putNumber("Gyro Angle", driveGyro.getAngle());
     }
     

@@ -19,9 +19,11 @@ import subsystems.shooter.A_Tension_ManualRaise;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+
+//we should make all this static
 public class OI {
     //Driver Stick
-        public Joystick driverStick = new Joystick(1);
+        static public Joystick driverStick = new Joystick(1);
         public Button Button_GearShift = new JoystickButton(driverStick, RobotMap.Button_GearShift);
         public Button Button_xBoxShift = new JoystickButton(driverStick, RobotMap.Button_xBoxShift);
     //opStick
@@ -66,6 +68,10 @@ public class OI {
                 Button_GyroReset.whenPressed(new C_ResetGyro());  
         //ControlPanel  
           
+    }
+    
+   static public boolean isTurning (){
+        return Math.abs(driverStick.getX()) > 0.5;
     }
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
