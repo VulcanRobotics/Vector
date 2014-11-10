@@ -36,8 +36,8 @@ public class SS_Shifting extends Subsystem {
     public float upShiftSpeedThreshold = 4.5f; 
     public float upShiftAccelerationThreshold = 5f;
     
-    public float downShiftSpeedThreshold = 7.0f;
-    public float downShiftAccelerationThreshold = 7.0f;
+    public float downShiftSpeedThreshold = 5f;
+    public float downShiftAccelerationThreshold = -7.0f;
     public float minHighGearSpeed = 1.5f;
     
     public long shiftCooldownTime = 500; //in milliseconds like System.currentTimeMillis();
@@ -53,8 +53,17 @@ public class SS_Shifting extends Subsystem {
     public void setGear(boolean state)
     {
         solenoid_gear_shift.set(!state);
-        inHighGear = !state;
-        lastShiftTime = System.currentTimeMillis();
+        if (inHighGear == !state & isCooledOff())
+        {
+            //no shifting happened
+        }
+        else
+        {
+            //shift occured
+            System.out.println("Shifted to: " + state);
+            lastShiftTime = System.currentTimeMillis();
+            inHighGear = !state;
+        }
     }
     
     boolean isCooledOff() {
@@ -63,7 +72,7 @@ public class SS_Shifting extends Subsystem {
     
     void updateShiftThreshold(){
         upShiftSpeedThreshold = (float)((OI.controlPanel.getX() +1) * 3);
-        System.out.println("threshold: " + upShiftSpeedThreshold);
+        //System.out.println("threshold: " + upShiftSpeedThreshold);
     }
     
     public void autoShift(){
@@ -72,11 +81,11 @@ public class SS_Shifting extends Subsystem {
         System.out.println("autoshifting");
         if (isCooledOff() & !OI.isTurning()) //both required to shift
         {
-            System.out.println("shifting allowable");
+            System.out.println("threshold: " + upShiftSpeedThreshold + " speed: " + speed());
             if (speed() > upShiftSpeedThreshold & acceleration() > this.upShiftAccelerationThreshold) {
                 setGear(true);
             }
-            if (speed() < downShiftSpeedThreshold & acceleration() > this.downShiftAccelerationThreshold) {
+            if (speed() < downShiftSpeedThreshold & acceleration() < this.downShiftAccelerationThreshold) {
                 setGear(false);
             }
             if (speed() < minHighGearSpeed) {
@@ -88,7 +97,7 @@ public class SS_Shifting extends Subsystem {
     double speed() {
         //wheel spinning should be slow, should't mess up auto shifiting 
         //filter heavily 
-        System.out.println(Math.abs(leftEncoder.getRate()));
+       // System.out.println(Math.abs(leftEncoder.getRate()));
         return Math.abs(leftEncoder.getRate());
         
     }
@@ -96,6 +105,6 @@ public class SS_Shifting extends Subsystem {
     double acceleration() {
         //filter heavily
         //use accelerometer on robo rio
-        return Math.abs(15);
+        return 15;
     }
 }

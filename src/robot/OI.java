@@ -24,7 +24,8 @@ import subsystems.shooter.A_Tension_ManualRaise;
 public class OI {
     //Driver Stick
         static public Joystick driverStick = new Joystick(1);
-        public Button Button_GearShift = new JoystickButton(driverStick, RobotMap.Button_GearShift);
+        static public Button Button_LowGearShift = new JoystickButton(driverStick, RobotMap.Button_LowGearShift);
+        static public Button Button_HighGearShift = new JoystickButton(driverStick, RobotMap.Button_HighGearShift);
         public Button Button_xBoxShift = new JoystickButton(driverStick, RobotMap.Button_xBoxShift);
     //opStick
         public Joystick opStick = new Joystick(2);
@@ -47,14 +48,16 @@ public class OI {
         public Button Button_EnableManualShotTrim = new JoystickButton(controlPanel, RobotMap.Button_EnableManualShotTrim);
         static public Button Button_ManualExtension = new JoystickButton(controlPanel, RobotMap.Button_ManualExtension);
 
+        
+        
 // Another type of button you can create is a DigitalIOButton, which is
     // a button or switch hooked up to the cypress module. These are useful if
     // you want to build a customized operator interface.
     // Button button = new DigitalIOButton(1);
     public OI (){
         //Driver
-            Button_GearShift.whenPressed(new C_GearShift(true));
-            Button_GearShift.whenReleased(new C_GearShift(false));
+            Button_LowGearShift.whenPressed(new C_GearShift(false));
+            Button_HighGearShift.whenReleased(new C_GearShift(true));
             Button_xBoxShift.whenPressed(new C_GearShift(true));
             Button_xBoxShift.whenReleased(new C_GearShift(false));
         //Operator
@@ -72,6 +75,7 @@ public class OI {
     }
     
    static public boolean isTurning (){
+       System.out.println("is turing: " + (Math.abs(driverStick.getX()) > 0.5));
         return Math.abs(driverStick.getX()) > 0.5;
     }
     // There are a few additional built in buttons you can use. Additionally,
