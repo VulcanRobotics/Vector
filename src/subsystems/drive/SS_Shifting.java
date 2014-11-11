@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.AnalogChannel;
+
 import robot.OI;
 import robot.RobotMap;
 /**
@@ -27,6 +29,8 @@ public class SS_Shifting extends Subsystem {
             this.start();            
         }};
     
+    public AnalogChannel accelerometer = new AnalogChannel(3);
+   
     public int AUTO = 4;
     public int HIGH = 2;
     public int LOW = 5;
@@ -34,10 +38,10 @@ public class SS_Shifting extends Subsystem {
     int state;
     
     public float upShiftSpeedThreshold = 4.5f; 
-    public float upShiftAccelerationThreshold = 5f;
+    public float upShiftAccelerationThreshold = 0.1f;
     
     public float downShiftSpeedThreshold = 5f;
-    public float downShiftAccelerationThreshold = -7.0f;
+    public float downShiftAccelerationThreshold = 0.2f;
     public float minHighGearSpeed = 1.5f;
     
     public long shiftCooldownTime = 500; //in milliseconds like System.currentTimeMillis();
@@ -85,10 +89,10 @@ public class SS_Shifting extends Subsystem {
             if (speed() > upShiftSpeedThreshold & acceleration() > this.upShiftAccelerationThreshold) {
                 setGear(true);
             }
-            if (speed() < downShiftSpeedThreshold & acceleration() < this.downShiftAccelerationThreshold) {
-                setGear(false);
-            }
-            if (speed() < minHighGearSpeed) {
+            //if (speed() < downShiftSpeedThreshold & acceleration() < this.downShiftAccelerationThreshold & Math.abs(OI.driverStick.getY()) > 0.75) {
+           //     setGear(false);
+           // }
+            if (speed() < minHighGearSpeed  & Math.abs(OI.driverStick.getY()) > 0.75 & acceleration() < 0.1) {
                 setGear(false);
             }
         }
@@ -103,8 +107,8 @@ public class SS_Shifting extends Subsystem {
     }
     
     double acceleration() {
-        //filter heavily
-        //use accelerometer on robo rio
-        return 15;
+         System.out.println(accelerometer.getAverageVoltage() - 1.5);
+        return Math.abs(accelerometer.getAverageVoltage() - 1.5);
+               
     }
 }
