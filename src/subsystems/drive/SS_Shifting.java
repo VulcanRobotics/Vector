@@ -41,10 +41,13 @@ public class SS_Shifting extends Subsystem {
     public float upShiftAccelerationThreshold = 0.1f;
     
     public float downShiftSpeedThreshold = 5f;
-    public float downShiftAccelerationThreshold = 0.2f;
-    public float minHighGearSpeed = 1.5f;
+    public float downShiftAccelerationThreshold = 0.1f;
+    public float minHighGearSpeed = 4f;
+    
+    public float joystickPowerThreshold = 0.8f;
     
     public long shiftCooldownTime = 500; //in milliseconds like System.currentTimeMillis();
+    
     
     boolean inHighGear;
     long lastShiftTime = 0;
@@ -92,7 +95,7 @@ public class SS_Shifting extends Subsystem {
             //if (speed() < downShiftSpeedThreshold & acceleration() < this.downShiftAccelerationThreshold & Math.abs(OI.driverStick.getY()) > 0.75) {
            //     setGear(false);
            // }
-            if (speed() < minHighGearSpeed  & Math.abs(OI.driverStick.getY()) > 0.75 & acceleration() < 0.1) {
+            if (speed() < minHighGearSpeed  & Math.abs(OI.driverStick.getY()) > joystickPowerThreshold & acceleration() < downShiftAccelerationThreshold) {
                 setGear(false);
             }
         }
@@ -107,7 +110,7 @@ public class SS_Shifting extends Subsystem {
     }
     
     double acceleration() {
-         System.out.println(accelerometer.getAverageVoltage() - 1.5);
+       //  System.out.println(accelerometer.getAverageVoltage() - 1.5);
         return Math.abs(accelerometer.getAverageVoltage() - 1.5);
                
     }
