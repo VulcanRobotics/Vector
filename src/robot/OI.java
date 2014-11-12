@@ -75,8 +75,7 @@ public class OI {
     }
     
    static public boolean isTurning (){
-       System.out.println("is turing: " + (Math.abs(driverStick.getX()) > 0.5));
-        return Math.abs(driverStick.getX()) > 0.5;
+        return Math.abs(driverStick.getX()) > 0.4;
     }
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to

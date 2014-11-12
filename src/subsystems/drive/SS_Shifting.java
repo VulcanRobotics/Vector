@@ -40,9 +40,8 @@ public class SS_Shifting extends Subsystem {
     public float upShiftSpeedThreshold = 4.5f; 
     public float upShiftAccelerationThreshold = 0.1f;
     
-    public float downShiftSpeedThreshold = 5f;
-    public float downShiftAccelerationThreshold = 0.1f;
-    public float minHighGearSpeed = 4f;
+    public float downShiftAccelerationThreshold = 0.03f;
+    public float minHighGearSpeed = 2f;
     
     public float joystickPowerThreshold = 0.8f;
     
@@ -85,10 +84,10 @@ public class SS_Shifting extends Subsystem {
     public void autoShift(){
         //don't shift while turning
         //don't shift if shifted too recently
-        System.out.println("autoshifting");
+        //System.out.println("autoshifting");
         if (isCooledOff() & !OI.isTurning()) //both required to shift
         {
-            System.out.println("threshold: " + upShiftSpeedThreshold + " speed: " + speed());
+            System.out.println("threshold: " + upShiftSpeedThreshold + " speed: " + speed() + " acceleration: " + acceleration() );
             if (speed() > upShiftSpeedThreshold & acceleration() > this.upShiftAccelerationThreshold) {
                 setGear(true);
             }
