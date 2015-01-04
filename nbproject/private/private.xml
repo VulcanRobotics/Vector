@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/afiol-mahon/Vector/src/subsystems/shooter/C_Shoot.java</file>
-            <file>file:/Users/afiol-mahon/Vector/src/robot/RobotMap.java</file>
-            <file>file:/Users/afiol-mahon/Vector/src/subsystems/pickup/C_PickupBall.java</file>
-            <file>file:/Users/afiol-mahon/Vector/src/Auton/Auton_2Ball.java</file>
-            <file>file:/Users/afiol-mahon/Vector/src/robot/OI.java</file>
-            <file>file:/Users/afiol-mahon/Vector/src/subsystems/drive/SS_Drive.java</file>
-            <file>file:/Users/afiol-mahon/Vector/src/subsystems/drive/C_AutoDrive.java</file>
-            <file>file:/Users/afiol-mahon/Vector/src/subsystems/pickup/C_ExtendArm.java</file>
-            <file>file:/Users/afiol-mahon/Vector/src/Auton/Auton_1Ball.java</file>
-            <file>file:/Users/afiol-mahon/Vector/src/commands/AutonCommand.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
